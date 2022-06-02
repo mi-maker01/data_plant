@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import optional dependency
+import optional
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
