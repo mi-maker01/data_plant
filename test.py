@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+pip install openpyxl
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
