@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-pip install openpyxl
 import openpyxl as op
 
 st.set_page_config(layout="wide")
