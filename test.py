@@ -19,8 +19,8 @@ if selector=="ヒストグラム":
     if uploaded_file is not None:
         df_time=pd.read_excel(uploaded_file)
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
-    df_time['標準時間']=pd.to_datetime(time['標準時間'], format='%M:%S:%f') - base_time
-    df_time['標準時間']=time["標準時間"].dt.total_seconds()
+    df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
+    df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     st.table(df_time['標準時間'])
     
     z_list = sorted(list(set(df["図番"])))
