@@ -16,7 +16,7 @@ selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #ヒストグラムの画面
 if selector=="ヒストグラム":
     st.dataframe(df)
-#標準時間の取り込み
+    #標準時間の取り込み
     st.title("標準時間ファイル")
     uploaded_file=st.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file is not None:
@@ -26,27 +26,27 @@ if selector=="ヒストグラム":
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
     st.dataframe(df_time)
-#図番の選択
+    #図番の選択
     z_list = sorted(list(set(df["図番"])))
     z = st.selectbox(
          "図番",
          (z_list))
     x=df[(df["図番"]==z)]#dfからzで選んだ図番のデータ
-#工程の選択
+    #工程の選択
     k_list = sorted(list(set(x["工程コード"])))
     k = st.selectbox(
          "工程コード",
          (k_list))
     x=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
-#担当の選択
+    #担当の選択
     t_list = sorted(list(set(x["担当コード"])))
-    t = st.selectbox(
+    t = st.multiselect(
          "担当コード",
          (t_list))
-#データの整理
+    #データの整理
     scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t)]#選択したデータ
     dd=scores["処理時間"]#選択したデータの処理時間
-#データ分析開始
+    #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
         st.write(z)
