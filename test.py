@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.title("生産データ分析")
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["ヒストグラム","担当者","図番","工程"]
+st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
