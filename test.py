@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.express as px
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
@@ -25,6 +26,7 @@ if selector=="ヒストグラム":
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
+    hyozyun=df_time['標準時間']
     st.dataframe(df_time)
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
@@ -47,6 +49,52 @@ if selector=="ヒストグラム":
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
+        #上限値、下限値の設定
+        data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
+        data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
+        
+        # 描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
+        ax.boxplot(data_num,column='processing_time')
+        # Matplotlib の Figure を指定して可視化する
+        st.pyplot(fig)
+        
+        st.write(data_num['processing_time'].describe())#データの詳細データ
+                
+        q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
+        q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
+                
+        iqr=q3-q1#四分位範囲
+        upper_num=q3+(1.5*iqr)#上限
+        lower_num=q1-(1.5*iqr)#下限
+        upper_num2=round(upper_num) #きりあげ
+        lower_num2=math.floor(lower_num)#きりおとし
+        dif_num=upper_num2-lower_num2#差
+                
+        if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
+            dif_num2=math.ceil((dif_num/10))*10
+        dif_num3=(dif_num2-dif_num)/2
+        upper_num2=upper_num2+dif_num3
+        lower_num2=lower_num2-dif_num3
+                
+        hazure=data_num[data_num["processing_time"]<=upper_num]
+        hazure=hazure[hazure["processing_time"]>=lower_num]
+                
+        st.write('第一四分位数は%.1fです'%q1)
+        st.write('第三四分位数は%.1fです'%q3)
+        st.write('四分位範囲は%.1fです'%iqr)
+        st.write('上限値は%.1fです'%upper_num)
+        st.write('下限値は%.1fです'%lower_num)
+        st.write('差は%.1fです'%dif_num)
+        st.write('差は%.1fです'%dif_num2)
+        st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
+        st.write('上限値は%.1fです'%upper_num2)
+        st.write('下限値は%.1fです'%lower_num2)
+        
+        
+        
+        #ヒストグラムの作成
         for i in range(len(t)):
             #データの整理
             scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t[i])]#選択したデータ
