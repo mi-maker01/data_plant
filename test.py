@@ -52,7 +52,7 @@ if selector=="ヒストグラム":
         #上限値、下限値の設定
         data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
-        s_num-data_num['processing_time']
+        s_num=data_num['processing_time']
         
         # 描画領域を用意する
         fig = plt.figure()
