@@ -49,7 +49,8 @@ if selector=="ヒストグラム":
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        st.write(t)
+        for i in range(t)
+        st.write(i)
 #         st.dataframe(scores)
         
 #         # 描画領域を用意する
