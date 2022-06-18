@@ -6,7 +6,7 @@ st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["ヒストグラム","担当者","図番","工程"]
 
-uploaded_file=st.file_uploader("ファイルの取り込み",type="xlsx")
+uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     df=pd.read_excel(uploaded_file)
 #サイドバーのセレクトボックスを配置
@@ -14,7 +14,15 @@ selector=st.sidebar.selectbox( "ページ選択",pagelist)
 if selector=="ヒストグラム":
     st.title("生産データ分析")
     st.dataframe(df)
-
+    
+    uploaded_file=st.file_uploader("標準時間の取り込み",type="xlsx")
+    if uploaded_file is not None:
+        df_time=pd.read_excel(uploaded_file)
+    base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
+    df_time['標準時間']=pd.to_datetime(time['標準時間'], format='%M:%S:%f') - base_time
+    df_time['標準時間']=time["標準時間"].dt.total_seconds()
+    st.table(df_time['標準時間'])
+    
     z_list = sorted(list(set(df["図番"])))
 
     z = st.selectbox(
