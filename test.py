@@ -44,22 +44,20 @@ if selector=="ヒストグラム":
          "担当コード",
          (t_list))
     #データの整理
-    scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t)]#選択したデータ
-    dd=scores["処理時間"]#選択したデータの処理時間
+#     scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t)]#選択したデータ
+#     dd=scores["処理時間"]#選択したデータの処理時間
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        st.write(z)
-        st.write(k)
         st.write(t)
-        st.dataframe(scores)
+#         st.dataframe(scores)
         
-        # 描画領域を用意する
-        fig = plt.figure()
-        ax = fig.add_subplot()
-        ax.hist(dd, bins=10)
-        # Matplotlib の Figure を指定して可視化する
-        st.pyplot(fig)
+#         # 描画領域を用意する
+#         fig = plt.figure()
+#         ax = fig.add_subplot()
+#         ax.hist(dd, bins=10)
+#         # Matplotlib の Figure を指定して可視化する
+#         st.pyplot(fig)
         
 #担当者の画面
 elif selector=="担当者":
