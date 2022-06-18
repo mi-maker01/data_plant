@@ -21,7 +21,7 @@ if selector=="ヒストグラム":
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
-    st.table(df_time['標準時間'])
+    st.dataframe(df_time)
     
     z_list = sorted(list(set(df["図番"])))
 
