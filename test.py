@@ -53,14 +53,14 @@ if selector=="ヒストグラム":
         st.write(k)
         st.write(t)
         st.dataframe(scores)
-
+        
         # 描画領域を用意する
         fig = plt.figure()
         ax = fig.add_subplot()
         ax.hist(dd, bins=10)
         # Matplotlib の Figure を指定して可視化する
         st.pyplot(fig)
-
+        
 #担当者の画面
 elif selector=="担当者":
     t_list = sorted(list(set(df["担当コード"])))
@@ -93,7 +93,7 @@ elif selector=="図番":
         st.dataframe(pvit)
         st.table(pvit)
         
-#工程の画面        
+#工程の画面
 elif selector=="工程":
     k_list = sorted(list(set(df["工程コード"])))
     k = st.selectbox(
@@ -114,4 +114,3 @@ elif selector=="工程":
         ax.hist(pvit)
         # Matplotlib の Figure を指定して可視化する
         st.pyplot(fig)
-
