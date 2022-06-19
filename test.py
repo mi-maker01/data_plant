@@ -35,15 +35,15 @@ if selector=="ヒストグラム":
     z = st.selectbox(
          "図番",
          (z_list))
-    x=df[(df["図番"]==z)]#dfからzで選んだ図番のデータ
+    x_num=df[(df["図番"]==z)]#dfからzで選んだ図番のデータ
     #工程の選択
-    k_list = sorted(list(set(x["工程コード"])))
+    k_list = sorted(list(set(x_num["工程コード"])))
     k = st.selectbox(
          "工程コード",
          (k_list))
-    x=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
+    x_num=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
     #担当の選択
-    t_list = sorted(list(set(x["担当コード"])))
+    t_list = sorted(list(set(x_num["担当コード"])))
     t = st.multiselect(
          "担当コード",
          (t_list))
@@ -53,16 +53,15 @@ if selector=="ヒストグラム":
     if answer == True:
         #上限値、下限値のdata
         data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
-        max_num=math.ceil((max(data_num["処理時間"])/10))*10 #data_num（x軸）の最大値を割り出し
+        
         dosu_num=0
         
         for t in t_list:
             y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
             #y軸の上限値
-            bine=np.linspace(0,max_num,11)#度数分布の箱
-            freq = y_num.value_counts(bins=bine, sort=False)#度数分布の作成
-            if dosu_num<max(freq):#tが2個以上の時に比較する
-                dosu_num=max(freq)
+            x,y,_= plt.hist(y_num)
+            if dosu_num<max(x):#tが2個以上の時に比較する
+                dosu_num=max(x)
         
         #処理時間の抜き出し
         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
