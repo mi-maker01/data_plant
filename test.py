@@ -61,7 +61,7 @@ if selector=="ヒストグラム":
             #y軸の上限値
             fig = plt.figure()
             ax = fig.add_subplot()
-            x,y,_= ax.hist(y_num)
+            x,y,_= plt.hist(y_num)
             if dosu_num<max(x):#tが2個以上の時に比較する
                 dosu_num=max(x)
         
