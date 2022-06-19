@@ -56,14 +56,12 @@ if selector=="ヒストグラム":
         
         dosu_num=0
         
-        for t in t_list:
-            x=0
-            y=0
-            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
-            #y軸の上限値
-            x,y,_= plt.hist(y_num)
-            if dosu_num<max(x):#tが2個以上の時に比較する
-                dosu_num=max(x)
+#         for t in t_list:
+#             y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
+#             #y軸の上限値
+#             x,y,_= plt.hist(y_num)
+#             if dosu_num<max(x):#tが2個以上の時に比較する
+#                 dosu_num=max(x)
         
         #処理時間の抜き出し
         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
@@ -123,7 +121,7 @@ if selector=="ヒストグラム":
             ax = fig.add_subplot()
             
             plt.xlim([0,upper_num2])                        # X軸範囲
-            plt.ylim([0,dosu_num+10])                      # Y軸範囲
+#             plt.ylim([0,dosu_num+10])                      # Y軸範囲
             plt.title("ヒストグラム", fontname="MS Gothic")
             plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
