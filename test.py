@@ -57,7 +57,7 @@ if selector=="ヒストグラム":
         dosu_num=0
         
         for t in t_list:
-            x,y=[]
+            x,y=0
             y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
             #y軸の上限値
             x,y,_= plt.hist(y_num)
