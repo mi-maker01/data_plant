@@ -120,7 +120,7 @@ elif selector=="担当者":
     pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
     answer = st.button('分析開始')
     if answer == True:
-        st.dataframe(t_num)
+        
         st.dataframe(pvit)
         st.table(pvit)
         
@@ -136,7 +136,7 @@ elif selector=="図番":
     pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
     answer = st.button('分析開始')
     if answer == True:
-        st.dataframe(z_num)
+        
         st.dataframe(pvit)
         st.table(pvit)
         
@@ -152,7 +152,7 @@ elif selector=="工程":
     pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
     answer = st.button('分析開始')
     if answer == True:
-        st.dataframe(k_num)
+        
         st.dataframe(pvit)
         st.table(pvit)
         # 描画領域を用意する
