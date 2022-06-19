@@ -61,7 +61,7 @@ if selector=="ヒストグラム":
             #y軸の上限値
             bine=np.linspace(0,max_num,11)#度数分布の箱
             freq = y_num.value_counts(bins=bine, sort=False)#度数分布の作成
-            if dosu_num<max(freq):　#tが2個以上の時に比較する
+            if dosu_num<max(freq):#tが2個以上の時に比較する
                 dosu_num=max(freq)
         
         #処理時間の抜き出し
