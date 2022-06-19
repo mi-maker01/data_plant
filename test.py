@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import math as math
+import numpy as np
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
@@ -50,15 +51,27 @@ if selector=="ヒストグラム":
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        #上限値、下限値の設定
+        #上限値、下限値のdata
         data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
+        max_num=math.ceil((max(data_num["処理時間"])/10))*10 #data_num（x軸）の最大値を割り出し
+        dosu_num=0
+        
+        for t in t_list:
+            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(data["担当コード"] == t)]
+            #y軸の上限値
+            bine=np.linspace(0,max_num,11)#度数分布の箱
+            freq = y_num.value_counts(bins=bine, sort=False)#度数分布の作成
+            if dosu_num<max(freq):　#tが2個以上の時に比較する
+                dosu_num=max(freq)
+        
+        #処理時間の抜き出し
         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
         s_num=data_num['processing_time']
         
         # 描画領域を用意する
         fig = plt.figure()
         ax = fig.add_subplot()
-        ax.boxplot(s_num)
+        ax.boxplot(s_num)#箱髭図作成
         # Matplotlib の Figure を指定して可視化する
         st.pyplot(fig)
         
@@ -100,12 +113,26 @@ if selector=="ヒストグラム":
         for i in range(len(t)):
             #データの整理
             scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t[i])]#選択したデータ
+            #はずれちの除外
+            dd=scores[scores["処理時間"]<=upper_num]
+            dd=dd[dd["処理時間"]>=lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
-            ax.hist(dd, bins=10)
+            
+            plt.xlim([0,upper_num2])                        # X軸範囲
+            plt.ylim([0,dosu_num+10])                      # Y軸範囲
+            plt.title("ヒストグラム", fontname="MS Gothic")
+            plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
+            plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
+            plt.grid(True)
+            plt.axvline(x=int(hyozyun),color = "crimson") #標準時間の表記（赤軸）
+            plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
+            
+            ax.hist(dd, bins=10,range=(lower_num2,upper_num2))
             # Matplotlib の Figure を指定して可視化する
+            st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",t[i],"-----------------------")
             st.pyplot(fig)
         
 #担当者の画面
@@ -155,9 +182,3 @@ elif selector=="工程":
         
         st.dataframe(pvit)
         st.table(pvit)
-        # 描画領域を用意する
-        fig = plt.figure()
-        ax = fig.add_subplot()
-        ax.hist(pvit)
-        # Matplotlib の Figure を指定して可視化する
-        st.pyplot(fig)
