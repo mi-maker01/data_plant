@@ -57,7 +57,7 @@ if selector=="ヒストグラム":
         dosu_num=0
         
         for t in t_list:
-            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(data["担当コード"] == t)]
+            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
             #y軸の上限値
             bine=np.linspace(0,max_num,11)#度数分布の箱
             freq = y_num.value_counts(bins=bine, sort=False)#度数分布の作成
