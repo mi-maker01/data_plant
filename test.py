@@ -18,7 +18,7 @@ if uploaded_file is not None:
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #ヒストグラムの画面
 if selector=="ヒストグラム":
-    st.dataframe(df)
+    
     #標準時間の取り込み
     st.title("標準時間ファイル")
     uploaded_file=st.file_uploader("標準時間の取り込み",type="xlsx")
@@ -29,7 +29,7 @@ if selector=="ヒストグラム":
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
     hyozyun=df_time['標準時間']
-    st.dataframe(df_time)
+    
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
     z = st.selectbox(
