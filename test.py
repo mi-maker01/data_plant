@@ -57,11 +57,10 @@ if selector=="ヒストグラム":
         dosu_num=0
         
         for t in t_list:
+            x,y=[]
             y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
             #y軸の上限値
-            fig = plt.figure()
-            ax = fig.add_subplot()
-            x,y,_= y_num.hist()
+            x,y,_= plt.hist(y_num)
             if dosu_num<max(x):#tが2個以上の時に比較する
                 dosu_num=max(x)
         
