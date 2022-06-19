@@ -28,7 +28,8 @@ if selector=="ヒストグラム":
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
-    hyozyun=int(df_time['標準時間'])
+    hyozyun=df_time['標準時間']
+    hyozyun=int(hyozyun)
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
