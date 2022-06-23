@@ -132,7 +132,7 @@ if selector=="ヒストグラム":
             
             ax.hist(dd,bins=10)
             # Matplotlib の Figure を指定して可視化する
-            ax.title("---------------このグラフのデータ個数：",len(dd))
+            st.title("---------------このグラフのデータ個数：",len(dd))
             st.pyplot(fig)
         
 #担当者の画面
