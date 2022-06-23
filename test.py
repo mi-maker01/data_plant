@@ -110,13 +110,13 @@ if selector=="ヒストグラム":
         
         
         #ヒストグラムの作成
-        for i in range(len(t)):
+        for i in t:
             #データの整理
-            scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==t[i])]#選択したデータ
+            scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==i)]#選択したデータ
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<=upper_num]
 #             dd=dd[dd["処理時間"]>=lower_num]
-#             dd=scores["処理時間"]#選択したデータの処理時間
+            dd=scores["処理時間"]#選択したデータの処理時間
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
@@ -130,9 +130,9 @@ if selector=="ヒストグラム":
 #             plt.axvline(x=hyozyun,color = "crimson") #標準時間の表記（赤軸）
 #             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             
-            ax.hist(scores,bins=10)
+            ax.hist(dd,bins=10)
             # Matplotlib の Figure を指定して可視化する
-            st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",t[i],"-----------------------")
+            st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             st.pyplot(fig)
         
 #担当者の画面
