@@ -130,7 +130,7 @@ if selector=="ヒストグラム":
 #             plt.axvline(x=hyozyun,color = "crimson") #標準時間の表記（赤軸）
 #             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             
-            ax.hist(, bins=10)
+            ax.hist(scores,bins=10)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",t[i],"-----------------------")
             st.pyplot(fig)
