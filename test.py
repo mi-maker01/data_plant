@@ -57,55 +57,55 @@ if selector=="ヒストグラム":
         
         dosu_num=0
         
-#         for t in t_list:
-#             y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
-#             #y軸の上限値
-#             x,y,_= plt.hist(y_num)
-#             if dosu_num<max(x):#tが2個以上の時に比較する
-#                 dosu_num=max(x)
+        for t in t_list:
+            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
+            #y軸の上限値
+            x,y,_= plt.hist(y_num)
+            if dosu_num<max(x):#tが2個以上の時に比較する
+                dosu_num=max(x)
         
-#         #処理時間の抜き出し
-#         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
-#         s_num=data_num['processing_time']
+        #処理時間の抜き出し
+        data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
+        s_num=data_num['processing_time']
         
-#         # 描画領域を用意する
-#         fig = plt.figure()
-#         ax = fig.add_subplot()
-#         ax.boxplot(s_num)#箱髭図作成
-#         # Matplotlib の Figure を指定して可視化する
-#         st.pyplot(fig)
+        # 描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
+        ax.boxplot(s_num)#箱髭図作成
+        # Matplotlib の Figure を指定して可視化する
+        st.pyplot(fig)
         
-#         st.write(data_num['processing_time'].describe())#データの詳細データ
+        st.write(data_num['processing_time'].describe())#データの詳細データ
                 
-#         q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
-#         q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
+        q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
+        q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
                 
-#         iqr=q3-q1#四分位範囲
-#         upper_num=q3+(1.5*iqr)#上限
-#         lower_num=q1-(1.5*iqr)#下限
-#         upper_num2=round(upper_num) #きりあげ
-#         lower_num2=math.floor(lower_num)#きりおとし
-#         dif_num=upper_num2-lower_num2#差
+        iqr=q3-q1#四分位範囲
+        upper_num=q3+(1.5*iqr)#上限
+        lower_num=q1-(1.5*iqr)#下限
+        upper_num2=round(upper_num) #きりあげ
+        lower_num2=math.floor(lower_num)#きりおとし
+        dif_num=upper_num2-lower_num2#差
                 
-#         if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
-#             dif_num2=math.ceil((dif_num/10))*10
-#         dif_num3=(dif_num2-dif_num)/2
-#         upper_num2=upper_num2+dif_num3
-#         lower_num2=lower_num2-dif_num3
+        if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
+            dif_num2=math.ceil((dif_num/10))*10
+        dif_num3=(dif_num2-dif_num)/2
+        upper_num2=upper_num2+dif_num3
+        lower_num2=lower_num2-dif_num3
                 
-#         hazure=data_num[data_num["processing_time"]<=upper_num]
-#         hazure=hazure[hazure["processing_time"]>=lower_num]
+        hazure=data_num[data_num["processing_time"]<=upper_num]
+        hazure=hazure[hazure["processing_time"]>=lower_num]
                 
-#         st.write('第一四分位数は%.1fです'%q1)
-#         st.write('第三四分位数は%.1fです'%q3)
-#         st.write('四分位範囲は%.1fです'%iqr)
-#         st.write('上限値は%.1fです'%upper_num)
-#         st.write('下限値は%.1fです'%lower_num)
-#         st.write('差は%.1fです'%dif_num)
-#         st.write('差は%.1fです'%dif_num2)
-#         st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
-#         st.write('上限値は%.1fです'%upper_num2)
-#         st.write('下限値は%.1fです'%lower_num2)
+        st.write('第一四分位数は%.1fです'%q1)
+        st.write('第三四分位数は%.1fです'%q3)
+        st.write('四分位範囲は%.1fです'%iqr)
+        st.write('上限値は%.1fです'%upper_num)
+        st.write('下限値は%.1fです'%lower_num)
+        st.write('差は%.1fです'%dif_num)
+        st.write('差は%.1fです'%dif_num2)
+        st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
+        st.write('上限値は%.1fです'%upper_num2)
+        st.write('下限値は%.1fです'%lower_num2)
         
         
         
@@ -114,21 +114,21 @@ if selector=="ヒストグラム":
             #データの整理
             scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==i)]#選択したデータ
             #はずれちの除外
-#             dd=scores[scores["処理時間"]<=upper_num]
-#             dd=dd[dd["処理時間"]>=lower_num]
+            dd=scores[scores["処理時間"]<=upper_num]
+            dd=dd[dd["処理時間"]>=lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
             
-#             plt.xlim([0,upper_num2])                        # X軸範囲
-# #             plt.ylim([0,dosu_num+10])                      # Y軸範囲
-#             plt.title("ヒストグラム", fontname="MS Gothic")
-#             plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
-#             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
-#             plt.grid(True)
-#             plt.axvline(x=hyozyun,color = "crimson") #標準時間の表記（赤軸）
-#             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
+            plt.xlim([0,upper_num2])                        # X軸範囲
+            plt.ylim([0,dosu_num+10])                      # Y軸範囲
+            plt.title("ヒストグラム", fontname="MS Gothic")
+            plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
+            plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
+            plt.grid(True)
+            plt.axvline(x=hyozyun,color = "crimson") #標準時間の表記（赤軸）
+            plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             
             ax.hist(dd,bins=10)
             # Matplotlib の Figure を指定して可視化する
