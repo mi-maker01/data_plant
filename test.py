@@ -123,8 +123,8 @@ if selector=="ヒストグラム":
             fig = plt.figure()
             ax = fig.add_subplot()
             
-            plt.xlim([0,upper_num2])                        # X軸範囲
-            plt.ylim([0,dosu_num+10])                      # Y軸範囲
+            ax.xlim([0,upper_num2])                        # X軸範囲
+            ax.ylim([0,dosu_num+10])                      # Y軸範囲
             plt.title("ヒストグラム", fontname="MS Gothic")
             plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
