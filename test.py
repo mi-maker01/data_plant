@@ -29,6 +29,7 @@ if selector=="ヒストグラム":
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
     hyozyun=df_time['標準時間']
+    hyozyun.astype(int)
     st.write(type(hyozyun))
     
     #図番の選択
