@@ -29,7 +29,7 @@ if selector=="ヒストグラム":
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     df_time['標準時間']=df_time["標準時間"]
     hyozyun=df_time['標準時間']
-    
+    st.write(type(hyozyun))
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
