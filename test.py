@@ -128,7 +128,7 @@ if selector=="ヒストグラム":
             plt.xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
             plt.grid(True)
-            ax.axvline(x=hyozyun)#,color="crimson")#標準時間の表記（赤軸）
+            plt.axvline(x=hyozyun)#,color="crimson")#標準時間の表記（赤軸）
             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             
             ax.hist(dd,bins=10)
