@@ -30,7 +30,7 @@ if selector=="ヒストグラム":
     df_time['標準時間']=df_time["標準時間"]
     hyozyun=df_time['標準時間']
     hyozyun=hyozyun.astype(int)
-    st.write(type(hyozyun))
+    st.write(hyozyun)
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
@@ -125,9 +125,9 @@ if selector=="ヒストグラム":
             
             plt.xlim([0,upper_num2])                        # X軸範囲
             plt.ylim([0,dosu_num+10])                      # Y軸範囲
-            ax.set_title("ヒストグラム", fontname="MS Gothic")
-            ax.set_xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
-            plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
+#             ax.set_title("ヒストグラム", fontname="MS Gothic")
+#             ax.set_xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
+#             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
             plt.grid(True)
             plt.axvline(x=hyozyun,color="crimson")#標準時間の表記（赤軸）
             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
