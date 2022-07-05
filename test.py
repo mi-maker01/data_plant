@@ -119,7 +119,7 @@ if selector=="ヒストグラム":
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
-            dd=scores["処理時間"]#選択したデータの処理時間
+            dd=scores["processing_time"]#選択したデータの処理時間
             st.write(dd)
             
             # 描画領域を用意する
