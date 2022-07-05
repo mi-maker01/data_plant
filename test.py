@@ -27,9 +27,6 @@ if selector=="ヒストグラム":
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
-    df_time['標準時間']=df_time["標準時間"]
-    hyozyun=df_time['標準時間']
-    hyozyun=hyozyun.astype(int)
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
@@ -115,6 +112,8 @@ if selector=="ヒストグラム":
         for i in t:
             #データの整理
             scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
+            y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)&(df_time["担当コード"]==i)]
+            hyozyun=y_scores["処理時間"]
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
@@ -130,7 +129,7 @@ if selector=="ヒストグラム":
             ax.set_xlabel("time")                # x軸ラベル
             plt.ylabel("count")               # y軸ラベル
             plt.grid(True)
-#             plt.axvline(x=hyozyun)#標準時間の表記（赤軸）
+            plt.axvline(x=hyozyun)#標準時間の表記（赤軸）
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             
             
