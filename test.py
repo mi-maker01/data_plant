@@ -120,7 +120,6 @@ if selector=="ヒストグラム":
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
             dd=scores["processing_time"]#選択したデータの処理時間
-            st.write(dd)
             
             # 描画領域を用意する
             fig = plt.figure()
@@ -128,9 +127,9 @@ if selector=="ヒストグラム":
             
             plt.xlim([0,upper_num2])                        # X軸範囲
             plt.ylim([0,dosu_num+10])                      # Y軸範囲
-            ax.set_title("ヒストグラム", fontname="MS Gothic")
-            ax.set_xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
-            plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
+            ax.set_title("chart")
+            ax.set_xlabel("time")                # x軸ラベル
+            plt.ylabel("count")               # y軸ラベル
             plt.grid(True)
 #             plt.axvline(x=hyozyun)#標準時間の表記（赤軸）
             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
