@@ -117,8 +117,8 @@ if selector=="ヒストグラム":
             #データの整理
             scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
             #はずれちの除外
-            dd=scores[scores["処理時間"]<upper_num]
-            dd=dd[dd["処理時間"]>lower_num]
+#             dd=scores[scores["処理時間"]<upper_num]
+#             dd=dd[dd["処理時間"]>lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
             st.write(dd)
             
@@ -136,7 +136,7 @@ if selector=="ヒストグラム":
             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             
             
-            ax.hist(dd,bins=10,rwidth=dif_num2/10)
+            ax.hist(dd,bins=10)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             st.pyplot(fig)
