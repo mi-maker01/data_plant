@@ -131,7 +131,7 @@ if selector=="ヒストグラム":
             plt.ylabel("count")               # y軸ラベル
             plt.grid(True)
 #             plt.axvline(x=hyozyun)#標準時間の表記（赤軸）
-#             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
+            plt.xticks(np.arange(lower_num2, upper_num2))
             
             
             ax.hist(dd,bins=10,rwidth=dif_num2/10)
