@@ -97,7 +97,7 @@ if selector=="ヒストグラム":
                 
         hazure=data_num[data_num["processing_time"]<=upper_num]
         hazure=hazure[hazure["processing_time"]>=lower_num]
-        st.write(hazure)
+        
         
         st.write('第一四分位数は%.1fです'%q1)
         st.write('第三四分位数は%.1fです'%q3)
@@ -115,11 +115,12 @@ if selector=="ヒストグラム":
         #ヒストグラムの作成
         for i in t:
             #データの整理
-            scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==i)]#選択したデータ
+            scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
             #はずれちの除外
             dd=scores[scores["処理時間"]<upper_num]
             dd=dd[dd["処理時間"]>lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
+            st.write(dd)
             
             # 描画領域を用意する
             fig = plt.figure()
