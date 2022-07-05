@@ -116,8 +116,8 @@ if selector=="ヒストグラム":
             #データの整理
             scores=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"]==i)]#選択したデータ
             #はずれちの除外
-            dd=scores[scores["処理時間"]<=upper_num]
-            dd=dd[dd["処理時間"]>=lower_num]
+            dd=scores[scores["処理時間"]<upper_num]
+            dd=dd[dd["処理時間"]>lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
             st.write(dd)
             # 描画領域を用意する
