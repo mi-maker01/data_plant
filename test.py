@@ -119,6 +119,7 @@ if selector=="ヒストグラム":
             dd=scores[scores["処理時間"]<=upper_num]
             dd=dd[dd["処理時間"]>=lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
+            st.write(dd)
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
