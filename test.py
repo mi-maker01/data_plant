@@ -124,15 +124,15 @@ if selector=="ヒストグラム":
             fig = plt.figure()
             ax = fig.add_subplot()
             
-#             plt.xlim([0,upper_num2])                        # X軸範囲
-#             plt.ylim([0,dosu_num+10])                      # Y軸範囲
-#             ax.set_title("ヒストグラム", fontname="MS Gothic")
-#             ax.set_xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
-#             plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
-#             plt.grid(True)
-#             plt.axvline(x=hyozyun,color="crimson")#標準時間の表記（赤軸）
-#             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
-#             plt.tight_layout()
+            plt.xlim([0,upper_num2])                        # X軸範囲
+            plt.ylim([0,dosu_num+10])                      # Y軸範囲
+            ax.set_title("ヒストグラム", fontname="MS Gothic")
+            ax.set_xlabel("作業時間", fontsize=20,fontname="MS Gothic")                # x軸ラベル
+            plt.ylabel("回数", fontsize=20,fontname="MS Gothic")               # y軸ラベル
+            plt.grid(True)
+            plt.axvline(x=hyozyun)#標準時間の表記（赤軸）
+            plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
+            
             
             ax.hist(dd,bins=10,rwidth=dif_num2/10)
             # Matplotlib の Figure を指定して可視化する
