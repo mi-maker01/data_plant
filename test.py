@@ -133,7 +133,7 @@ if selector=="ヒストグラム":
             plt.xticks(np.arange(lower_num2, upper_num2, dif_num2/10))
             plt.tight_layout()
             
-            ax.hist(dd,bins=10)
+            ax.hist(dd,bins=10,rwidth=dif_num2/10)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             st.pyplot(fig)
