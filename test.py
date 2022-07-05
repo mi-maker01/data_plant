@@ -113,7 +113,7 @@ if selector=="ヒストグラム":
             #データの整理
             scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
             y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
-            hyozyun=y_scores["処理時間"]
+            hyozyun=y_scores["標準時間"]
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
