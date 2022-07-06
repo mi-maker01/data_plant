@@ -7,7 +7,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム","担当者","図番","工程"]
+pagelist = ["ヒストグラム","担当者","図番","工程","一日のデータ"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -17,7 +17,7 @@ if uploaded_file is not None:
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #ヒストグラムの画面
-if selector=="ヒストグラム":
+if selector=="ヒストグラム":#===============================================================================================
     
     #標準時間の取り込み
     st.title("標準時間ファイル")
@@ -51,7 +51,6 @@ if selector=="ヒストグラム":
     if answer == True:
         #上限値、下限値のdata
         data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
-        
         dosu_num=0
         
         for t_num in t_list:
@@ -106,8 +105,6 @@ if selector=="ヒストグラム":
         st.write('上限値は%.1fです'%upper_num2)
         st.write('下限値は%.1fです'%lower_num2)
         
-        
-        
         #ヒストグラムの作成
         for i in t:
             #データの整理
@@ -132,12 +129,11 @@ if selector=="ヒストグラム":
             plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             
-            
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             st.pyplot(fig)
-        
+        #===============================================================================================================================(ヒストグラムの設定)
 #担当者の画面
 elif selector=="担当者":
     t_list = sorted(list(set(df["担当コード"])))
@@ -185,3 +181,24 @@ elif selector=="工程":
         
         st.dataframe(pvit)
         st.table(pvit)
+ 
+#工程の画面
+elif selector=="一日のデータ":
+    #標準時間の取り込み
+    st.title("標準時間ファイル")
+    uploaded_file=st.file_uploader("標準時間の取り込み",type="xlsx")
+    if uploaded_file is not None:
+        df_time=pd.read_excel(uploaded_file)
+    base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
+    df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
+    df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
+    
+    t_list = sorted(list(set(df["担当コード"])))
+    t = st.selectbox(
+         "担当コード",
+         (t_list))
+    t_num=df[(df["担当コード"]==t)]
+    
+    st.write(t_num)
+    
+    
