@@ -203,7 +203,7 @@ elif selector=="一日のデータ":
     if answer == True:
         st.write(t_num)
         k_list = sorted(list(set(t_num["工程コード"])))
-        z_list = sorted(list(set(t_num["図番コード"])))
+        z_list = sorted(list(set(t_num["図番"])))
         st.write(k_num)
         st.write(z_num)
 
