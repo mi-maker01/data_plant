@@ -199,9 +199,11 @@ elif selector=="一日のデータ":
          (t_list))
     t_num=df[(df["担当コード"]==t)]
     
-    st.write(t_num)
-    k_list = sorted(list(set(df["工程コード"])))
-    z_list = sorted(list(set(df["図番コード"])))
-    st.write(k_num)
-    st.write(z_num)
-    
+    answer = st.button('分析開始')
+    if answer == True:
+        st.write(t_num)
+        k_list = sorted(list(set(t_num["工程コード"])))
+        z_list = sorted(list(set(t_num["図番コード"])))
+        st.write(k_num)
+        st.write(z_num)
+
