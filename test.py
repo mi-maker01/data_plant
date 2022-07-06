@@ -204,6 +204,5 @@ elif selector=="一日のデータ":
         st.write(t_num)
         k_list = sorted(list(set(t_num["工程コード"])))
         z_list = sorted(list(set(t_num["図番"])))
-        st.write(k_num)
-        st.write(z_num)
-
+        st.write(k_list)
+        st.write(z_list)
