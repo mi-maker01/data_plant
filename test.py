@@ -193,18 +193,77 @@ elif selector=="一日のデータ":
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     
+    #担当の選択
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
          "担当コード",
          (t_list))
-    t_num=df[(df["担当コード"]==t)]
+    k_list = sorted(list(set(df["工程コード"])))
+    z_list = sorted(list(set(df["図番"])))
     
+    x_num=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
+    
+    #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        st.write(t_num)
-        k_list = sorted(list(set(t_num["工程コード"])))
-        z_list = sorted(list(set(t_num["図番"])))
         
-        for k in k_list:
-            k_num=t_num[t_num["工程コード"]==k)]#選択したデータ
+        for z in z_list:
+            for k in k_list:
+                data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
+                dosu_num=0
+                
+                y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
+                y_num=y_num["処理時間"]
+                #y軸の上限値
+                x,y,_= plt.hist(y_num)
+                if dosu_num<max(x):#tが2個以上の時に比較する
+                    dosu_num=max(x)
+                    
+                data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
+                s_num=data_num['processing_time']
+                    
+                q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
+                q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
+                
+                iqr=q3-q1#四分位範囲
+                upper_num=q3+(1.5*iqr)#上限
+                lower_num=q1-(1.5*iqr)#下限
+                upper_num2=round(upper_num) #きりあげ
+                lower_num2=math.floor(lower_num)#きりおとし
+                dif_num=upper_num2-lower_num2#差
+                    
+                if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
+                    dif_num2=math.ceil((dif_num/10))*10
+                dif_num3=(dif_num2-dif_num)/2
+                upper_num2=upper_num2+dif_num3
+                lower_num2=lower_num2-dif_num3
+                
+                hazure=data_num[data_num["processing_time"]<=upper_num]
+                hazure=hazure[hazure["processing_time"]>=lower_num]
+        
+                    #ヒストグラムの作成
+                #データの整理
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
+                y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
+                hyozyun=y_scores["標準時間"]
+                dd=scores["processing_time"]#選択したデータの処理時間
             
+                #描画領域を用意する
+                fig = plt.figure()
+                ax = fig.add_subplot()
+
+                plt.xlim([0,upper_num2])                        # X軸範囲
+                plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                ax.set_title("chart")
+                ax.set_xlabel("time")                # x軸ラベル
+                plt.ylabel("count")               # y軸ラベル
+                plt.grid(True)
+                plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
+                plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
+
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+                # Matplotlib の Figure を指定して可視化する
+                st.write("---------------工程コード:",k,"-------------図番:",z,"-----------------------")
+                st.pyplot(fig)
+          #===============================================================================================================================(ヒストグラムの設定)
+
