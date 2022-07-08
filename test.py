@@ -262,6 +262,8 @@ elif selector=="一日のデータ":
                 plt.grid(True)
                 plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
                 plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
+                fig.set_figheight(6)
+                fig.set_figwidth(8)
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
                 # Matplotlib の Figure を指定して可視化する
