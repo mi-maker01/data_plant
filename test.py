@@ -198,8 +198,9 @@ elif selector=="一日のデータ":
     t = st.selectbox(
          "担当コード",
          (t_list))
-    k_list = sorted(list(set(df["工程コード"])))
-    z_list = sorted(list(set(df["図番"])))
+    x_num=df[(df["担当コード"]==t)]#dfからzで選んだ図番のデータ
+    k_list = sorted(list(set(x_num["工程コード"])))
+    z_list = sorted(list(set(x_num["図番"])))
     
     
     #データ分析開始
