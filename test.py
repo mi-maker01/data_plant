@@ -201,7 +201,6 @@ elif selector=="一日のデータ":
     k_list = sorted(list(set(df["工程コード"])))
     z_list = sorted(list(set(df["図番"])))
     
-    x_num=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
     
     #データ分析開始
     answer = st.button('分析開始')
