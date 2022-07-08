@@ -242,7 +242,7 @@ elif selector=="一日のデータ":
         
                     #ヒストグラムの作成
                 #データの整理
-                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
                 hyozyun=y_scores["標準時間"]
                 dd=scores["processing_time"]#選択したデータの処理時間
