@@ -7,7 +7,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム","担当者","図番","工程","一日のデータ","工程量"]
+pagelist = ["ヒストグラム","担当者","図番","工程","一日のデータ","工程量","滞在時間"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -293,3 +293,28 @@ elif selector=="工程量":
 
     plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
     st.pyplot(fig)
+
+ elif selector=="滞在時間":
+    k_list = sorted(list(set(df["工程完了日"])))
+    k = st.selectbox(
+         "工程完了日",
+         (k_list))
+    
+    z_num=df[(df["図番"]==k)]
+    s_list = sorted(list(set(z_num["製造番号"])))
+    s = st.selectbox(
+         "製造番号",
+         (s_list))
+    s_num=z_num[z_num["製造番号"]==s]
+    s_num=s_num.sort_values(['工程完了日','工程開始時間'])
+    
+    d_num1=s_num[0]
+    d_num2=s_num[s_num["工程コード"]=="P028"]
+    
+    
+    #データ分析開始
+    answer = st.button('分析開始')
+    if answer == True:
+        st.write(d_num1)
+        st.write(d_num2)
+        
