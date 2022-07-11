@@ -262,12 +262,31 @@ elif selector=="一日のデータ":
                 plt.grid(True)
                 plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
                 plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
-                fig.set_figheight(3)
-                fig.set_figwidth(4)
+                
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
                 st.pyplot(fig)
           #===============================================================================================================================(ヒストグラムの設定)
+#工程の画面
+elif selector=="工程量":
+    num=data[["図番","製造番号","工程コード","担当コード","工程開始時間","工程完了日","工程完了時間"]]
+    t_list = sorted(list(set(data["担当コード"])))
 
+    for t in t_list:
+        t_num=num[(num["担当コード"]==t)]
+        k_list = sorted(list(set(t_num["工程コード"])))
+        z_num=[]
+        k_num=[]
+        for k in k_list:
+            k_daynum = t_num[(t_num["工程コード"]==k)]
+            z_num.append(len(k_daynum))
+            k_num.append(k)
+        print("==========",t,"=================")
+        #描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
+
+        plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
+        st.pyplot(fig)
