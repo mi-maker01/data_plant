@@ -294,7 +294,7 @@ elif selector=="工程量":
     plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
     st.pyplot(fig)
 
- elif selector=="滞在時間":
+elif selector=="滞在時間":
     k_list = sorted(list(set(df["工程完了日"])))
     k = st.selectbox(
          "工程完了日",
