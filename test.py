@@ -308,7 +308,7 @@ elif selector=="滞在時間":
     s_num=z_num[z_num["製造番号"]==s]
     s_num=s_num.sort_values(['工程完了日','工程開始時間'])
     
-    d_num1=s_num[0]
+    d_num1=s_num
     d_num2=s_num[s_num["工程コード"]=="P028"]
     
     
