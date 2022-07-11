@@ -7,7 +7,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム","担当者","図番","工程","一日のデータ"]
+pagelist = ["ヒストグラム","担当者","図番","工程","一日のデータ","工程量"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -273,12 +273,15 @@ elif selector=="一日のデータ":
 elif selector=="工程量":
     num=data[["図番","製造番号","工程コード","担当コード","工程開始時間","工程完了日","工程完了時間"]]
     t_list = sorted(list(set(data["担当コード"])))
-
-    for t in t_list:
-        t_num=num[(num["担当コード"]==t)]
-        k_list = sorted(list(set(t_num["工程コード"])))
-        z_num=[]
-        k_num=[]
+    
+    t = st.selectbox(
+         "担当コード",
+         (t_list))
+    
+    t_num=num[(num["担当コード"]==t)]
+    k_list = sorted(list(set(t_num["工程コード"])))
+    z_num=[]
+    k_num=[]
         for k in k_list:
             k_daynum = t_num[(t_num["工程コード"]==k)]
             z_num.append(len(k_daynum))
