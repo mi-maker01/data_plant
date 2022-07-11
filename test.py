@@ -282,14 +282,14 @@ elif selector=="工程量":
     k_list = sorted(list(set(t_num["工程コード"])))
     z_num=[]
     k_num=[]
-        for k in k_list:
-            k_daynum = t_num[(t_num["工程コード"]==k)]
-            z_num.append(len(k_daynum))
-            k_num.append(k)
-        print("==========",t,"=================")
-        #描画領域を用意する
-        fig = plt.figure()
-        ax = fig.add_subplot()
+    for k in k_list:
+        k_daynum = t_num[(t_num["工程コード"]==k)]
+        z_num.append(len(k_daynum))
+        k_num.append(k)
+    st.write("==========",t,"=================")
+    #描画領域を用意する
+    fig = plt.figure()
+    ax = fig.add_subplot()
 
-        plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
-        st.pyplot(fig)
+    plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
+    st.pyplot(fig)
