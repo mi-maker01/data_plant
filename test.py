@@ -300,7 +300,7 @@ elif selector=="滞在時間":
          "工程完了日",
          (k_list))
     
-    z_num=df[(df["図番"]==k)]
+    z_num=df[(df["工程完了日"]==k)]
     s_list = sorted(list(set(z_num["製造番号"])))
     s = st.selectbox(
          "製造番号",
