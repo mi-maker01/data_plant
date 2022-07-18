@@ -343,8 +343,8 @@ elif selector=="ガントチャート":
     
     if len(d_num)!=0:
             if len(d_num)!=1:
-                xy_dnum["工程開始時間"] = pd.to_datetime(xy_dnum["工程開始時間"], format="%H:%M:%S")
-                xy_dnum["工程完了時間"] = pd.to_datetime(xy_dnum["工程完了時間"], format="%H:%M:%S")
+                xy_dnum["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
+                xy_dnum["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
                 
                 answer = st.button('分析開始')
                 if answer == True:
