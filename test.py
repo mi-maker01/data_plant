@@ -5,9 +5,14 @@ import plotly.express as px
 import math as math
 import numpy as np
 
+import plotly.express as px
+import plotly.io as pio
+import datetime
+
+
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間"]
+pagelist = ["ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -317,4 +322,34 @@ elif selector=="滞在時間":
     if answer == True:
         st.write(d_num1)
         st.write(d_num2)
-        
+
+ elif selector=="ガントチャート":
+    t_list = sorted(list(set(df["担当コード"])))
+    t = st.selectbox(
+         "担当コード",
+         (t_list))
+    
+    t_num=df[(df["担当コード"]==t)]
+    day_num = sorted(list(set(t_num["工程完了日"])))
+    d = st.selectbox(
+         "工程完了日",
+         (day_num))
+    
+    d_num=t_num[(t_num["工程完了日"]==d)]
+    d_num=d_num.sort_values(["工程開始時間"])
+    d_num=d_num.reset_index()
+    
+    d_num=d_num[(d_num["処理時間"] != 1)]
+    
+    if len(d_num)!=0:
+            if len(d_num)!=1:
+                xy_dnum["工程開始時間"] = pd.to_datetime(xy_dnum["工程開始時間"], format="%H:%M:%S")
+                xy_dnum["工程完了時間"] = pd.to_datetime(xy_dnum["工程完了時間"], format="%H:%M:%S")
+                
+                answer = st.button('分析開始')
+                if answer == True:
+                    fig = plt.figure()
+                    fig= px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",
+                                 y="製造番号",title="設備の稼働状況見える化")
+                    fig.update_traces(textposition='inside', orientation="h")
+                    fig.show()
