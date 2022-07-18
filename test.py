@@ -323,7 +323,7 @@ elif selector=="滞在時間":
         st.write(d_num1)
         st.write(d_num2)
 
- elif selector=="ガントチャート":
+elif selector=="ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
          "担当コード",
