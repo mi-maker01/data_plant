@@ -2,6 +2,3 @@ pandas
 matplotlib
 openpyxl
 plotly.express
-plotly.express as px
-plotly.io 
-datetime
