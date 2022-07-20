@@ -348,6 +348,7 @@ elif selector=="ガントチャート":
                 
                 answer = st.button('分析開始')
                 if answer == True:
+                    st.dataframe(d_num)
                     #描画領域を用意する
                     fig = plt.figure(figsize=(12,9))
                     ax = fig.add_subplot()
