@@ -126,22 +126,26 @@ if selector=="ヒストグラム（工程）":#=================================
             dd=scores["processing_time"]#選択したデータの処理時間
             
             # 描画領域を用意する
-            fig = plt.figure()
-            ax = fig.add_subplot()
+#             fig = plt.figure()
+#             ax = fig.add_subplot()
             
-            plt.xlim([0,upper_num2])                        # X軸範囲
-            plt.ylim([0,dosu_num+10])                      # Y軸範囲
-            ax.set_title("chart")
-            ax.set_xlabel("time")                # x軸ラベル
-            plt.ylabel("count")               # y軸ラベル
-            plt.grid(True)
-            plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
-            plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
+#             plt.xlim([0,upper_num2])                        # X軸範囲
+#             plt.ylim([0,dosu_num+10])                      # Y軸範囲
+#             ax.set_title("chart")
+#             ax.set_xlabel("time")                # x軸ラベル
+#             plt.ylabel("count")               # y軸ラベル
+#             plt.grid(True)
+#             plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
+#             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             
-            ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+#             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+
+            fig = go.Figure(px.Histogram(x=dd, nbinsx=10, 
+                           opacity=dif_num2/10, name='ヒストグラム')))
+            st.plotly_chart(fig, use_container_width=True)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
-            st.pyplot(fig)
+#             st.pyplot(fig)
         #===============================================================================================================================(ヒストグラムの設定)
 #担当者の画面
 elif selector=="担当者":
