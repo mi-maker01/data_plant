@@ -301,8 +301,8 @@ elif selector=="工程量":
         fig = plt.figure()
         ax = fig.add_subplot()
 
-        st.pie(z_num,labels=k_num,autopct="%1.1f%%")
-        st.pyplot(fig)
+        fig = go.Figure(go.pie(z_num,labels=k_num,autopct="%1.1f%%"))
+        st.plotly_chart(fig, use_container_width=True)
 
 elif selector=="滞在時間":
     k_list = sorted(list(set(df["工程完了日"])))
