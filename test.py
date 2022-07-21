@@ -297,6 +297,7 @@ elif selector=="工程量":
     answer = st.button('分析開始')
     if answer == True:
         st.write("==========",t,"=================")
+        st.markdown("==========",t,"=================")
         #描画領域を用意する
 
         fig = go.Figure(go.Pie(values=z_num,labels=k_num,hole=.3))
