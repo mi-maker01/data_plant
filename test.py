@@ -298,8 +298,6 @@ elif selector=="工程量":
     if answer == True:
         st.write("==========",t,"=================")
         #描画領域を用意する
-        fig = plt.figure()
-        ax = fig.add_subplot()
 
         fig = go.Figure(go.pie(z_num,labels=k_num,autopct="%1.1f%%"))
         st.plotly_chart(fig, use_container_width=True)
