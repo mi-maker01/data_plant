@@ -281,7 +281,7 @@ elif selector=="ヒストグラム（担当コード）":
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
                 left_column, right_column = st.columns(2)
-                st.plotly_chart(fig)
+                right_column.plotly_chart(fig)
                 left_column.pyplot(fig)
                 
           #===============================================================================================================================(ヒストグラムの設定)
