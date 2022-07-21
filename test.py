@@ -358,4 +358,5 @@ elif selector=="ガントチャート":
 #                     st.show(fig)
 
                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化"))
+                    fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
