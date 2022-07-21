@@ -73,11 +73,13 @@ if selector=="ヒストグラム（工程）":#=================================
         s_num=data_num['processing_time']
         
         # 描画領域を用意する
-        fig = plt.figure()
-        ax = fig.add_subplot()
-        ax.boxplot(s_num)#箱髭図作成
-        # Matplotlib の Figure を指定して可視化する
-        st.pyplot(fig)
+#         fig = plt.figure()
+#         ax = fig.add_subplot()
+#         ax.boxplot(s_num)#箱髭図作成
+#         # Matplotlib の Figure を指定して可視化する
+#         st.pyplot(fig)
+        fig = go.Figure([go.boxplot(s_num)])
+        st.plotly_chart(fig_target, use_container_width=True)
         
         st.write(data_num['processing_time'].describe())#データの詳細データ
                 
