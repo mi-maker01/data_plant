@@ -9,6 +9,8 @@ import plotly.express as px
 import plotly.io as pio
 import datetime
 
+import plotly.graph_objects as go
+
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
@@ -350,8 +352,10 @@ elif selector=="ガントチャート":
                 if answer == True:
                     st.dataframe(d_num)
                     #描画領域を用意する
-                    fig = plt.subplots()
-                    fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
+#                     fig = plt.subplots()
+#                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
 #                     ax.update_traces(textposition='inside', orientation="h")
-                    
-                    st.show(fig)
+#                     st.show(fig)
+
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化"))
+                    st.plotly_chart(fig)
