@@ -293,13 +293,16 @@ elif selector=="工程量":
         k_daynum = t_num[(t_num["工程コード"]==k)]
         z_num.append(len(k_daynum))
         k_num.append(k)
-    st.write("==========",t,"=================")
-    #描画領域を用意する
-    fig = plt.figure()
-    ax = fig.add_subplot()
+    
+    answer = st.button('分析開始')
+    if answer == True:
+        st.write("==========",t,"=================")
+        #描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
 
-    plt.pie(z_num,labels=k_num,autopct="%1.1f%%")
-    st.pyplot(fig)
+        st.pie(z_num,labels=k_num,autopct="%1.1f%%")
+        st.pyplot(fig)
 
 elif selector=="滞在時間":
     k_list = sorted(list(set(df["工程完了日"])))
