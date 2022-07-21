@@ -139,10 +139,13 @@ if selector=="ヒストグラム（工程）":#=================================
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
-
+            
+            left_column, right_column = st.columns(2)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig)
+            st.pyplot(fig)
+            left_column.pyplot(fig)
         #===============================================================================================================================(ヒストグラムの設定)
 #担当者の画面
 elif selector=="担当者":
