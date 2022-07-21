@@ -79,7 +79,7 @@ if selector=="ヒストグラム（工程）":#=================================
 #         # Matplotlib の Figure を指定して可視化する
 #         st.pyplot(fig)
         fig = go.Figure(px.box(s_num))
-        st.plotly_chart(fig_target, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
         
         st.write(data_num['processing_time'].describe())#データの詳細データ
                 
