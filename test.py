@@ -342,7 +342,7 @@ elif selector=="ガントチャート":
     d_num=d_num.reset_index()
     
     d_num=d_num[(d_num["処理時間"] != 1)]
-    
+    st.dataframe(d_num)
     if len(d_num)!=0:
             if len(d_num)!=1:
                 d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
@@ -350,7 +350,7 @@ elif selector=="ガントチャート":
                 
                 answer = st.button('分析開始')
                 if answer == True:
-                    st.dataframe(d_num)
+                    
                     #描画領域を用意する
 #                     fig = plt.subplots()
 #                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
