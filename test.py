@@ -299,7 +299,7 @@ elif selector=="工程量":
         st.write("==========",t,"=================")
         #描画領域を用意する
 
-        fig = go.Figure(go.pie(z_num,labels=k_num,autopct="%1.1f%%"))
+        fig = go.Figure(go.Pie(z_num,labels=k_num,autopct="%1.1f%%"))
         st.plotly_chart(fig, use_container_width=True)
 
 elif selector=="滞在時間":
