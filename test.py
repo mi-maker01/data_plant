@@ -126,7 +126,7 @@ if selector=="ヒストグラム（工程）":#=================================
             dd=scores["processing_time"]#選択したデータの処理時間
             
             # 描画領域を用意する
-            fig = plt.figure(figsize=[10,4.2])
+            fig = plt.figure(figsize=[5,4.2])
             ax = fig.add_subplot()
             
             plt.xlim([0,upper_num2])                        # X軸範囲
