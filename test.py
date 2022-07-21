@@ -141,7 +141,7 @@ if selector=="ヒストグラム（工程）":#=================================
 #             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
 
             fig = go.Figure(px.Histogram(x=dd, nbinsx=10, 
-                           opacity=dif_num2/10, name='ヒストグラム')))
+                           opacity=dif_num2/10, name='ヒストグラム'))
             st.plotly_chart(fig, use_container_width=True)
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
