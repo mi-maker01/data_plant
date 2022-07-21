@@ -143,8 +143,8 @@ if selector=="ヒストグラム（工程）":#=================================
             
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
-            st.plotly_chart(fig)
             left_column, right_column = st.columns(2)
+            st.plotly_chart(fig)
             left_column.pyplot(fig)
         #===============================================================================================================================(ヒストグラムの設定)
 #担当者の画面
@@ -280,7 +280,10 @@ elif selector=="ヒストグラム（担当コード）":
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
-                st.pyplot(fig)
+                left_column, right_column = st.columns(2)
+                st.plotly_chart(fig)
+                left_column.pyplot(fig)
+                
           #===============================================================================================================================(ヒストグラムの設定)
 #工程の画面
 elif selector=="工程量":
