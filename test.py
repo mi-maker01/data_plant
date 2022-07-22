@@ -387,4 +387,4 @@ elif selector=="折れ線グラフ":
             sei_num=d_num[d_num["製造番号"]==s]
             st.dataframe(sei_num)
         
-    st.dataframe(a)
+    st.write(a)
