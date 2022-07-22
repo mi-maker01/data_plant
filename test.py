@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート"]
+pagelist = ["ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート","折れ線グラフ"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -371,3 +371,19 @@ elif selector=="ガントチャート":
                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",color="工程コード",title="一日の稼働状況見える化"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
+elif selector=="折れ線グラフ":
+    day_num = sorted(list(set(df["工程完了日"])))
+    d = st.selectbox(
+         "工程完了日",
+         (day_num))
+    d_num=df[(df["工程完了日"]==d)]
+    s_num = sorted(list(set(d_num["製造番号"])))
+        
+    
+    answer = st.button('分析開始')
+    if answer == True:
+        for s in s_num:
+            sei_num=d_num[d_num["製造番号"]==s]
+            st.dataframe(sei_num)
+        
+        
