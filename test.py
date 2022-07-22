@@ -377,14 +377,16 @@ elif selector=="折れ線グラフ":
          "工程完了日",
          (day_num))
     d_num=df[(df["工程完了日"]==d)]
+    d_num=d_num.sort_values(["工程開始時間"])
     s_num = sorted(list(set(d_num["製造番号"])))
         
-    a=0
+    
     answer = st.button('分析開始')
     if answer == True:
         for s in s_num:
             a+=1
             sei_num=d_num[d_num["製造番号"]==s]
+            sei_num=sei_num.sort_values(["工程開始時間"])
             st.dataframe(sei_num)
-        
-    st.write(a)
+            st.plot(sei_num["工程開始時間"])
+    
