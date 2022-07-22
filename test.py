@@ -384,7 +384,7 @@ elif selector=="折れ線グラフ":
     answer = st.button('分析開始')
     if answer == True:
         for s in s_num:
-            
+                
             sei_num=d_num[d_num["製造番号"]==s]
             sei_num=sei_num.sort_values(["工程開始時間"])
             st.dataframe(sei_num)
