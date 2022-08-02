@@ -391,7 +391,7 @@ elif selector=="ガントチャート2":
         st.plotly_chart(fig)
         
         
-        for k in kikai_num:
+        for k in range(kikai_num):
             k_num=d_num[d_num["号機名称"]==k]
             k_num=k_num.sort_values(["工程開始時間"])
             st.write("==============================")
