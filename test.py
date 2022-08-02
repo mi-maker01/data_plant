@@ -372,14 +372,17 @@ elif selector=="ガントチャート":
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
 elif selector=="ガントチャート2":
+    
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
          (day_num))
     
     d_num=df[(df["工程完了日"]==d)]
+    
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
+    kikai_num = sorted(list(set(d_num["号機名称"])))
     
     answer = st.button('分析開始')
     if answer == True:
@@ -387,7 +390,7 @@ elif selector=="ガントチャート2":
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
         
-        kikai_num = sorted(list(set(d_num["号機名称"])))
+        
         for k in kikai_num:
             k_num=d_num[d_num["号機名称"]==k]
             st.write("==============================")
