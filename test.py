@@ -368,7 +368,7 @@ elif selector=="ガントチャート":
 #                     ax.update_traces(textposition='inside', orientation="h")
 #                     st.show(fig)
 
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="工程コード",title="一日の稼働状況見える化"))
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
 elif selector=="折れ線グラフ":
