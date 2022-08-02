@@ -430,8 +430,11 @@ elif selector=="折れ線グラフ":
             sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
             sei_num=sei_num.reset_index()
             gura_num = pd.DataFrame()
-            st.dataframe(sei_num)
             
+            
+            
+            st.dataframe(sei_num)
+            st.dataframe(gura_num)
            
             st.write("--------------------------")
 #             fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード", markers=True))
