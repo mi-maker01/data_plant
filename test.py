@@ -419,7 +419,6 @@ elif selector=="折れ線グラフ":
     d_num=df[(df["工程完了日"]==d)]
     d_num=d_num.sort_values(["工程開始時間"])
     s_num = sorted(list(set(d_num["製造番号"])))
-    y_list = list(set(d_num["工程コード"]))
     
     answer = st.button('分析開始')
     if answer == True:
@@ -429,11 +428,12 @@ elif selector=="折れ線グラフ":
             sei_num["工程開始時間"] = pd.to_datetime(sei_num["工程開始時間"], format="%H:%M:%S")
             sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
             sei_num=sei_num.reset_index()
+            
             gura_num = pd.DataFrame()
             sei_num['工程時間'] = sei_num["工程開始時間"]
             gura_num=sei_num
             for i in range(len(sei_num)):
-                pass
+                gura_num=gura_num.append(sei_num)
             
             
             st.dataframe(sei_num)
