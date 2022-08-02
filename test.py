@@ -426,6 +426,8 @@ elif selector=="折れ線グラフ":
         for s in s_num:        
             sei_num=d_num[d_num["製造番号"]==s]
             sei_num=sei_num.sort_values(["工程開始時間"])
+            sei_num["工程開始時間"] = pd.to_datetime(sei_num["工程開始時間"], format="%H:%M:%S")
+            sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
             sei_num=sei_num.reset_index()
             gura_num = pd.DataFrame()
             st.dataframe(sei_num)
