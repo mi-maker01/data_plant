@@ -382,8 +382,8 @@ elif selector=="ガントチャート2":
     
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
-    kikai_num = list(set(d_num["号機名称"]))
-    kikai_num = list(d_num["号機名称"].unique())
+    kikai_num = []
+    kikai_num = d_num["号機名称"].unique()
     st.write(kikai_num)
     
     answer = st.button('分析開始')
