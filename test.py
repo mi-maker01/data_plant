@@ -430,8 +430,8 @@ elif selector=="折れ線グラフ":
             
             for i in range(len(sei_num)):
                 a=sei_num.iloc[i]
-                gura_num.append(a["工程開始時間"])
-                gura_num.append(a["工程完了時間"])
+                gura_num=gura_num.append(a["工程開始時間"])
+                gura_num=gura_num.append(a["工程完了時間"])
             
             st.write(gura_num)
             st.write("--------------------------")
