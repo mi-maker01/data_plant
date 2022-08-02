@@ -430,7 +430,7 @@ elif selector=="折れ線グラフ":
             gura_num = pd.DataFrame()
             
             for i in range(len(sei_num)):
-                a=sei_num.iloc[i]
+                a=sei_num[i]
                 st.write(a)
             
             st.write("--------------------------")
