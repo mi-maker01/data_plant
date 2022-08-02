@@ -430,13 +430,17 @@ elif selector=="折れ線グラフ":
             sei_num=sei_num.reset_index()
             
             gura_num = pd.DataFrame()
+            s_num = pd.DataFrame()
             sei_num['工程時間'] = sei_num["工程開始時間"]
             gura_num=sei_num
             for i in range(len(sei_num)):
-                gura_num=gura_num.append(sei_num)
+                
+                s_num = sei_num.iloc[i]
+                gura_num=gura_num.append(s_num)
             
             
             st.dataframe(sei_num)
+            gura_num=gura_num.reset_index()
             st.dataframe(gura_num)
            
             st.write("--------------------------")
