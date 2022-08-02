@@ -431,10 +431,12 @@ elif selector=="折れ線グラフ":
             
             gura_num = pd.DataFrame()
             s_num = pd.DataFrame()
-            sei_num['工程時間'] = sei_num["工程開始時間"]
             for i in range(len(sei_num)):
+                sei_num['工程時間'] = sei_num["工程開始時間"]
                 s_num = sei_num.iloc[i]
                 gura_num=gura_num.append(s_num)
+                sei_num['工程時間'] = sei_num["工程完了時間"]
+                s_num = sei_num.iloc[i]
                 gura_num=gura_num.append(s_num)
             
             st.dataframe(sei_num)
