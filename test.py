@@ -379,7 +379,7 @@ elif selector=="折れ線グラフ":
     d_num=df[(df["工程完了日"]==d)]
     d_num=d_num.sort_values(["工程開始時間"])
     s_num = sorted(list(set(d_num["製造番号"])))
-        
+    y_list = list(set(d_num["工程コード"]))
     
     answer = st.button('分析開始')
     if answer == True:
@@ -387,7 +387,7 @@ elif selector=="折れ線グラフ":
             sei_num=d_num[d_num["製造番号"]==s]
             sei_num=sei_num.sort_values(["工程開始時間"])
             st.dataframe(sei_num)
-            fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード"))
-            
+            fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード",mode='markers+lines'))
+            plt.yticks(range(y_list))
             st.plotly_chart(fig)
     
