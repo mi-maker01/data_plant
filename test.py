@@ -383,13 +383,13 @@ elif selector=="ガントチャート2":
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
     kikai_num = list(set(d_num["号機名称"]))
+    st.write(kikai_num)
     
     answer = st.button('分析開始')
     if answer == True:
         fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
-        
         
         for k in kikai_num:
             k_num=d_num[d_num["号機名称"]==k]
