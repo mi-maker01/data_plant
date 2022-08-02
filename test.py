@@ -431,10 +431,8 @@ elif selector=="折れ線グラフ":
             
             for i in range(len(sei_num)):
                 a=sei_num.iloc[i]
-                gura_num=gura_num.append(a["工程開始時間"])
-                gura_num=gura_num.append(a["工程完了時間"])
+                st.write(a)
             
-            st.write(gura_num)
             st.write("--------------------------")
 #             fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード", markers=True))
 #             st.plotly_chart(fig)
