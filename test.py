@@ -428,7 +428,12 @@ elif selector=="折れ線グラフ":
             sei_num=sei_num.sort_values(["工程開始時間"])
             sei_num=sei_num.reset_index()
             
-            st.dataframe(sei_num)
-            fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード", markers=True))
-            st.plotly_chart(fig)
+            for i in range(sei_num):
+                a=sei_num[i]
+                gura_num=a["工程開始時間"]
+                gura_num=a["工程完了時間"]
+            
+            st.dataframe(gura_num)
+#             fig = go.Figure(px.line(sei_num, x="工程開始時間", y="工程コード", markers=True))
+#             st.plotly_chart(fig)
    
