@@ -396,8 +396,9 @@ elif selector=="ガントチャート2":
             st.write("==============================")
             st.write(k)
             st.write("==============================")
-            fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",color="担当コード",title="一日の稼働状況見える化"))
+            fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="一日の稼働状況見える化"))
             fig.update_traces(textposition='inside', orientation="h")
+            fig.update_yaxes(autorange='reversed')
             st.plotly_chart(fig)
             
 elif selector=="折れ線グラフ":
