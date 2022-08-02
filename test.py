@@ -386,8 +386,14 @@ elif selector=="ガントチャート2":
         fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
-    
-    
+        
+        kikai_num = sorted(list(set(d_num["号機名称"])))
+        for k in kikai_num:
+            k_num=d_num[d_num["号機名称"]==k]
+            fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
+            fig.update_traces(textposition='inside', orientation="h")
+            st.plotly_chart(fig)
+            
 elif selector=="折れ線グラフ":
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
