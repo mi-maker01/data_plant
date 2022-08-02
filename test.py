@@ -428,7 +428,7 @@ elif selector=="折れ線グラフ":
             sei_num=sei_num.sort_values(["工程開始時間"])
             sei_num=sei_num.reset_index()
             
-            for i in range(sei_num):
+            for i in range(len(sei_num)):
                 a=sei_num[i]
                 gura_num=a["工程開始時間"]
                 gura_num=a["工程完了時間"]
