@@ -25,11 +25,11 @@ st.title("生産データ分析")
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 
 if selector=="データの読み込み":
-#製造データの取り込み
-st.title("製造データファイル")
-uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
-if uploaded_file is not None:
-    df=pd.read_excel(uploaded_file)
+    #製造データの取り込み
+    st.title("製造データファイル")
+    uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
+    if uploaded_file is not None:
+        df=pd.read_excel(uploaded_file)
 
 elif selector=="(A-1)各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
