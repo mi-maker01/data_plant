@@ -11,7 +11,7 @@ import datetime
 
 import plotly.graph_objects as go
 
-pd.options.display.precision = 2
+
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握_折れ線グラフ","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
@@ -243,6 +243,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
+        pd.options.display.precision = 0
         syosai_num=data_num['processing_time'].describe()#データの詳細データ
         syosai_num = pd.DataFrame(syosai_num)
         st.write(syosai_num.T)
