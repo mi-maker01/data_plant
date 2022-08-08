@@ -243,7 +243,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
-        st.table(data_num['processing_time'].describe())#データの詳細データ
+        st.dataframe(data_num['processing_time'].describe())#データの詳細データ
                 
         q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
         q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
