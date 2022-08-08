@@ -14,20 +14,15 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["データ読み込み","(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握_折れ線グラフ","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
+pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握_折れ線グラフ","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
 st.title("生産データ分析")
-# #製造データの取り込み
-# st.title("製造データファイル")
-# uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
-# if uploaded_file is not None:
-#     df=pd.read_excel(uploaded_file)
+#製造データの取り込み
+st.title("製造データファイル")
+uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
+if uploaded_file is not None:
+    df=pd.read_excel(uploaded_file)
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
-
-if selector=="データ読み込み":
-    uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
-    if uploaded_file is not None:
-        df=pd.read_excel(uploaded_file)
 
 elif selector=="(A-1)各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
