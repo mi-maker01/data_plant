@@ -398,19 +398,26 @@ elif selector=="（E）工程別作業時間統計量":
  
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
-    num=df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程完了日","工程完了時間"]]
+    num=df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
     t_list = sorted(list(set(df["担当コード"])))
-    
     t = st.selectbox(
          "担当コード",
          (t_list))
-    
     t_num=num[(num["担当コード"]==t)]
-    k_list = sorted(list(set(t_num["工程コード"])))
+    
+    n_list = sorted(list(set(t_num["工程開始日"])))
+    n = st.selectbox(
+         "工程日",
+         (n_list))
+    n_num=t_num[(t_num["工程開始日"]==n)]
+    
+    
+    
+    k_list = sorted(list(set(n_num["工程コード"])))
     z_num=[]
     k_num=[]
     for k in k_list:
-        k_daynum = t_num[(t_num["工程コード"]==k)]
+        k_daynum = n_num[(n_num["工程コード"]==k)]
         z_num.append(len(k_daynum))
         k_num.append(k)
     
