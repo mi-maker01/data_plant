@@ -90,10 +90,8 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
             k_num=d_num[d_num["号機名称"]==k]
             k_num=k_num.sort_values(["工程開始時間"])
             if len(k_num) >=1:
-                st.write("==============================")
-                st.write(k)
-                st.write(len(k_num))
-                st.write("==============================")
+                st.write("================================================================================")
+                st.write(k,":")
 
                 fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="担当コード", color_continuous_scale='Jet',title="一日の稼働状況見える化"))
                 fig.update_traces(textposition='inside', orientation="h")
