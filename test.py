@@ -243,7 +243,6 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
-        pd.options.display.precision = 0
         syosai_num=data_num['processing_time'].describe()#データの詳細データ
         syosai_num = pd.DataFrame(syosai_num)
         st.write(syosai_num.T)
