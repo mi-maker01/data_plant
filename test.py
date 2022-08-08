@@ -24,7 +24,7 @@ st.title("生産データ分析")
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 
-if selector=="データの読み込み":
+if selector=="データ読み込み":
     uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
     if uploaded_file is not None:
         df=pd.read_excel(uploaded_file)
