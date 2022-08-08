@@ -23,7 +23,7 @@ if uploaded_file is not None:
     df=pd.read_excel(uploaded_file)
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
-
+#================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
@@ -66,7 +66,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     fig.update_yaxes(autorange='reversed')
                     st.plotly_chart(fig)
                     
-                    
+                    #================================================================================================================================
 elif selector=="（A-2）各工程各日の実績ガントチャート":
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
@@ -96,6 +96,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
                 fig.update_traces(textposition='inside', orientation="h")
                 fig.update_yaxes(autorange='reversed')
                 st.plotly_chart(fig)
+                 #================================================================================================================================
 
 elif selector=="（B）同一人物の同一行程でのばらつきの把握_ヒストグラム":
     #標準時間の取り込み
@@ -310,7 +311,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             left_column, right_column = st.columns(2)
             right_column.plotly_chart(fig)
             left_column.pyplot(fig)            
-
+#================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握_折れ線グラフ":
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
@@ -362,7 +363,7 @@ elif selector=="担当者別作業時間統計量":
         
         st.dataframe(pvit)
         st.table(pvit)
-        
+ #================================================================================================================================        
 #図番の画面
 elif selector=="図番別作業時間統計量":
     z_list = sorted(list(set(df["図番"])))
@@ -378,7 +379,7 @@ elif selector=="図番別作業時間統計量":
         
         st.dataframe(pvit)
         st.table(pvit)
-        
+ #================================================================================================================================      
 #工程の画面
 elif selector=="工程別作業時間統計量":
     k_list = sorted(list(set(df["工程コード"])))
@@ -418,6 +419,9 @@ elif selector=="各人の工程量":
         st.write("==========",t,"=================")
         st.markdown("==========",t)
         #描画領域を用意する
-
+        left_column, right_column = st.columns(2)
         fig = go.Figure(go.Pie(values=z_num,labels=k_num,hole=.3))
-        st.plotly_chart(fig, use_container_width=True)
+        left_column.plotly_chart(fig, use_container_width=True)
+        
+        
+        
