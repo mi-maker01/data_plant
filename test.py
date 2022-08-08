@@ -340,8 +340,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握_折れ�
                 gura_num=gura_num.append(s_num)
            
             gura_num=gura_num.sort_values(["工程時間"])
+            st.write("-----------------------------------------------------------------------------------")
             st.dataframe(gura_num)
-            st.write("--------------------------")
             fig = go.Figure(px.line(gura_num, x="工程時間", y="工程コード", markers=True))
             fig.update_yaxes(autorange='reversed')
             st.plotly_chart(fig)
