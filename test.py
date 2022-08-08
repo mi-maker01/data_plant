@@ -157,7 +157,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 hazure=data_num[data_num["processing_time"]<=upper_num]
                 hazure=hazure[hazure["processing_time"]>=lower_num]
         
-                    #ヒストグラムの作成
+                #ヒストグラムの作成
                 #データの整理
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
@@ -243,7 +243,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
-        st.write(data_num['processing_time'].describe())#データの詳細データ
+        st.table(data_num['processing_time'].describe())#データの詳細データ
                 
         q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
         q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
@@ -265,16 +265,16 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         hazure=hazure[hazure["processing_time"]>=lower_num]
         
         
-        st.write('第一四分位数は%.1fです'%q1)
-        st.write('第三四分位数は%.1fです'%q3)
-        st.write('四分位範囲は%.1fです'%iqr)
-        st.write('上限値は%.1fです'%upper_num)
-        st.write('下限値は%.1fです'%lower_num)
-        st.write('差は%.1fです'%dif_num)
-        st.write('差は%.1fです'%dif_num2)
-        st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
-        st.write('上限値は%.1fです'%upper_num2)
-        st.write('下限値は%.1fです'%lower_num2)
+#         st.write('第一四分位数は%.1fです'%q1)
+#         st.write('第三四分位数は%.1fです'%q3)
+#         st.write('四分位範囲は%.1fです'%iqr)
+#         st.write('上限値は%.1fです'%upper_num)
+#         st.write('下限値は%.1fです'%lower_num)
+#         st.write('差は%.1fです'%dif_num)
+#         st.write('差は%.1fです'%dif_num2)
+#         st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
+#         st.write('上限値は%.1fです'%upper_num2)
+#         st.write('下限値は%.1fです'%lower_num2)
         
         #ヒストグラムの作成
         for i in t:
