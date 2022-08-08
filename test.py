@@ -65,8 +65,9 @@ elif selector=="（A-1）各人各日の実績ガントチャート":
                     fig.update_traces(textposition='inside', orientation="h")
                     fig.update_yaxes(autorange='reversed')
                     st.plotly_chart(fig)
+                    
+                    
 elif selector=="（A-2）各工程各日の実績ガントチャート":
-    
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
