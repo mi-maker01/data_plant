@@ -78,7 +78,6 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
     kikai_num = list(set(d_num["号機名称"]))
-    st.write(kikai_num)
     
     answer = st.button('分析開始')
     if answer == True:
@@ -91,7 +90,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
             k_num=k_num.sort_values(["工程開始時間"])
             if len(k_num) >=1:
                 st.write("================================================================================")
-                st.write(k,":")
+                st.write(k,":",len(k_num))
 
                 fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="担当コード", color_continuous_scale='Jet',title="一日の稼働状況見える化"))
                 fig.update_traces(textposition='inside', orientation="h")
