@@ -24,7 +24,7 @@ if uploaded_file is not None:
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 
-elif selector=="A-1各人各日の実績ガントチャート":
+if selector=="A-1各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
          "担当コード",
