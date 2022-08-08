@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート","ガントチャート2","折れ線グラフ"]
+pagelist = ["各人各日の実績ガントチャート","ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート2","折れ線グラフ"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -336,7 +336,7 @@ elif selector=="滞在時間":
         st.write(d_num1)
         st.write(d_num2)
 
-elif selector=="ガントチャート":
+elif selector=="各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
          "担当コード",
