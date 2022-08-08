@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["各人各日の実績ガントチャート","ヒストグラム（工程）","担当者","図番","工程","ヒストグラム（担当コード）","工程量","滞在時間","ガントチャート2","折れ線グラフ"]
+pagelist = ["（A-1）各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握_折れ線グラフ","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
 st.title("生産データ分析")
 #製造データの取り込み
 st.title("製造データファイル")
@@ -23,6 +23,116 @@ if uploaded_file is not None:
     df=pd.read_excel(uploaded_file)
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
+
+elif selector=="（A-1）各人各日の実績ガントチャート":
+    t_list = sorted(list(set(df["担当コード"])))
+    t = st.selectbox(
+         "担当コード",
+         (t_list))
+    
+    t_num=df[(df["担当コード"]==t)]
+    day_num = sorted(list(set(t_num["工程完了日"])))
+    d = st.selectbox(
+         "工程完了日",
+         (day_num))
+    
+    d_num=t_num[(t_num["工程完了日"]==d)]
+    d_num=d_num.sort_values(["工程開始時間"])
+    d_num=d_num.reset_index()
+    
+    d_num=d_num[(d_num["処理時間"] != 1)]
+    st.dataframe(d_num)
+    if len(d_num)!=0:
+            if len(d_num)!=1:
+                d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
+                d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
+                
+                answer = st.button('分析開始')
+                if answer == True:
+                    
+                    #描画領域を用意する
+#                     fig = plt.subplots()
+#                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
+#                     ax.update_traces(textposition='inside', orientation="h")
+#                     st.show(fig)
+
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",color="工程コード",title="一日の稼働状況見える化"))
+                    fig.update_traces(textposition='inside', orientation="h")
+                    fig.update_yaxes(autorange='reversed')
+                    st.plotly_chart(fig)
+                    
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="工程コード",title="一日の稼働状況見える化"))
+                    fig.update_traces(textposition='inside', orientation="h")
+                    fig.update_yaxes(autorange='reversed')
+                    st.plotly_chart(fig)
+elif selector=="（A-2）各工程各日の実績ガントチャート":
+    
+    day_num = sorted(list(set(df["工程完了日"])))
+    d = st.selectbox(
+         "工程完了日",
+         (day_num))
+    
+    d_num=df[(df["工程完了日"]==d)]
+    
+    d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
+    d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
+    kikai_num = list(set(d_num["号機名称"]))
+    st.write(kikai_num)
+    
+    answer = st.button('分析開始')
+    if answer == True:
+        fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
+        fig.update_traces(textposition='inside', orientation="h")
+        st.plotly_chart(fig)
+        
+        for k in kikai_num:
+            k_num=d_num[d_num["号機名称"]==k]
+            k_num=k_num.sort_values(["工程開始時間"])
+            if len(k_num) >=1:
+                st.write("==============================")
+                st.write(k)
+                st.write(len(k_num))
+                st.write("==============================")
+
+                fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="担当コード", color_continuous_scale='Jet',title="一日の稼働状況見える化"))
+                fig.update_traces(textposition='inside', orientation="h")
+                fig.update_yaxes(autorange='reversed')
+                st.plotly_chart(fig)
+            
+elif selector=="折れ線グラフ":
+    day_num = sorted(list(set(df["工程完了日"])))
+    d = st.selectbox(
+         "工程完了日",
+         (day_num))
+    d_num=df[(df["工程完了日"]==d)]
+    d_num=d_num.sort_values(["工程開始時間"])
+    s_num = sorted(list(set(d_num["製造番号"])))
+    
+    answer = st.button('分析開始')
+    if answer == True:
+        for s in s_num:        
+            sei_num=d_num[d_num["製造番号"]==s]
+            sei_num=sei_num.sort_values(["工程開始時間"])
+            sei_num["工程開始時間"] = pd.to_datetime(sei_num["工程開始時間"], format="%H:%M:%S")
+            sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
+            sei_num=sei_num.reset_index()
+            
+            gura_num = pd.DataFrame()
+            s_num = pd.DataFrame()
+            for i in range(len(sei_num)):
+                sei_num['工程時間'] = sei_num["工程開始時間"]
+                s_num = sei_num.iloc[i]
+                gura_num=gura_num.append(s_num)
+                sei_num['工程時間'] = sei_num["工程完了時間"]
+                s_num = sei_num.iloc[i]
+                gura_num=gura_num.append(s_num)
+           
+            gura_num=gura_num.sort_values(["工程時間"])
+            st.dataframe(gura_num)
+            st.write("--------------------------")
+            fig = go.Figure(px.line(gura_num, x="工程時間", y="工程コード", markers=True))
+            fig.update_yaxes(autorange='reversed')
+            st.plotly_chart(fig)
 #ヒストグラムの画面
 if selector=="ヒストグラム（工程）":#===============================================================================================
     
@@ -336,113 +446,5 @@ elif selector=="滞在時間":
         st.write(d_num1)
         st.write(d_num2)
 
-elif selector=="各人各日の実績ガントチャート":
-    t_list = sorted(list(set(df["担当コード"])))
-    t = st.selectbox(
-         "担当コード",
-         (t_list))
-    
-    t_num=df[(df["担当コード"]==t)]
-    day_num = sorted(list(set(t_num["工程完了日"])))
-    d = st.selectbox(
-         "工程完了日",
-         (day_num))
-    
-    d_num=t_num[(t_num["工程完了日"]==d)]
-    d_num=d_num.sort_values(["工程開始時間"])
-    d_num=d_num.reset_index()
-    
-    d_num=d_num[(d_num["処理時間"] != 1)]
-    st.dataframe(d_num)
-    if len(d_num)!=0:
-            if len(d_num)!=1:
-                d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
-                d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
-                
-                answer = st.button('分析開始')
-                if answer == True:
-                    
-                    #描画領域を用意する
-#                     fig = plt.subplots()
-#                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
-#                     ax.update_traces(textposition='inside', orientation="h")
-#                     st.show(fig)
 
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",color="工程コード",title="一日の稼働状況見える化"))
-                    fig.update_traces(textposition='inside', orientation="h")
-                    fig.update_yaxes(autorange='reversed')
-                    st.plotly_chart(fig)
-                    
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="工程コード",title="一日の稼働状況見える化"))
-                    fig.update_traces(textposition='inside', orientation="h")
-                    fig.update_yaxes(autorange='reversed')
-                    st.plotly_chart(fig)
-elif selector=="ガントチャート2":
-    
-    day_num = sorted(list(set(df["工程完了日"])))
-    d = st.selectbox(
-         "工程完了日",
-         (day_num))
-    
-    d_num=df[(df["工程完了日"]==d)]
-    
-    d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
-    d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
-    kikai_num = list(set(d_num["号機名称"]))
-    st.write(kikai_num)
-    
-    answer = st.button('分析開始')
-    if answer == True:
-        fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
-        fig.update_traces(textposition='inside', orientation="h")
-        st.plotly_chart(fig)
-        
-        for k in kikai_num:
-            k_num=d_num[d_num["号機名称"]==k]
-            k_num=k_num.sort_values(["工程開始時間"])
-            if len(k_num) >=1:
-                st.write("==============================")
-                st.write(k)
-                st.write(len(k_num))
-                st.write("==============================")
-
-                fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="担当コード", color_continuous_scale='Jet',title="一日の稼働状況見える化"))
-                fig.update_traces(textposition='inside', orientation="h")
-                fig.update_yaxes(autorange='reversed')
-                st.plotly_chart(fig)
-            
-elif selector=="折れ線グラフ":
-    day_num = sorted(list(set(df["工程完了日"])))
-    d = st.selectbox(
-         "工程完了日",
-         (day_num))
-    d_num=df[(df["工程完了日"]==d)]
-    d_num=d_num.sort_values(["工程開始時間"])
-    s_num = sorted(list(set(d_num["製造番号"])))
-    
-    answer = st.button('分析開始')
-    if answer == True:
-        for s in s_num:        
-            sei_num=d_num[d_num["製造番号"]==s]
-            sei_num=sei_num.sort_values(["工程開始時間"])
-            sei_num["工程開始時間"] = pd.to_datetime(sei_num["工程開始時間"], format="%H:%M:%S")
-            sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
-            sei_num=sei_num.reset_index()
-            
-            gura_num = pd.DataFrame()
-            s_num = pd.DataFrame()
-            for i in range(len(sei_num)):
-                sei_num['工程時間'] = sei_num["工程開始時間"]
-                s_num = sei_num.iloc[i]
-                gura_num=gura_num.append(s_num)
-                sei_num['工程時間'] = sei_num["工程完了時間"]
-                s_num = sei_num.iloc[i]
-                gura_num=gura_num.append(s_num)
-           
-            gura_num=gura_num.sort_values(["工程時間"])
-            st.dataframe(gura_num)
-            st.write("--------------------------")
-            fig = go.Figure(px.line(gura_num, x="工程時間", y="工程コード", markers=True))
-            fig.update_yaxes(autorange='reversed')
-            st.plotly_chart(fig)
    
