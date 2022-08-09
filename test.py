@@ -66,6 +66,10 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     fig.update_yaxes(autorange='reversed')
                     st.plotly_chart(fig)
                     
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程開始日",color="工程コード",title="一日の稼働状況見える化"))
+                    fig.update_traces(textposition='inside', orientation="h")
+                    fig.update_yaxes(autorange='reversed')
+                    st.plotly_chart(fig)
                     #================================================================================================================================
 elif selector=="（A-2）各工程各日の実績ガントチャート":
     day_num = sorted(list(set(df["工程完了日"])))
@@ -108,6 +112,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
     df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
     
+    #曜日の設定
+    
+    
     #担当の選択
     t_list = sorted(list(set(df["担当コード"])))
     t = st.selectbox(
@@ -119,7 +126,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     
     #曜日の選択
     y_list = ["月","火","水","木","金","すべて"]
-    n = st.selectbox(
+    y = st.selectbox(
          "曜日",
          (y_list))
     
