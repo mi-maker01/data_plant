@@ -438,7 +438,7 @@ elif selector=="（E）各人の工程量":
         st.write("==========",t,"=================")
         #描画領域を用意する
         left_column, right_column = st.columns(2)
-        fig = go.Figure(go.Pie(values=z_num,labels=k_num,hole=.3))
+        fig = go.Figure(px.bar(values=z_num,labels=k_num,hole=.3))
         left_column.plotly_chart(fig, use_container_width=True)
         
         
