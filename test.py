@@ -425,7 +425,7 @@ elif selector=="（E）各人の工程量":
     
     answer = st.button('分析開始')
     if answer == True:
-        st.write("==========",t,"=================")
+        
         #描画領域を用意する
         left_column, right_column = st.columns(2)
         fig = go.Figure(px.bar(n_num,x="担当コード",color="工程コード"))
