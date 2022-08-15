@@ -411,34 +411,24 @@ elif selector=="（E）工程別作業時間統計量":
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
     num=df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
-    t_list = sorted(list(set(df["担当コード"])))
-    t = st.selectbox(
-         "担当コード",
-         (t_list))
-    t_num=num[(num["担当コード"]==t)]
     
-    n_list = sorted(list(set(t_num["工程開始日"])))
+    n_list = sorted(list(set(df["工程開始日"])))
     n = st.selectbox(
          "工程日",
          (n_list))
-    n_num=t_num[(t_num["工程開始日"]==n)]
+    n_num=df[(df["工程開始日"]==n)]
+    t_list = sorted(list(set(n_num["担当コード"])))
+    t_num=n_num[(n_num["担当コード"]==t)]
+    k_list = sorted(list(set(t_num["工程コード"])))
     
     
-    
-    k_list = sorted(list(set(n_num["工程コード"])))
-    z_num=[]
-    k_num=[]
-    for k in k_list:
-        k_daynum = n_num[(n_num["工程コード"]==k)]
-        z_num.append(len(k_daynum))
-        k_num.append(k)
     
     answer = st.button('分析開始')
     if answer == True:
         st.write("==========",t,"=================")
         #描画領域を用意する
         left_column, right_column = st.columns(2)
-        fig = go.Figure(px.bar(values=z_num,labels=k_num,hole=.3))
+        fig = go.Figure(px.bar(n_num,x="担当コード",color="工程コード"))
         left_column.plotly_chart(fig, use_container_width=True)
         
         
