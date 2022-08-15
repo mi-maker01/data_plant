@@ -425,7 +425,7 @@ elif selector=="（E）各人の工程量":
     
     for t in hito_list:
         t_num=n_num[(n_num["担当者"]==t)]
-        k_list = sorted(list(set(t_num["工程コード"])))
+        k_list = sorted(list(set(t_num["工程名称"])))
         for k in k_list:
             bar_num.loc[k,t]=round(100 * len(k_list) / len(t_num), 1)
     
