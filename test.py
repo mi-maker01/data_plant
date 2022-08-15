@@ -427,7 +427,8 @@ elif selector=="（E）各人の工程量":
         t_num=n_num[(n_num["担当者"]==t)]
         k_list = sorted(list(set(t_num["工程名称"])))
         for k in k_list:
-            bar_num.loc[k,t]=round(100 * len(k_list) / len(t_num), 1)
+            k_num=t_num[(t_num["工程名称"]==k)]
+            bar_num.loc[k,t]=round(100 * len(k_list) / len(k_num), 1)
     
     st.dataframe(bar_num)
     answer = st.button('分析開始')
