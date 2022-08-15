@@ -439,5 +439,6 @@ elif selector=="（E）各人の工程量":
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程コード"))
         left_column.plotly_chart(fig, use_container_width=True)
         
-        
+        fig = go.Figure(px.bar(bar_num,x="担当者",color="工程名称"))
+        left_column.plotly_chart(fig, use_container_width=True)
         
