@@ -418,8 +418,8 @@ elif selector=="（E）各人の工程量":
          (n_list))
     n_num=df[(df["工程開始日"]==n)]
     t_list = sorted(list(set(n_num["担当コード"])))
-    t_num=n_num[(n_num["担当コード"]==t)]
-    k_list = sorted(list(set(t_num["工程コード"])))
+#     t_num=n_num[(n_num["担当コード"]==t)]
+#     k_list = sorted(list(set(t_num["工程コード"])))
     
     
     
