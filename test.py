@@ -418,8 +418,14 @@ elif selector=="（E）各人の工程量":
          (n_list))
     n_num=df[(df["工程開始日"]==n)]
     t_list = sorted(list(set(n_num["担当コード"])))
-#     t_num=n_num[(n_num["担当コード"]==t)]
-#     k_list = sorted(list(set(t_num["工程コード"])))
+    
+    hito_list = sorted(list(set(df["担当者"])))
+    ko_list = sorted(list(set(df["工程名称"])))
+    bar_num=pd.DataFrame(columns=hito_list,index=ko_list )
+    display(bar_num)
+    for t in t_list:
+        t_num=n_num[(n_num["担当コード"]==t)]
+        k_list = sorted(list(set(t_num["工程コード"])))
     
     
     
@@ -428,7 +434,7 @@ elif selector=="（E）各人の工程量":
         
         #描画領域を用意する
         left_column, right_column = st.columns(2)
-        fig = go.Figure(px.bar(n_num,x="担当コード",color="工程コード"))
+        fig = go.Figure(px.bar(n_num,x="担当者",y="担当者",color="工程コード"))
         left_column.plotly_chart(fig, use_container_width=True)
         
         
