@@ -421,7 +421,7 @@ elif selector=="（E）各人の工程量":
     
     hito_list = sorted(list(set(df["担当者"])))
     ko_list = sorted(list(set(df["工程名称"])))
-    bar_num=pd.DataFrame(columns=hito_list,index=ko_list )
+    bar_num=pd.DataFrame(columns=["担当者","工程名称","%"] )
     
     for t in hito_list:
         t_num=n_num[(n_num["担当者"]==t)]
