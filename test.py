@@ -437,8 +437,8 @@ elif selector=="（E）各人の工程量":
         #描画領域を用意する
         left_column, right_column = st.columns(2)
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程コード"))
-        left_column.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
         
-        fig = go.Figure(px.bar(bar_num,x=hito_list,y=ko_list))
+        fig = go.Figure(px.bar(bar_num,x=bar_num.columns,y=bar_num.index))
         left_column.plotly_chart(fig, use_container_width=True)
         
