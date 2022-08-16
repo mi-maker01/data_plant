@@ -421,7 +421,7 @@ elif selector=="（E）各人の工程量":
     
     hito_list = sorted(list(set(df["担当者"])))
     ko_list = sorted(list(set(df["工程名称"])))
-    bar_num=pd.DataFrame(columns=["担当者","工程名称","%"] )
+    bar_num1=pd.DataFrame(columns=["担当者","工程名称","%"] )
     
     for t in hito_list:
         t_num=n_num[(n_num["担当者"]==t)]
@@ -430,7 +430,7 @@ elif selector=="（E）各人の工程量":
             k_num=t_num[(t_num["工程名称"]==k)]
             bar_num.loc[k,t]=round(100 * len(k_num) / len(t_num), 1)
     
-    st.dataframe(bar_num)
+    st.dataframe(bar_num1)
     answer = st.button('分析開始')
     if answer == True:
         
