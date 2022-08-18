@@ -434,6 +434,8 @@ elif selector=="（E）各人の工程量":
             app_num = pd.DataFrame(fruit_list, columns = ["担当者","工程名称","%"])
             
             bar_num1=bar_num1.append(app_num,ignore_index=True)
+            
+    bar_num1=bar_num1.sort_values('担当者')
     st.dataframe(bar_num1)
     st.dataframe(n_num)
     answer = st.button('分析開始')
