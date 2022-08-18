@@ -111,8 +111,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
     df_time['標準時間１']=pd.to_datetime(df_time['標準時間１'], format='%M:%S:%f') - base_time
     df_time['標準時間１']=df_time["標準時間１"].dt.total_seconds()
-    df_time['標準時間2']=pd.to_datetime(df_time['標準時間2'], format='%M:%S:%f') - base_time
-    df_time['標準時間2']=df_time["標準時間2"].dt.total_seconds()
+    df_time['標準時間２']=pd.to_datetime(df_time['標準時間２'], format='%M:%S:%f') - base_time
+    df_time['標準時間２']=df_time["標準時間２"].dt.total_seconds()
     
     st.write(df_time)
     #曜日の設定
