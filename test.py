@@ -417,6 +417,7 @@ elif selector=="（E）各人の工程量":
          "工程日",
          (n_list))
     n_num=df[(df["工程開始日"]==n)]
+    
     t_list = sorted(list(set(n_num["担当コード"])))
     
     hito_list = sorted(list(set(df["担当者"])))
@@ -434,6 +435,7 @@ elif selector=="（E）各人の工程量":
             
             bar_num1=bar_num1.append(app_num,ignore_index=True)
     st.dataframe(bar_num1)
+    st.dataframe(n_num)
     answer = st.button('分析開始')
     if answer == True:
         
