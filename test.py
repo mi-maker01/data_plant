@@ -429,8 +429,10 @@ elif selector=="（E）各人の工程量":
         for k in k_list:
             k_num=t_num[(t_num["工程名称"]==k)]
             r=round(100 * len(k_num) / len(t_num), 1)
+            fruit_list = [ (t, k, r )]
+            app_num = pd.DataFrame(fruit_list, columns = ["担当者","工程名称","%"])
             
-            bar_num1=bar_num1.append({'担当者': t, '工程名称': k, '%': r })
+            bar_num1=bar_num1.append(app_num,ignore_index=True)
     st.dataframe(bar_num1)
     answer = st.button('分析開始')
     if answer == True:
