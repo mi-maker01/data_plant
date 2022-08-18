@@ -436,9 +436,9 @@ elif selector=="（E）各人の工程量":
             bar_num1=bar_num1.append(app_num,ignore_index=True)
             
     bar_num1=bar_num1.sort_values('担当者')
-    bar_num1=bar_num1.sort_values('工程名称')
+    
     n_num=n_num.sort_values('担当者')
-    n_num=n_num.sort_values('工程名称')
+    
     st.dataframe(bar_num1)
     st.dataframe(n_num)
     answer = st.button('分析開始')
