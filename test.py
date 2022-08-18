@@ -177,7 +177,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 #データの整理
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
-                hyozyun=y_scores["標準時間"]
+                hyozyun=y_scores["標準時間１"]
                 dd=scores["processing_time"]#選択したデータの処理時間
             
                 #描画領域を用意する
