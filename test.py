@@ -109,10 +109,10 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     if uploaded_file is not None:
         df_time=pd.read_excel(uploaded_file)
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
-    df_time['標準時間１']=pd.to_datetime(df_time['標準時間１'], format='%M:%S:%f') - base_time
-    df_time['標準時間１']=df_time["標準時間１"].dt.total_seconds()
-    df_time['標準時間２']=pd.to_datetime(df_time['標準時間２'], format='%M:%S:%f') - base_time
-    df_time['標準時間２']=df_time["標準時間２"].dt.total_seconds()
+    df_time['標準時間1']=pd.to_datetime(df_time['標準時間1'], format='%M:%S:%f') - base_time
+    df_time['標準時間1']=df_time["標準時間1"].dt.total_seconds()
+    df_time['標準時間2']=pd.to_datetime(df_time['標準時間2'], format='%M:%S:%f') - base_time
+    df_time['標準時間2']=df_time["標準時間2"].dt.total_seconds()
     
     st.write(df_time)
     #曜日の設定
@@ -177,7 +177,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 #データの整理
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
-                hyozyun=y_scores["標準時間１"]
+                hyozyun1=y_scores["標準時間1"]
+                hyozyun2=y_scores["標準時間2"]
                 dd=scores["processing_time"]#選択したデータの処理時間
             
                 #描画領域を用意する
@@ -190,7 +191,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 ax.set_xlabel("time")                # x軸ラベル
                 plt.ylabel("count")               # y軸ラベル
                 plt.grid(True)
-                plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
                 plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
                 
 
