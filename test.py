@@ -137,12 +137,12 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     
     
     #担当の選択
-    t_list = sorted(list(set(df["担当コード"])))
+    t_list = sorted(list(set(df["担当者"])))
     t = st.selectbox(
-         "担当コード",
+         "担当者",
          (t_list))
-    x_num=df[(df["担当コード"]==t)]#dfからzで選んだ図番のデータ
-    k_list = sorted(list(set(x_num["工程コード"])))
+    x_num=df[(df["担当者"]==t)]#dfからzで選んだ図番のデータ
+    k_list = sorted(list(set(x_num["工程名称"])))
     z_list = sorted(list(set(x_num["図番"])))
     
     #曜日の選択
@@ -155,22 +155,22 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     answer = st.button('分析開始')
     if answer == True:
         
-        for z in z_list:
-            for k in k_list:
-                data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
-                dosu_num=0
+        for z in z_list:#図番でfor文回す
+            for k in k_list:#工程名称でfor文回す
+                data_num=df[(df["図番"]==z)&(df["工程名称"]==k)]#図番と工程名称でデータを絞る
+                dosu_num=0#度数の空の変数
                 
-                y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t)]
-                y_num=y_num["処理時間"]
-                if len(y_num)==0:
+                y_num=df[(df["図番"]==z)&(df["工程名称"]==k)&(df["担当者"] == t)]#図番、工程名称、担当者でデータを絞る
+                y_num=y_num["処理時間"]#処理時間だけ抜出
+                if len(y_num)==0:#y_numの中にデータが一つも入ってなかった場合終了
                     break
                 #y軸の上限値
-                x,y,_= plt.hist(y_num)
-                if dosu_num<max(x):#tが2個以上の時に比較する
-                    dosu_num=max(x)
+                x,y,_= plt.hist(y_num)#x軸、y軸、度数
+                if dosu_num<max(x):#度数の比較（最大値）
+                    dosu_num=max(x)#（最大値）
                     
-                data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
-                s_num=data_num['processing_time']
+                data_num=data_num.rename(columns={'処理時間': 'processing_time'})#名前の変更 
+                s_num=data_num['processing_time']#図番と工程名称で絞ったデータの処理時間を抜き出し
                     
                 q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
                 q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
@@ -178,8 +178,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 iqr=q3-q1#四分位範囲
                 upper_num=q3+(1.5*iqr)#上限
                 lower_num=q1-(1.5*iqr)#下限
-                upper_num2=round(upper_num) #きりあげ
-                lower_num2=math.floor(lower_num)#きりおとし
+                
+                upper_num2=round(upper_num) #きりあげ（上限）見やすくする用
+                lower_num2=math.floor(lower_num)#きりおとし（下限）見やすくする用
                 dif_num=upper_num2-lower_num2#差
                 dif_num3=0
                 
@@ -190,15 +191,17 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 upper_num2=upper_num2+dif_num3
                 lower_num2=lower_num2-dif_num3
                 
-                hazure=data_num[data_num["processing_time"]<=upper_num]
+                hazure=data_num[data_num["processing_time"]<=upper_num]#外れ値の除外
                 hazure=hazure[hazure["processing_time"]>=lower_num]
         
                 #ヒストグラムの作成
                 #データの整理
-                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ
-                y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ（外れ値）
+                
+                y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]#標準時間のデータ
                 hyozyun1=y_scores["標準時間1"]
                 hyozyun2=y_scores["標準時間2"]
+                
                 dd=scores["processing_time"]#選択したデータの処理時間
             
                 #描画領域を用意する
@@ -216,7 +219,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
                 
 
-                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
                 left_column, right_column = st.columns(2)
