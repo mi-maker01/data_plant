@@ -21,6 +21,23 @@ st.title("製造データファイル")
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     df=pd.read_excel(uploaded_file)
+
+df["開始日時"]=0
+df["完了日時"]=0
+for index,row in df.iterrows():
+    
+    time1=row["工程開始時間"]
+    day1=row["工程開始日"]
+    dateti1= datetime.datetime.combine(day1,time1)
+    
+    time2=row.工程完了時間
+    day2=row.工程完了日
+    dateti2= datetime.datetime.combine(day2,time2)
+    
+    
+    df.at[index,'開始日時'] = pd.to_datetime(dateti1)
+    df.at[index,'完了日時'] = pd.to_datetime(dateti2)
+    
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #================================================================================================================================
