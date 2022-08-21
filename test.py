@@ -373,7 +373,7 @@ elif selector=="（E）担当者別作業時間統計量":
          "担当コード",
          (t_list))
     t_num=df[(df["担当コード"]==t)]
-    pd.options.display.float_format = '{:.2f}'.format
+    
     num=pd.DataFrame(t_num.groupby(['担当コード',"図番","工程コード"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
     pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
     pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
@@ -382,7 +382,7 @@ elif selector=="（E）担当者別作業時間統計量":
     if answer == True:
         
         st.dataframe(pvit)
-        st.table(pvit)
+        
  #================================================================================================================================        
 #図番の画面
 elif selector=="（E）図番別作業時間統計量":
