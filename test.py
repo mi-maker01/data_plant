@@ -14,8 +14,10 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握_折れ線グラフ","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
+pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
 st.title("生産データ分析")
+#サイドバーのセレクトボックスを配置
+selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #製造データの取り込み
 st.title("製造データファイル")
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
@@ -38,8 +40,7 @@ for index,row in df.iterrows():
     df.at[index,'開始日時'] = pd.to_datetime(dateti1)
     df.at[index,'完了日時'] = pd.to_datetime(dateti2)
     
-#サイドバーのセレクトボックスを配置
-selector=st.sidebar.selectbox( "ページ選択",pagelist)
+
 #================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
     t_list = sorted(list(set(df["担当コード"])))
@@ -346,38 +347,21 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             right_column.plotly_chart(fig)
             left_column.pyplot(fig)            
 #================================================================================================================================
-elif selector=="（D）一つの製品の総社内滞在時間の把握_折れ線グラフ":
+elif selector=="（D）一つの製品の総社内滞在時間の把握":
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
          (day_num))
     d_num=df[(df["工程完了日"]==d)]
     d_num=d_num.sort_values(["工程開始時間"])
-    s_num = sorted(list(set(d_num["製造番号"])))
+    
     
     answer = st.button('分析開始')
     if answer == True:
-        for s in s_num:        
-            sei_num=d_num[d_num["製造番号"]==s]
-            sei_num=sei_num.sort_values(["工程開始時間"])
-            sei_num["工程開始時間"] = pd.to_datetime(sei_num["工程開始時間"], format="%H:%M:%S")
-            sei_num["工程完了時間"] = pd.to_datetime(sei_num["工程完了時間"], format="%H:%M:%S")
-            sei_num=sei_num.reset_index()
-            
-            gura_num = pd.DataFrame()
-            s_num = pd.DataFrame()
-            for i in range(len(sei_num)):
-                sei_num['工程時間'] = sei_num["工程開始時間"]
-                s_num = sei_num.iloc[i]
-                gura_num=gura_num.append(s_num)
-                sei_num['工程時間'] = sei_num["工程完了時間"]
-                s_num = sei_num.iloc[i]
-                gura_num=gura_num.append(s_num)
-           
-            gura_num=gura_num.sort_values(["工程時間"])
+        
             st.write("-----------------------------------------------------------------------------------")
-            st.dataframe(gura_num)
-            fig = go.Figure(px.line(gura_num, x="工程時間", y="工程コード", markers=True))
+            fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
+            fig.update_traces(textposition='inside', orientation="h")
             fig.update_yaxes(autorange='reversed')
             st.plotly_chart(fig)
 
