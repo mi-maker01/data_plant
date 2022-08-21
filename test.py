@@ -185,7 +185,6 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 dif_num3=0
                 
                 if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
-                    dif_num=math.ceil((dif_num/10))*10
                     dif_num2=math.ceil((dif_num/10))*10
                     dif_num3=(dif_num2-dif_num)/2
                 upper_num2=upper_num2+dif_num3
