@@ -11,7 +11,7 @@ import datetime
 
 import plotly.graph_objects as go
 
-pd.options.display.float_format = '{:.2f}'.format
+
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握","（E）担当者別作業時間統計量","（E）図番別作業時間統計量","（E）工程別作業時間統計量","（E）各人の工程量"]
@@ -373,6 +373,7 @@ elif selector=="（E）担当者別作業時間統計量":
          "担当コード",
          (t_list))
     t_num=df[(df["担当コード"]==t)]
+    pd.options.display.float_format = '{:.2f}'.format
     num=pd.DataFrame(t_num.groupby(['担当コード',"図番","工程コード"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
     pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
     pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
