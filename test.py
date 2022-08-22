@@ -382,8 +382,8 @@ elif selector=="（E）担当者別作業時間統計量":
         for k in k_list:
             k_num=t_num[(t_num["工程名称"]==k)]
             
-            q1=data_num["処理時間"].describe().loc['25%']#第一四分位範囲
-            q3=data_num['処理時間'].describe().loc['75%']#第三四分位範囲
+            q1=k_num["処理時間"].describe().loc['25%']#第一四分位範囲
+            q3=k_num['処理時間'].describe().loc['75%']#第三四分位範囲
             iqr=q3-q1#四分位範囲
             upper_num=q3+(1.5*iqr)#上限
             lower_num=q1-(1.5*iqr)#下限
