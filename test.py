@@ -43,12 +43,12 @@ for index,row in df.iterrows():
 
 #================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
-    t_list = sorted(list(set(df["担当コード"])))
+    t_list = sorted(list(set(df["担当者"])))
     t = st.selectbox(
-         "担当コード",
+         "担当者",
          (t_list))
     
-    t_num=df[(df["担当コード"]==t)]
+    t_num=df[(df["担当者"]==t)]
     day_num = sorted(list(set(t_num["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
@@ -74,7 +74,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #                     ax.update_traces(textposition='inside', orientation="h")
 #                     st.show(fig)
                     
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程開始日",color="工程コード",title="一日の稼働状況見える化"))
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程開始日",color="工程名称",title="一日の稼働状況見える化"))
                     fig.update_traces(textposition='inside', orientation="h")
                     fig.update_yaxes(autorange='reversed')
                     st.plotly_chart(fig)
