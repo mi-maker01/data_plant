@@ -197,6 +197,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]#標準時間のデータ
                 hyozyun1=y_scores["標準時間1"]
                 hyozyun2=y_scores["標準時間2"]
+                st.write(hyozyun1)
                 
                 dd=scores["processing_time"]#選択したデータの処理時間
             
@@ -210,7 +211,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 ax.set_xlabel("time")                # x軸ラベル
                 plt.ylabel("count")               # y軸ラベル
                 plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=hyozyun1,color = "crimson")#標準時間の表記（赤軸）
 #                 plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
                 plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
                 
