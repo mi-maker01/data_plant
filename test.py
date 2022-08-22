@@ -49,7 +49,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #          (t_list))
     
 #     t_num=df[(df["担当者"]==t)]
-    day_num = sorted(list(set(["工程完了日"])))
+    day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
          (day_num))
