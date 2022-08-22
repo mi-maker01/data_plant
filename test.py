@@ -358,7 +358,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
          (day_num))
     
     d_num=pd.DataFrame()
-    for d in d_list
+    for d in d_list:
         kari_num=df[(df["工程完了日"]==d)]
         d_num.append(kari_num)
     d_num=d_num.sort_values(["工程開始時間"])
