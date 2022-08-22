@@ -363,9 +363,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         d_num=d_num.append(kari_num)
     
     
-    s_list = sorted(list(set(d_num["製造番号"])))
-    for s in s_list:
-        s_num=d_num[(d_num["製造番号"]=s)]
+#     s_list = sorted(list(set(d_num["製造番号"])))
+#     for s in s_list:
+#         s_num=d_num[(d_num["製造番号"]=s)]
     
     answer = st.button('分析開始')
     if answer == True:
