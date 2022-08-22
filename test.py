@@ -396,7 +396,7 @@ elif selector=="（E）担当者別作業時間統計量":
 
                 Nohazure_num=len(hazure)
                 zentai_num=len(k_num)
-                Yeshazure_num=append(zentai_num-Nohazure_num)
+                Yeshazure_num.append(zentai_num-Nohazure_num)
                 
                 graph_num=pd.concat([graph_num, hazure], axis=0)
 
