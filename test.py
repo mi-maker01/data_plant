@@ -410,7 +410,7 @@ elif selector=="（E）担当者別作業時間統計量":
 #                 for
 # #                 pvit.at[index,''] =
 #                 pvit.at[index,'外れた数'] = Yeshazure_num[index]
-                st.write(len(row))
+                st.write(len(pvit))
             
             st.dataframe(pvit)
             st.write("----------------------")
