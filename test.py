@@ -407,8 +407,10 @@ elif selector=="（E）担当者別作業時間統計量":
             pvit["外れた数"]=0
             
             for index,row in pvit.iterrows():
-#                 pvit.at[index,''] =
-                pvit.at[index,'外れた数'] = Yeshazure_num[index]
+#                 for
+# #                 pvit.at[index,''] =
+#                 pvit.at[index,'外れた数'] = Yeshazure_num[index]
+                st.write(len(row))
             
             st.dataframe(pvit)
             st.write("----------------------")
