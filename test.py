@@ -374,37 +374,37 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 elif selector=="（E）担当者別作業時間統計量":
     answer = st.button('分析開始')
     if answer == True:
-        st.dataframe(pvit)
         
-    t_list = sorted(list(set(df["担当者"])))
-    
-    for t in t_list:
-        t_num=df[(df["担当者"]==t)]
-        k_list=sorted(list(set(t_num["工程名称"])))
-        
-        
-        for k in k_list:
-            k_num=t_num[(t_num["工程名称"]==k)]
-            
-            q1=k_num["処理時間"].describe().loc['25%']#第一四分位範囲
-            q3=k_num['処理時間'].describe().loc['75%']#第三四分位範囲
-            iqr=q3-q1#四分位範囲
-            upper_num=q3+(1.5*iqr)#上限
-            lower_num=q1-(1.5*iqr)#下限
-            
-            hazure=k_num[k_num["処理時間"]<=upper_num]#外れ値の除外
-            hazure=hazure[hazure["処理時間"]>=lower_num]
-            
-            Nohazure_num=len(hazure)
-            zentai_num=len(k_num)
-            Yeshazure_num=zentai_num-Nohazure_num
-            
-           
-    
-            num=pd.DataFrame(t_num.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
-            pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-            pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
-            
+        t_list = sorted(list(set(df["担当者"])))
+
+        for t in t_list:
+            t_num=df[(df["担当者"]==t)]
+            k_list=sorted(list(set(t_num["工程名称"])))
+
+
+            for k in k_list:
+                k_num=t_num[(t_num["工程名称"]==k)]
+
+                q1=k_num["処理時間"].describe().loc['25%']#第一四分位範囲
+                q3=k_num['処理時間'].describe().loc['75%']#第三四分位範囲
+                iqr=q3-q1#四分位範囲
+                upper_num=q3+(1.5*iqr)#上限
+                lower_num=q1-(1.5*iqr)#下限
+
+                hazure=k_num[k_num["処理時間"]<=upper_num]#外れ値の除外
+                hazure=hazure[hazure["処理時間"]>=lower_num]
+
+                Nohazure_num=len(hazure)
+                zentai_num=len(k_num)
+                Yeshazure_num=zentai_num-Nohazure_num
+
+
+
+                num=pd.DataFrame(t_num.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
+
+                st.dataframe(pvit)
         
  #================================================================================================================================        
 #図番の画面
