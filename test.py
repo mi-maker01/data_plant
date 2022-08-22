@@ -78,7 +78,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
                     
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="工程名称",title="一日の稼働状況見える化"))
+                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="担当者",title="一日の稼働状況見える化"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
                     
