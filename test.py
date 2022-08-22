@@ -374,7 +374,6 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 elif selector=="（E）担当者別作業時間統計量":
     answer = st.button('分析開始')
     if answer == True:
-        
         t_list = sorted(list(set(df["担当者"])))
 
         for t in t_list:
@@ -406,9 +405,8 @@ elif selector=="（E）担当者別作業時間統計量":
             pvit["標準時間"]=0
             pvit["外れた数"]=0
             
-            pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
-
             st.dataframe(pvit)
+            st.dataframe(pvit[1])
         
  #================================================================================================================================        
 #図番の画面
