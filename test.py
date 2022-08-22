@@ -198,7 +198,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 hyozyun1=y_scores["標準時間1"]
                 hyozyun2=y_scores["標準時間2"]
                 st.write(hyozyun1)
-                st.write(y_scores["標準時間1"])
+                st.write(y_scores)
                 
                 dd=scores["processing_time"]#選択したデータの処理時間
             
