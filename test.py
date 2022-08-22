@@ -73,16 +73,6 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
 #                     ax.update_traces(textposition='inside', orientation="h")
 #                     st.show(fig)
-
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",color="工程コード",title="一日の稼働状況見える化"))
-                    fig.update_traces(textposition='inside', orientation="h")
-                    fig.update_yaxes(autorange='reversed')
-                    st.plotly_chart(fig)
-                    
-                    fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="工程コード",title="一日の稼働状況見える化"))
-                    fig.update_traces(textposition='inside', orientation="h")
-                    fig.update_yaxes(autorange='reversed')
-                    st.plotly_chart(fig)
                     
                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程開始日",color="工程コード",title="一日の稼働状況見える化"))
                     fig.update_traces(textposition='inside', orientation="h")
