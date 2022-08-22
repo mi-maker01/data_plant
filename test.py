@@ -353,10 +353,14 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
 #================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握":
     day_num = sorted(list(set(df["工程完了日"])))
-    d = st.selectbox(
+    d_list = st.multiselect(
          "工程完了日",
          (day_num))
-    d_num=df[(df["工程完了日"]==d)]
+    
+    d_num=pd.DataFrame()
+    for d in d_list
+        kari_num=df[(df["工程完了日"]==d)]
+        d_num.append(kari_num)
     d_num=d_num.sort_values(["工程開始時間"])
     
     
