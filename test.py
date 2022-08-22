@@ -197,8 +197,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]#標準時間のデータ
                 hyozyun1=y_scores["標準時間1"]
                 hyozyun2=y_scores["標準時間2"]
-                st.write(hyozyun1)
-                st.write(data_num)
+                st.write(y_scores)
+               
                 
                 dd=scores["processing_time"]#選択したデータの処理時間
             
