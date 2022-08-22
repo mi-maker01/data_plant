@@ -142,11 +142,11 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     k_list = sorted(list(set(x_num["工程名称"])))
     z_list = sorted(list(set(x_num["図番"])))
     
-    #曜日の選択
-    y_list = ["月","火","水","木","金","すべて"]
-    y = st.selectbox(
-         "曜日",
-         (y_list))
+#     #曜日の選択
+#     y_list = ["月","火","水","木","金","すべて"]
+#     y = st.selectbox(
+#          "曜日",
+#          (y_list))
     
     #データ分析開始
     answer = st.button('分析開始')
@@ -212,9 +212,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 plt.grid(True)
                 plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
                 plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                plt.xticks(np.arange(lower_num2, upper_num2))
                 
-
+# ,dif_num/10
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
