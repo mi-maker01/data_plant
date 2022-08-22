@@ -192,9 +192,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
         
                 #ヒストグラムの作成
                 #データの整理
-                scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==t)]#選択したデータ（外れ値）
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)]#選択したデータ（外れ値）
                 
-                y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]#標準時間のデータ
+                y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]#標準時間のデータ
                 hyozyun1=y_scores["標準時間1"]
                 hyozyun2=y_scores["標準時間2"]
                 
