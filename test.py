@@ -398,7 +398,7 @@ elif selector=="（E）担当者別作業時間統計量":
                 zentai_num=len(k_num)
                 Yeshazure_num=zentai_num-Nohazure_num
                 
-                graph_num=append(hazure)
+                graph_num=pd.merge(graph_num, hazure)
 
 
             num=pd.DataFrame(hazure.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
