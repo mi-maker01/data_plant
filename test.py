@@ -215,7 +215,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 plt.xticks(np.arange(lower_num2, upper_num2))
                 
 # ,dif_num/10
-                ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2,5))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
                 left_column, right_column = st.columns(2)
