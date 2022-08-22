@@ -104,7 +104,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
                 st.write("================================================================================")
                 st.write(k,":",len(k_num))
 
-                fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程コード",color="担当コード", color_continuous_scale='Jet',title="稼働状況の詳細"))
+                fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程名称",color="担当者", color_continuous_scale='Jet',title="稼働状況の詳細"))
                 fig.update_traces(textposition='inside', orientation="h")
                 fig.update_yaxes(autorange='reversed')
                 st.plotly_chart(fig)
