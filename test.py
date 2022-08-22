@@ -380,7 +380,8 @@ elif selector=="（E）担当者別作業時間統計量":
             t_num=df[(df["担当者"]==t)]
             k_list=sorted(list(set(t_num["工程名称"])))
             graph_num=pd.DataFrame()
-
+            Yeshazure_num=[]
+            
             for k in k_list:
                 k_num=t_num[(t_num["工程名称"]==k)]
 
@@ -404,6 +405,10 @@ elif selector=="（E）担当者別作業時間統計量":
             pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
             pvit["標準時間"]=0
             pvit["外れた数"]=0
+            
+            for index,row in pvit.iterrows():
+#                 pvit.at[index,''] =
+                pvit.at[index,'外れた数'] = Yeshazure_num[index]
             
             st.dataframe(pvit)
             st.write("----------------------")
