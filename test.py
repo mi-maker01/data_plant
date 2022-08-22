@@ -358,18 +358,22 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
          (day_num))
     
     d_num=pd.DataFrame()
-    for d in d_list:
+    for d in d_list:#日のデータの追加文
         kari_num=df[(df["工程完了日"]==d)]
         d_num=d_num.append(kari_num)
-    st.write(d_num)
+    
+    
+    s_list = sorted(list(set(d_num["製造番号"])))
+    for s in s_list:
+        s_num=d_num[(d_num["製造番号"])=s]
+    
     answer = st.button('分析開始')
     if answer == True:
-        
-            st.write("-----------------------------------------------------------------------------------")
-            fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
-            fig.update_traces(textposition='inside', orientation="h")
-            fig.update_yaxes(autorange='reversed')
-            st.plotly_chart(fig)
+        st.write("-----------------------------------------------------------------------------------")
+        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
+        fig.update_traces(textposition='inside', orientation="h")
+        fig.update_yaxes(autorange='reversed')
+        st.plotly_chart(fig)
 
 #=======================================================================================================================================
 #担当者の画面
