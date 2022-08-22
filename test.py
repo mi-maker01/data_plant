@@ -406,15 +406,10 @@ elif selector=="（E）担当者別作業時間統計量":
             pvit["標準時間"]=0
             pvit["外れた数"]=0
             
-            for index,row in pvit.iterrows():
-                for i  in len(pvit):
-#                   pvit.at[index,''] =
-                    pvit.at[index,'外れた数'] = Yeshazure_num[i]
-                
             
             st.dataframe(pvit)
             st.write("----------------------")
-        
+            st.dataframe(Yeshazure_num)
  #================================================================================================================================        
 #図番の画面
 elif selector=="（E）図番別作業時間統計量":
