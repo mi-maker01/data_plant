@@ -380,7 +380,7 @@ elif selector=="（E）担当者別作業時間統計量":
             t_num=df[(df["担当者"]==t)]
             k_list=sorted(list(set(t_num["工程名称"])))
             graph_num=pd.DataFrame()
-            Yeshazure_num=[]
+            Yeshazure_num=[0]
             
             for k in k_list:
                 k_num=t_num[(t_num["工程名称"]==k)]
@@ -397,7 +397,7 @@ elif selector=="（E）担当者別作業時間統計量":
                 Nohazure_num=len(hazure)
                 zentai_num=len(k_num)
                 Yeshazure_num.append(zentai_num-Nohazure_num)
-                st.dataframe(Yeshazure_num)
+                st.write(Yeshazure_num)
                 graph_num=pd.concat([graph_num, hazure], axis=0)
 
 
