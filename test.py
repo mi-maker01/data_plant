@@ -380,7 +380,7 @@ elif selector=="（E）担当者別作業時間統計量":
             t_num=df[(df["担当者"]==t)]
             k_list=sorted(list(set(t_num["工程名称"])))
             graph_num=pd.DataFrame()
-            Yeshazure_num=[0]
+           
             
             for k in k_list:
                 k_num=t_num[(t_num["工程名称"]==k)]
@@ -396,15 +396,12 @@ elif selector=="（E）担当者別作業時間統計量":
 
                 Nohazure_num=len(hazure)
                 zentai_num=len(k_num)
-                Yeshazure_num.append(zentai_num-Nohazure_num)
-                st.write(Yeshazure_num)
-                
-
+                Yeshazure_num=(zentai_num-Nohazure_num)
 
                 num=pd.DataFrame(hazure.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
                 pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
                 pvit["標準時間"]=0
-                pvit["外れた数"]=0
+                pvit["外れた数"]=Yeshazure_num
                 
                 graph_num=pd.concat([graph_num, pvit], axis=0)
             
