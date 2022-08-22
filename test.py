@@ -397,7 +397,7 @@ elif selector=="（E）担当者別作業時間統計量":
                 Nohazure_num=len(hazure)
                 zentai_num=len(k_num)
                 Yeshazure_num.append(zentai_num-Nohazure_num)
-                
+                st.dataframe(Yeshazure_num)
                 graph_num=pd.concat([graph_num, hazure], axis=0)
 
 
@@ -409,7 +409,7 @@ elif selector=="（E）担当者別作業時間統計量":
             
             st.dataframe(pvit)
             st.write("----------------------")
-            st.dataframe(Yeshazure_num)
+            
  #================================================================================================================================        
 #図番の画面
 elif selector=="（E）図番別作業時間統計量":
