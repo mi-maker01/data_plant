@@ -446,11 +446,13 @@ elif selector=="（E）工程別作業時間統計量":
     num_3= st.selectbox(
          "3つ目",
          (num_list))
+    
     answer = st.button('分析開始')
     if answer == True:
+        
         graph_num=pd.DataFrame()
         list_1=sorted(list(set(df[num_1]))
-        st.write(list_1)
+            st.write(list_1)
 #         for hazure_num1 in list_1:
 #             x_num=df[(df[num_1]==hazure_num1)]
 #             list_2 = sorted(list(set(x_num[num_2]))
