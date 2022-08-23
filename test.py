@@ -234,8 +234,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     if uploaded_file is not None:
         df_time=pd.read_excel(uploaded_file)
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
-    df_time['標準時間']=pd.to_datetime(df_time['標準時間'], format='%M:%S:%f') - base_time
-    df_time['標準時間']=df_time["標準時間"].dt.total_seconds()
+    df_time['標準時間1']=pd.to_datetime(df_time['標準時間1'], format='%M:%S:%f') - base_time
+    df_time['標準時間1']=df_time["標準時間1"].dt.total_seconds()
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
@@ -244,26 +244,26 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
          (z_list))
     x_num=df[(df["図番"]==z)]#dfからzで選んだ図番のデータ
     #工程の選択
-    k_list = sorted(list(set(x_num["工程コード"])))
+    k_list = sorted(list(set(x_num["工程名称"])))
     k = st.selectbox(
-         "工程コード",
+         "工程名称",
          (k_list))
-    x_num=df[(df["図番"]==z)&(df["工程コード"] == k)]#dfからz,kで選んだ図番,工程のデータ
+    x_num=df[(df["図番"]==z)&(df["工程名称"] == k)]#dfからz,kで選んだ図番,工程のデータ
     #担当の選択
-    t_list = sorted(list(set(x_num["担当コード"])))
+    t_list = sorted(list(set(x_num["担当者"])))
     t = st.multiselect(
-         "担当コード",
+         "担当者",
          (t_list))
 
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
         #上限値、下限値のdata
-        data_num=df[(df["図番"]==z)&(df["工程コード"]==k)]
+        data_num=df[(df["図番"]==z)&(df["工程名称"]==k)]
         dosu_num=0
         
         for t_num in t_list:
-            y_num=df[(df["図番"]==z)&(df["工程コード"]==k)&(df["担当コード"] == t_num)]
+            y_num=df[(df["図番"]==z)&(df["工程名称"]==k)&(df["担当者"] == t_num)]
             y_num=y_num["処理時間"]
             #y軸の上限値
             x,y,_= plt.hist(y_num)
@@ -321,9 +321,9 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         #ヒストグラムの作成
         for i in t:
             #データの整理
-            scores=hazure[(hazure["図番"]==z)&(hazure["工程コード"]==k)&(hazure["担当コード"]==i)]#選択したデータ
-            y_scores=df_time[(df_time["図番"]==z)&(df_time["工程コード"] ==k)]
-            hyozyun=y_scores["標準時間"]
+            scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+            y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]
+            hyozyun=y_scores["標準時間1"]
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
