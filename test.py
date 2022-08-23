@@ -436,17 +436,23 @@ elif selector=="（E）図番別作業時間統計量":
  #================================================================================================================================      
 #工程の画面
 elif selector=="（E）工程別作業時間統計量":
-    k_list = sorted(list(set(df["工程コード"])))
-    k = st.selectbox(
-         "工程コード",
-         (k_list))
-    k_num=df[(df["工程コード"]==k)]
-    num=pd.DataFrame(k_num.groupby(["工程コード","図番",'担当コード'])['処理時間'].agg(["count","mean", "std", "min", "max"]))
-    pvit=num.set_axis(['件数', '平均', '標準偏差', '最小', '最大'], axis=1)
-    pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
+    num_list = ["工程名称","担当者","図番",]
+    num_1 = st.selectbox(
+         "1つ目",
+         (num_list))
+    num_2 = st.selectbox(
+         "2つ目",
+         (num_list))
+    num_3= st.selectbox(
+         "3つ目",
+         (num_list))
+    
+    
     answer = st.button('分析開始')
     if answer == True:
-        
+        num=pd.DataFrame(df.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "std", "min", "max"]))
+        pvit=num.set_axis(['件数', '平均', '標準偏差', '最小', '最大'], axis=1)
+        pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
         st.dataframe(pvit)
         st.table(pvit)
  
