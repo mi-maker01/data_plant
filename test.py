@@ -454,30 +454,30 @@ elif selector=="（E）工程別作業時間統計量":
         list_1=sorted(list(set(df[num_1])))
         for hazure_num1 in list_1:
             x_num=df[(df[num_1]==hazure_num1)]
-            list_2 = sorted(list(set(x_num[num_2])))
-                for hazure_num2 in list_2:
-                    y_num=x_num[(x_num[num_2]==hazure_num2)]
-                    list_3 = sorted(list(set(y_num[num_3])))
-                        for hazure_num3 in list_3:
-                            z_num=_num[(y_num[num_3]==hazure_num3)]
+            list_2=sorted(list(set(x_num[num_2])))
+            for hazure_num2 in list_2:
+                y_num=x_num[(x_num[num_2]==hazure_num2)]
+                list_3 = sorted(list(set(y_num[num_3])))
+                for hazure_num3 in list_3:
+                    z_num=_num[(y_num[num_3]==hazure_num3)]
 
-                            q1=z_num["処理時間"].describe().loc['25%']#第一四分位範囲
-                            q3=z_num['処理時間'].describe().loc['75%']#第三四分位範囲
-                            iqr=q3-q1#四分位範囲
-                            upper_num=q3+(1.5*iqr)#上限
-                            lower_num=q1-(1.5*iqr)#下限
+                    q1=z_num["処理時間"].describe().loc['25%']#第一四分位範囲
+                    q3=z_num['処理時間'].describe().loc['75%']#第三四分位範囲
+                    iqr=q3-q1#四分位範囲
+                    upper_num=q3+(1.5*iqr)#上限
+                    lower_num=q1-(1.5*iqr)#下限
 
-                            hazure=z_num[z_num["処理時間"]<=upper_num]#外れ値の除外
-                            hazure=hazure[hazure["処理時間"]>=lower_num]
+                    hazure=z_num[z_num["処理時間"]<=upper_num]#外れ値の除外
+                    hazure=hazure[hazure["処理時間"]>=lower_num]
 
-                            Nohazure_num=len(hazure)
-                            zentai_num=len(k_num)
-                            Yeshazure_num=(zentai_num-Nohazure_num)
+                    Nohazure_num=len(hazure)
+                    zentai_num=len(k_num)
+                    Yeshazure_num=(zentai_num-Nohazure_num)
 
-                            num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
-                            pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-                            pvit["外れた数"]=Yeshazure_num
-                            graph_num=pd.concat([graph_num, pvit], axis=0)        
+                    num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                    pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                    pvit["外れた数"]=Yeshazure_num
+                    graph_num=pd.concat([graph_num, pvit], axis=0)        
            
         
         st.dataframe(graph_num)
