@@ -236,6 +236,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
     df_time['標準時間1']=pd.to_datetime(df_time['標準時間1'], format='%M:%S:%f') - base_time
     df_time['標準時間1']=df_time["標準時間1"].dt.total_seconds()
+    df_time['標準時間2']=pd.to_datetime(df_time['標準時間2'], format='%M:%S:%f') - base_time
+    df_time['標準時間2']=df_time["標準時間2"].dt.total_seconds()
     
     #図番の選択
     z_list = sorted(list(set(df["図番"])))
@@ -323,7 +325,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #データの整理
             scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
             y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]
-            hyozyun=y_scores["標準時間1"]
+            hyozyun1=y_scores["標準時間1"]
+            hyozyun2=y_scores["標準時間2"]
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
@@ -339,7 +342,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             ax.set_xlabel("time")                # x軸ラベル
             plt.ylabel("count")               # y軸ラベル
             plt.grid(True)
-            plt.axvline(x=int(hyozyun),color = "crimson")#標準時間の表記（赤軸）
+            plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+            plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
@@ -348,7 +352,6 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             left_column, right_column = st.columns(2)
-            right_column.plotly_chart(fig)
             left_column.pyplot(fig)            
 #================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握":
