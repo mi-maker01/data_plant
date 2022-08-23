@@ -450,8 +450,8 @@ elif selector=="（E）工程別作業時間統計量":
     
     answer = st.button('分析開始')
     if answer == True:
-        num=pd.DataFrame(df.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "std", "min", "max"]))
-        pvit=num.set_axis(['件数', '平均', '標準偏差', '最小', '最大'], axis=1)
+        num=pd.DataFrame(df.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+        pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
         pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
         st.dataframe(pvit)
         st.table(pvit)
