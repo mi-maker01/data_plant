@@ -452,7 +452,7 @@ elif selector=="（E）工程別作業時間統計量":
         
         graph_num=pd.DataFrame()
         list_1=sorted(list(set(df[num_1])))
-            st.write(list_1)
+        st.write(list_1)
 #         for hazure_num1 in list_1:
 #             x_num=df[(df[num_1]==hazure_num1)]
 #             list_2 = sorted(list(set(x_num[num_2]))
