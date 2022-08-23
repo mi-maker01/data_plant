@@ -471,7 +471,7 @@ elif selector=="（E）工程別作業時間統計量":
                     hazure=hazure[hazure["処理時間"]>=lower_num]
 
                     Nohazure_num=len(hazure)
-                    zentai_num=len(k_num)
+                    zentai_num=len(z_num)
                     Yeshazure_num=(zentai_num-Nohazure_num)
 
                     num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
