@@ -225,6 +225,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 
                 num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
                 pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit.insert(0, '総件数', len(y_num))
 #                 pvit_num=pd.DataFrame(dd.agg(["count","mean","median","min", "max"]))
 #                 pvit_num=pvit_num.T
 #                 pvit=pvit_num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
