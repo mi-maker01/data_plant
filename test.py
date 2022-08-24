@@ -420,7 +420,7 @@ elif selector=="（E）担当者別作業時間統計量":
                 num=pd.DataFrame(hazure.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
                 pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
                 pvit["標準時間"]=0
-                pvit["外れた数"]=Yeshazure_num
+                pvit.insert(0, '総件数', zentai_num)
                 
                 graph_num=pd.concat([graph_num, pvit], axis=0)
             
