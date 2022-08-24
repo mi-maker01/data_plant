@@ -223,7 +223,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
                 
-                num=pd.DataFrame(scores.groupby([担当者、工程名称、図番])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
                 pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
 #                 pvit_num=pd.DataFrame(dd.agg(["count","mean","median","min", "max"]))
 #                 pvit_num=pvit_num.T
