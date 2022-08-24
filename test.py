@@ -530,6 +530,6 @@ elif selector=="（E）各人の工程量":
         left_column.plotly_chart(fig, use_container_width=True)
         right_column.dataframe(bar_num1)
         
-        fig = go.Figure(px.bar(bar_num1,x="担当者",y="%",text="%"color="工程名称"))
+        fig = go.Figure(px.bar(bar_num1,x="担当者",y="%",text="%",color="工程名称"))
         st.plotly_chart(fig, use_container_width=True)
         
