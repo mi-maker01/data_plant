@@ -328,6 +328,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         #ヒストグラムの作成
         for i in t:
             #データの整理
+            x_num=df[(df["図番"]==z)&(df["工程名称"]==k)&(df["担当者"] == i)]
             scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
             y_scores=df_time[(df_time["図番"]==z)&(df_time["工程名称"] ==k)]
             hyozyun1=y_scores["標準時間1"]
@@ -336,7 +337,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
             dd=scores["processing_time"]#選択したデータの処理時間
-            
+            scores=scores.rename(columns={'processing_time':'処理時間' })#名前の変更 
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
@@ -357,7 +358,11 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             # Matplotlib の Figure を指定して可視化する
             st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
             left_column, right_column = st.columns(2)
-            left_column.pyplot(fig)            
+            left_column.pyplot(fig)
+            num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+            pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+            pvit.insert(0, '総件数', len(x_num))
+            right_column.write(pvit)
 #================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握":
     day_num = sorted(list(set(df["工程完了日"])))
