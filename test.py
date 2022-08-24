@@ -200,6 +200,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 hyozyun2=y_scores["標準時間2"]
                 
                 dd=scores["processing_time"]#選択したデータの処理時間
+                scores=scores.rename(columns={'processing_time':'処理時間' })#名前の変更 
             
                 #描画領域を用意する
                 fig = plt.figure()
@@ -222,9 +223,11 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
                 
-                pvit_num=pd.DataFrame(dd.agg(["count","mean","median","min", "max"]))
-                pvit_num=pvit_num.T
-                pvit=pvit_num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                num=pd.DataFrame(scores.groupby([担当者、工程名称、図番])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+#                 pvit_num=pd.DataFrame(dd.agg(["count","mean","median","min", "max"]))
+#                 pvit_num=pvit_num.T
+#                 pvit=pvit_num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
                 st.write(pvit)
 #=======================================================================================================================================================
 elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
