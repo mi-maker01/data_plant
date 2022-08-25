@@ -62,13 +62,13 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                 
                 answer = st.button('分析開始')
                 if answer == True:
-                    
+                    graph_num=pd.DataFrame()
                     t_list = sorted(list(set(d_num["担当者"])))
                     for t in t_list:
                         t_num =d_num[d_num['担当者']==t]
                         t_num=t_num.sort_values("開始日時")
                         
-                        graph_num=pd.DataFrame()
+                        
                         sta_num=[]
                         end_num=[]
                         t_col=t_num.columns.values
@@ -88,7 +88,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         
                         t_num=t_num.sort_values("開始日時")
                         st.write(t_num)
-                    graph_num=graph_num.append(t_num)
+                        graph_num=graph_num.append(t_num)
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
