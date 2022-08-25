@@ -82,7 +82,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             
                             df3.loc[0,'担当者'] = t
                             df3.loc[0,'工程名称'] = "隙間時間"
-                            df3.loc[0,'開始日時'] = end_num[i]
+                            df3.loc[0,'開始日時'] = end_num[i]+ datetime.timedelta(seconds=1)
                             df3.loc[0,'完了日時'] = sta_num[i+1]
                             
                             t_num=pd.concat([t_num, df3], axis=0)
