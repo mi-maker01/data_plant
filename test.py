@@ -58,8 +58,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
         for i in range(len(s_num)):
             df2 = pd.DataFrame({"製造番号":s,"工程名称":"隙間時間","開始日時":sta_num[i], "完了日時":end_num[i]},index=['間の時間'])
             s_num=pd.concat([s_num, df2])
-        st.write(s_num)
-        st.write("---")
+        
     
     day_num = sorted(list(set(df["工程完了日"])))
     d = st.selectbox(
