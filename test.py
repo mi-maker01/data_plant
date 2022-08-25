@@ -49,7 +49,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
          "工程完了日",
          (day_num))
     
-    d_num=df[(df["工程完了日"]==d)&(df["工程開始日"] == t)]
+    d_num=df[(df["工程完了日"]==d)&(df["工程開始日"] == d)]
     d_num=d_num.sort_values(["工程開始時間"])
     d_num=d_num.reset_index()
     
