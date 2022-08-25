@@ -66,7 +66,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     s_list = sorted(list(set(d_num["担当者"])))
                     for s in s_list:
                         s_num =df[df['担当者']==s]
-                        s_num=s_num.sort_values(["工程開始日","工程開始時間"])
+                        s_num=s_num.sort_values("開始時刻")
                         
                         graph_num=pd.DataFrame()
                         sta_num=[]
