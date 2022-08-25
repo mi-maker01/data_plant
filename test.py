@@ -44,9 +44,9 @@ for index,row in df.iterrows():
 #================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
     
-    s_list = sorted(list(set(data["製造番号"])))
+    s_list = sorted(list(set(df["製造番号"])))
     for s in s_list:
-        s_num = data[data['製造番号'] == s]
+        s_num = df[df['製造番号'] == s]
         s_num=s_num.sort_values(["工程開始日","工程開始時間"])
         st.write(s_num)
     
