@@ -63,22 +63,23 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                 answer = st.button('分析開始')
                 if answer == True:
                     
-                    s_list = sorted(list(set(d_num["担当者"])))
-                    for s in s_list:
-                        s_num =df[df['担当者']==s]
-                        s_num=s_num.sort_values("開始時刻")
+                    t_list = sorted(list(set(d_num["担当者"])))
+                    for t in t_list:
+                        t_num =df[df['担当者']==t]
+                        t_num=t_num.sort_values("開始時刻")
                         
                         graph_num=pd.DataFrame()
                         sta_num=[]
                         end_num=[]
-                        for row in s_num.itertuples():
+                        for row in t_num.itertuples():
                             sta_num.append(row.開始日時)
                             end_num.append(row.完了日時)
 
-                        for i in range(len(s_num)-1):
-                            df2 = pd.DataFrame({"製造番号":s,"工程名称":"隙間時間","開始日時":end_num[i], "完了日時":sta_num[i+1]},index=['time'])
+                        for i in range(len(t_num)-1):
+                            df2 = pd.DataFrame({"担当者":t,"工程名称":"隙間時間","開始日時":end_num[i], "完了日時":sta_num[i+1]},index=['time'])
                             graph_num=pd.concat([s_num, df2], axis=0)
-                        st.write(graph_num)
+                            st.write(df2)
+                        st.write(t_num)
                         
                     #描画領域を用意する
 #                     fig = plt.subplots()
