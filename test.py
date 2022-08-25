@@ -85,9 +85,9 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             df3.loc[0,'開始日時'] = end_num[i]
                             df3.loc[0,'完了日時'] = sta_num[i+1]
                             
-                            a_num=pd.concat([t_num, df2], axis=0)
+                            t_num=pd.concat([t_num, df3], axis=0)
                             
-                            st.write(df3)
+                        st.write(t_num)
                         
                     #描画領域を用意する
 #                     fig = plt.subplots()
