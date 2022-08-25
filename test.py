@@ -66,7 +66,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     for s in s_list:
                         s_num =df[df['製造番号']==s]
                         s_num=s_num.sort_values(["工程開始日","工程開始時間"])
-                        st.dataframe(_num)
+                        st.dataframe(s_num)
                         
                         sta_num=[]
                         end_num=[]
