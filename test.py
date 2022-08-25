@@ -62,7 +62,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                 
                 answer = st.button('分析開始')
                 if answer == True:
-                    s_list = sorted(list(set(df["製造番号"])))
+                    s_list = sorted(list(set(d_num["製造番号"])))
                     for s in s_list:
                         s_num = df[df['製造番号'] == s]
                         s_num=s_num.sort_values(["工程開始日","工程開始時間"])
