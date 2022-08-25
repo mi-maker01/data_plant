@@ -71,15 +71,17 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         graph_num=pd.DataFrame()
                         sta_num=[]
                         end_num=[]
+                        t_col=t_num.columns.values
                         for row in t_num.itertuples():
                             sta_num.append(row.開始日時)
                             end_num.append(row.完了日時)
 
                         for i in range(len(t_num)-1):
+                            df3 =pd.DataFrame(data = 0, columns =t_col )
                             df2 = pd.DataFrame({"担当者":t,"工程名称":"隙間時間","開始日時":end_num[i], "完了日時":sta_num[i+1]},index=['time'])
                             a_num=pd.concat([t_num, df2], axis=0)
                             
-                        st.write(t_num)
+                        st.write(df3)
                         
                     #描画領域を用意する
 #                     fig = plt.subplots()
