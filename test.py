@@ -42,9 +42,9 @@ for index,row in st.session_state.df.iterrows():
     
 #標準時間の取り込み
     st.title("標準時間ファイル")
-    uploaded_file=st.file_uploader("標準時間の取り込み",type="xlsx")
+    uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file is not None:
-        st.session_state.df_time=pd.read_excel(uploaded_file)
+        st.session_state.df_time=pd.read_excel(uploaded_file1)
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
     st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
     st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
