@@ -386,14 +386,17 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
 #================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握":
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
-    d_list = st.multiselect(
-         "工程完了日",
+    d_start = st.selectbox(
+         "開始日",
+         (day_num))
+    d_end = st.selectbox(
+         "終了日",
          (day_num))
     
-    d_num=pd.DataFrame()
-    for d in d_list:#日のデータの追加文
-        kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)]
-        d_num=d_num.append(kari_num)
+#     d_num=pd.DataFrame()
+#     for d in d_list:#日のデータの追加文
+#         kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)]
+#         d_num=d_num.append(kari_num)
     
     
 #     s_list = sorted(list(set(d_num["製造番号"])))
@@ -402,11 +405,14 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     
     answer = st.button('分析開始')
     if answer == True:
-        st.write("-----------------------------------------------------------------------------------")
-        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
-        fig.update_traces(textposition='inside', orientation="h")
-        fig.update_yaxes(autorange='reversed')
-        st.plotly_chart(fig)
+        st.write(d_start)
+        st.write(d_end)
+        
+#         st.write("-----------------------------------------------------------------------------------")
+#         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
+#         fig.update_traces(textposition='inside', orientation="h")
+#         fig.update_yaxes(autorange='reversed')
+#         st.plotly_chart(fig)
 
 #=======================================================================================================================================
 #担当者の画面
