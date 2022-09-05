@@ -26,6 +26,8 @@ if uploaded_file is not None:
 
 # st.session_state.df["開始日時"]=0
 # st.session_state.df["完了日時"]=0
+st.session_state.df["工程完了時間"]=pd.to_datetime(st.session_state.df["工程完了時間"])
+st.session_state.df["工程完了日"]=pd.to_datetime(st.session_state.df["工程完了日"])
 
 for index,row in st.session_state.df.iterrows():
     
@@ -33,8 +35,8 @@ for index,row in st.session_state.df.iterrows():
     day1=row["工程開始日"]
     dateti1= datetime.datetime.combine(day1,time1)
     
-    time2=pd.to_datetime(row["工程完了時間"])
-    day2=pd.to_datetime(row["工程完了日"])
+    time2=row["工程完了時間"]
+    day2=row["工程完了日"]
     dateti2= datetime.datetime.combine(day2,time2)
     
     
