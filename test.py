@@ -392,7 +392,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     d_end = st.selectbox(
          "終了日",
          (day_num))
-    
+    dt = dt_start- dt_end
 #     d_num=pd.DataFrame()
 #     for d in d_list:#日のデータの追加文
 #         kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)]
@@ -405,9 +405,10 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     
     answer = st.button('分析開始')
     if answer == True:
+        
         st.write(d_start)
         st.write(d_end)
-        
+        st.write(dt)
 #         st.write("-----------------------------------------------------------------------------------")
 #         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
 #         fig.update_traces(textposition='inside', orientation="h")
