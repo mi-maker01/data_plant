@@ -34,11 +34,11 @@ for index,row in df.iterrows():
     
     time2=row["工程完了時間"]
     day2=row["工程完了日"]
-    dateti2= datetime.datetime.combine(day2,time2)
+#     dateti2= datetime.datetime.combine(day2,time2)
     
     
     df.at[index,'開始日時'] = pd.to_datetime(dateti1)
-    df.at[index,'完了日時'] = pd.to_datetime(dateti2)
+#     df.at[index,'完了日時'] = pd.to_datetime(dateti2)
     
 
 #================================================================================================================================
