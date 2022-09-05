@@ -26,8 +26,7 @@ if uploaded_file is not None:
 
 # st.session_state.df["開始日時"]=0
 # st.session_state.df["完了日時"]=0
-st.session_state.df["工程完了時間"]=pd.to_datetime(st.session_state.df["工程完了時間"])
-st.session_state.df["工程完了日"]=pd.to_datetime(st.session_state.df["工程完了日"])
+
 
 for index,row in st.session_state.df.iterrows():
     
