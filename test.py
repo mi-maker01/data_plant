@@ -403,7 +403,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     for s in s_list:
         s_num=d_num[(d_num["製造番号"]==s)]
         s_num=s_num.sort_values(["完了日時"])
-        s_num.tail(1)
+  
         date_koutei_num.append(s_num.tail(1))
     for d in range(dt):#日のデータの追加文
         
