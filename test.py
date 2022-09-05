@@ -392,7 +392,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     d_end = st.selectbox(
          "終了日",
          (day_num))
-    dt = dt_start- dt_end
+    dt = d_end-d_start
 #     d_num=pd.DataFrame()
 #     for d in d_list:#日のデータの追加文
 #         kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)]
