@@ -490,9 +490,9 @@ elif selector=="（E）作業時間統計量":
     if answer == True:
         
         graph_num=pd.DataFrame()
-        list_1=sorted(list(set(df[num_1])))
+        list_1=sorted(list(set(st.session_state.df[num_1])))
         for hazure_num1 in list_1:
-            x_num=df[(df[num_1]==hazure_num1)]
+            x_num=st.session_state.df[(st.session_state.df[num_1]==hazure_num1)]
             list_2=sorted(list(set(x_num[num_2])))
             for hazure_num2 in list_2:
                 y_num=x_num[(x_num[num_2]==hazure_num2)]
@@ -523,18 +523,18 @@ elif selector=="（E）作業時間統計量":
  
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
-    num=df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
+    num=st.session_state.df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
     
-    n_list = sorted(list(set(df["工程開始日"])))
+    n_list = sorted(list(set(st.session_state.df["工程開始日"])))
     n = st.selectbox(
          "工程日",
          (n_list))
-    n_num=df[(df["工程開始日"]==n)]
+    n_num=st.session_state.df[(st.session_state.df["工程開始日"]==n)]
     
     t_list = sorted(list(set(n_num["担当コード"])))
     
-    hito_list = sorted(list(set(df["担当者"])))
-    ko_list = sorted(list(set(df["工程名称"])))
+    hito_list = sorted(list(set(st.session_state.df["担当者"])))
+    ko_list = sorted(list(set(st.session_state.df["工程名称"])))
     bar_num1=pd.DataFrame(columns=["担当者","工程名称","%"] )
     
     for t in hito_list:
