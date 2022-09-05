@@ -397,7 +397,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     
     k_list = sorted(list(set(st.session_state.df["工程名称"])))
     date_num = pd.DataFrame()
-    date_num.columns =　k_list
+    date_num.columns=k_list
     d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
     for d in range(dt):#日のデータの追加文
         
