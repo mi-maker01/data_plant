@@ -392,8 +392,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     d_end = st.selectbox(#終了日の選択
          "終了日",
          (day_num))
-    dt = d_end-d_start　#開始日と終了日の差の計算
-    dt= dt.days　#int
+    dt = d_end-d_start#開始日と終了日の差の計算
+    dt= dt.days#int
     
     k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
     date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
