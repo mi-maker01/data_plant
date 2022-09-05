@@ -403,8 +403,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     for s in s_list:
         s_num=d_num[(d_num["製造番号"]==s)]
         s_num=s_num.sort_values(["完了日時"])
-  
         date_koutei_num.append(s_num.tail(1))
+    st.write(date_koutei_num)
     for d in range(dt+1):#日のデータの追加文
         kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
         d_num=d_num.append(kari_num)
