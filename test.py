@@ -26,7 +26,7 @@ if uploaded_file is not None:
 
 st.session_state.df["開始日時"]=0
 st.session_state.df["完了日時"]=0
-for index,row in df.iterrows():
+for index,row in st.session_state.df.iterrows():
     
     time1=row["工程開始時間"]
     day1=row["工程開始日"]
@@ -37,8 +37,8 @@ for index,row in df.iterrows():
     dateti2= datetime.datetime.combine(day2,time2)
     
     
-    df.at[index,'開始日時'] = pd.to_datetime(dateti1)
-    df.at[index,'完了日時'] = pd.to_datetime(dateti2)
+    st.session_state.df.at[index,'開始日時'] = pd.to_datetime(dateti1)
+    st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
     
 
 #================================================================================================================================
