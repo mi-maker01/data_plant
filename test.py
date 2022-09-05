@@ -22,7 +22,7 @@ selector=st.sidebar.selectbox( "ページ選択",pagelist)
 st.title("製造データファイル")
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
-    df=pd.read_excel(uploaded_file)
+    st.session_state.df=pd.read_excel(uploaded_file)
 
 df["開始日時"]=0
 df["完了日時"]=0
