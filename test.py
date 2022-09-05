@@ -395,9 +395,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     dt = d_end-d_start
     dt= dt.days
     
-    d_num=pd.DataFrame()
+    d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
     for d in range(dt):#日のデータの追加文
-        d_start = d_start + datetime.timedelta(days=ｄ)
+        d_start = d_start + datetime.timedelta(days=1)
         kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
         d_num=d_num.append(kari_num)
     
