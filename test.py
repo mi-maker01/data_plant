@@ -397,13 +397,14 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     
     k_list = sorted(list(set(st.session_state.df["工程名称"])))
     date_num = pd.DataFrame(columns=k_list)
+    date_koutei_num=pd.DataFrame()
     d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
     s_list = sorted(list(set(d_num["製造番号"])))
     for s in s_list:
         s_num=d_num[(d_num["製造番号"]==s)]
         s_num=s_num.sort_values(["完了日時"])
         s_num.tail(1)
-        date_koutei_num=date_koutei_num.append(s_num.tail(1))
+        date_koutei_num.append(s_num.tail(1))
     for d in range(dt):#日のデータの追加文
         
         d_start = d_start + datetime.timedelta(days=1)
