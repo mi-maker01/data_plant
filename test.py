@@ -46,10 +46,10 @@ for index,row in st.session_state.df.iterrows():
     if uploaded_file is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file)
     base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
-    st.session_state.df_time['標準時間1']=pd.to_datetime(df_time['標準時間1'], format='%M:%S:%f') - base_time
-    st.session_state.df_time['標準時間1']=df_time["標準時間1"].dt.total_seconds()
-    st.session_state.df_time['標準時間2']=pd.to_datetime(df_time['標準時間2'], format='%M:%S:%f') - base_time
-    st.session_state.df_time['標準時間2']=df_time["標準時間2"].dt.total_seconds()
+    st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
+    st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
+    st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_time['標準時間2'], format='%M:%S:%f') - base_time
+    st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
     
 #================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
