@@ -398,6 +398,12 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     k_list = sorted(list(set(st.session_state.df["工程名称"])))
     date_num = pd.DataFrame(columns=k_list)
     d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
+    s_list = sorted(list(set(d_num["製造番号"])))
+    for s in s_list:
+        s_num=d_num[(d_num["製造番号"]==s)]
+        s_num=s_num.sort_values(["完了日時"])
+        s_num.tail(1)
+        date_koutei_num=date_koutei_num.append(s_num.tail(1))
     for d in range(dt):#日のデータの追加文
         
         d_start = d_start + datetime.timedelta(days=1)
@@ -405,15 +411,14 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         d_num=d_num.append(kari_num)
     
     s_list = sorted(list(set(d_num["製造番号"])))
-        
+        date_koutei_num
     answer = st.button('分析開始')
     if answer == True:       
         st.write(d_num)
-#         for s in s_list:
-#             s_num=d_num[(d_num["製造番号"]==s)]
-#             st.write(s_num)
-#             st.write(s_num.tail(1))
-        st.write(date_num)
+        k_date_list = sorted(list(set(date_koutei_num["工程名称"])))
+        for k in k_date_list:
+            st.write(k)
+            st.write(len(date_koutei_num[(date_koutei_num["工程名称"]==ｋ)]))
         
         st.write("-----------------------------------------------------------------------------------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
