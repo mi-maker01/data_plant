@@ -44,12 +44,12 @@ for index,row in st.session_state.df.iterrows():
 #================================================================================================================================
 if selector=="(A-1)各人各日の実績ガントチャート":
     
-    day_num = sorted(list(set(df["工程完了日"])))
+    day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
          (day_num))
     
-    d_num=df[(df["工程完了日"]==d)&(df["工程開始日"] == d)]
+    d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)&(st.session_state.df["工程開始日"] == d)]
     d_num=d_num.sort_values(["工程開始時間"])
     d_num=d_num.reset_index()
     
