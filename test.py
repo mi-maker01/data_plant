@@ -413,7 +413,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     answer = st.button('分析開始')
     if answer == True:       
         st.write(d_num)
-        st.write(date_koutei_num)
+        st.write(date_num)
 #         k_date_list = sorted(list(set(date_koutei_num["工程名称"])))
 #         for k in k_date_list:
 #             st.write(k)
