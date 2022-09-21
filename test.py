@@ -395,25 +395,26 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     dt = d_end-d_start#開始日と終了日の差の計算
     dt= dt.days#int
     
-    k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
-    date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
-    date_koutei_num=pd.DataFrame()#表データに入れる空データ
-    d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]#
-    s_list = sorted(list(set(d_num["製造番号"])))
-    for s in s_list:
-        s_num=d_num[(d_num["製造番号"]==s)]
-        s_num=s_num.sort_values(["完了日時"])
-        date_koutei_num.append(s_num.tail(1))
-    
-    for d in range(dt+1):#日のデータの追加文
-        kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
-        d_num=d_num.append(kari_num)
-        d_start = d_start + datetime.timedelta(days=1)
-        
     answer = st.button('分析開始')
     if answer == True:       
+        k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
+        date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
+        date_koutei_num=pd.DataFrame()#表データに入れる空データ
+        d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]#
+        s_list = sorted(list(set(d_num["製造番号"])))
+        for s in s_list:
+            s_num=d_num[(d_num["製造番号"]==s)]
+            s_num=s_num.sort_values(["完了日時"])
+            date_koutei_num.append(s_num.tail(1))
+
+        for d in range(dt+1):#日のデータの追加文
+            kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
+            d_num=d_num.append(kari_num)
+            d_start = d_start + datetime.timedelta(days=1)
+        
+    
         st.write(d_num)
-        st.write(date_num)
+        st.write(date_koutei_num)
 #         k_date_list = sorted(list(set(date_koutei_num["工程名称"])))
 #         for k in k_date_list:
 #             st.write(k)
