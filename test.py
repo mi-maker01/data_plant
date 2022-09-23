@@ -84,6 +84,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         #余裕率の計算
                         re_num=t_num.reset_index()
                         st.write(re_num)#担当者の一日のデータ
+                        st.write(len(re_num))
                         
                         
                         
