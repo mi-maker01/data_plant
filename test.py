@@ -123,7 +123,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #                     st.plotly_chart(fig)
                     
                     st.write("----------")
-                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color={"隙間時間"="white"},title="一日の各人の稼働状況"))
+                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color=("隙間時間"="white"),title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
                     #================================================================================================================================
