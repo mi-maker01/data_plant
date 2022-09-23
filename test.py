@@ -78,7 +78,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     graph_num=pd.DataFrame()
                     t_list = sorted(list(set(d_num["担当者"])))
                     for t in t_list:
-                        aki_time=pd.to_datetime()
+                        
                         t_num =d_num[d_num['担当者']==t]
                         t_num=t_num.sort_values("開始日時")
                         
