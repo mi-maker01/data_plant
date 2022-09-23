@@ -81,6 +81,10 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         t_num =d_num[d_num['担当者']==t]
                         t_num=t_num.sort_values("開始日時")
                         
+                        #余裕率の計算
+                        st.write(t_num)#担当者の一日のデータ
+                        
+                        
                         
                         sta_num=[]
                         end_num=[]
@@ -126,6 +130,8 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
+                    
+                    
                     #================================================================================================================================
 elif selector=="（A-2）各工程各日の実績ガントチャート":
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
