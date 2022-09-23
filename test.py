@@ -92,7 +92,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             end_num.append(row.完了日時)
 
                         for i in range(len(t_num)-1):
-                            aki_time=sta_num[i+1]-end_num[i]
+                            aki_time+=sta_num[i+1]-end_num[i]
                             
                             df3 =pd.DataFrame(columns =t_col )
                             df2 = pd.DataFrame({"担当者":t,"工程名称":"隙間時間","開始日時":end_num[i], "完了日時":sta_num[i+1]},index=['time'])
@@ -104,6 +104,8 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             t_num=pd.concat([t_num, df3], axis=0)
                         
                             st.write(aki_time)
+                            st.write("======")
+                        st.write(aki_time)
                         t_num=t_num.sort_values("開始日時")
                         graph_num=graph_num.append(t_num)
                       
