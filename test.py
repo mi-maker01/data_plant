@@ -331,6 +331,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         
         syosai_num=data_num['processing_time'].describe()#データの詳細データ
         syosai_num = pd.DataFrame(syosai_num)
+        syosai_num=syosai_num.set_axis(["個数","平均","標準偏差","最小値","第一四分位数","第二四分位数","第三四分位数","最大値"], axis=1)
         st.write(syosai_num.T)
         
         q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
