@@ -92,10 +92,9 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             end_num.append(row.完了日時)
                         
                         zentai_num=end_num[-1]-sta_num[0]
-#                         zentai_num=zentai_num.seconds
+                        zentai_num=zentai_num.seconds
                         for i in range(len(t_num)-1):
                             a=sta_num[i+1]-end_num[i]
-                            st.write(a)
                             a=a.seconds
                             aki_time+=a
                             
@@ -108,10 +107,11 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             df3.loc[0,'完了日時'] = sta_num[i+1]+ datetime.timedelta(seconds=-1)
                             t_num=pd.concat([t_num, df3], axis=0)
                         
-                            
+                        yoyuritu_num=(aki_time/zentai_num)*100
                         st.write("===")
                         st.write(aki_time)
                         st.write(zentai_num)
+                        st.write(yoyuritu_num)
                         st.write("===")
                         t_num=t_num.sort_values("開始日時")
                         graph_num=graph_num.append(t_num)
@@ -134,7 +134,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程名称",color="担当者",title="一日の工程状況"))
 #                     fig.update_traces(textposition='inside', orientation="h")
 #                     st.plotly_chart(fig)
-                    st.write(graph_num)
+  
                     st.write("----------")
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
