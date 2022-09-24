@@ -122,7 +122,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
-                        st.write("================================================")
+                        st.write("========================================================================================================================")
                         
                     #描画領域を用意する
 #                     fig = plt.subplots()
@@ -171,7 +171,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
             k_num=d_num[d_num["号機名称"]==k]
             k_num=k_num.sort_values(["開始日時"])
             if len(k_num) >=1:
-                st.write("================================================================================")
+                st.write("==============================================================================================================================")
                 st.write(k,":",len(k_num))
 
                 fig = go.Figure(px.timeline(k_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="担当者",color="担当者", color_continuous_scale='Jet',title="稼働状況の詳細"))
