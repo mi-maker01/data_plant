@@ -81,7 +81,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         aki_time=0
                         t_num =d_num[d_num['担当者']==t]
                         t_num=t_num.sort_values("開始日時")
-                        st.write(t_num)
+                        
                         #余裕率の計算、隙間時間
                         
                         sta_num=[]
@@ -115,7 +115,8 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         st.write(zentai_num)
                         st.write("余裕率（％）")
                         st.write(yoyuritu_num)
-                        st.write("===")
+                        st.write(t_num)
+                        st.write("================================================")
                         t_num=t_num.sort_values("開始日時")
                         graph_num=graph_num.append(t_num)
                       
