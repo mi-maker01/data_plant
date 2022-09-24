@@ -155,7 +155,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
          "工程完了日",
          (day_num))
     
-    d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d)&(st.session_state.df["工程完了日"]==d_start)]
+    d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d)&(st.session_state.df["工程完了日"]==d)]
     
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
