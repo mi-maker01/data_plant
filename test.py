@@ -355,6 +355,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         
         hazure_num=data_num[(data_num["処理時間"]>upper_num) | (data_num["処理時間"]<lower_num)]
         hazure_num2=data_num[data_num["処理時間"]<lower_num]
+        st.write("＝＝＝＝外れ値のデータ＝＝＝＝")
         st.write(hazure_num)#外れ値（データベース）の表示
         
 #         st.write('第一四分位数は%.1fです'%q1)
@@ -367,6 +368,28 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
 #         st.write('外れてない数の割合は%d/%dです'%(len(hazure),len(data_num)))
 #         st.write('上限値は%.1fです'%upper_num2)
 #         st.write('下限値は%.1fです'%lower_num2)
+        
+        #全体のヒストグラムの作成
+        zentai_scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)]#選択したデータ
+        zentai_dd=zentai_scores["処理時間"]#選択したデータの処理時間
+        # 描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
+
+        plt.xlim([0,upper_num2])                        # X軸範囲
+        plt.ylim([0,dosu_num+10])                      # Y軸範囲
+        ax.set_title("chart")
+        ax.set_xlabel("time")                # x軸ラベル
+        plt.ylabel("count")               # y軸ラベル
+        plt.grid(True)
+        plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+        plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+        plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
+        labels = ax.get_xticklabels()
+        plt.setp(labels, rotation=45, fontsize=10)
+        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+        left_column, right_column = st.columns(2)
+        left_column.pyplot(fig)
         
         #ヒストグラムの作成
         for i in t:
@@ -395,7 +418,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
             labels = ax.get_xticklabels()
-            plt.setp(labels, rotation=45, fontsize=10);
+            plt.setp(labels, rotation=45, fontsize=10)
             
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
             
