@@ -317,8 +317,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                 dosu_num=max(x)
         
         #処理時間の抜き出し
-        data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
-        s_num=data_num['processing_time']
+#         data_num=data_num.rename(columns={'処理時間': 'processing_time'}) 
+        s_num=data_num['処理時間']
         
         # 描画領域を用意する
 #         fig = plt.figure()
@@ -329,13 +329,13 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
-        syosai_num=data_num['processing_time'].describe()#データの詳細データ
+        syosai_num=data_num['処理時間'].describe()#データの詳細データ
         syosai_num = pd.DataFrame(syosai_num)
-        syosai_num=syosai_num.set_axis(["個数","平均","標準偏差","最小値","第一四分位数","第二四分位数","第三四分位数","最大値"], axis=1)
+#         syosai_num=syosai_num.set_axis(["個数","平均","標準偏差","最小値","第一四分位数","第二四分位数","第三四分位数","最大値"], axis=1)
         st.write(syosai_num.T)
         
-        q1=data_num['processing_time'].describe().loc['25%']#第一四分位範囲
-        q3=data_num['processing_time'].describe().loc['75%']#第三四分位範囲
+        q1=data_num['処理時間'].describe().loc['25%']#第一四分位範囲
+        q3=data_num['処理時間'].describe().loc['75%']#第三四分位範囲
                 
         iqr=q3-q1#四分位範囲
         upper_num=q3+(1.5*iqr)#上限
@@ -350,8 +350,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         upper_num2=upper_num2+dif_num3
         lower_num2=lower_num2-dif_num3
                 
-        hazure=data_num[data_num["processing_time"]<=upper_num]
-        hazure=hazure[hazure["processing_time"]>=lower_num]
+        hazure=data_num[data_num["処理時間"]<=upper_num]
+        hazure=hazure[hazure["処理時間"]>=lower_num]
         
         
 #         st.write('第一四分位数は%.1fです'%q1)
@@ -376,8 +376,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
-            dd=scores["processing_time"]#選択したデータの処理時間
-            scores=scores.rename(columns={'processing_time':'処理時間' })#名前の変更 
+            dd=scores["処理時間"]#選択したデータの処理時間
+#             scores=scores.rename(columns={'processing_time':'処理時間' })#名前の変更 
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
