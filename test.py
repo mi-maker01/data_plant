@@ -500,6 +500,18 @@ elif selector=="（E）図番別作業時間統計量":
  #================================================================================================================================      
 #工程の画面
 elif selector=="（E）作業時間統計量":
+    
+    #================データの選択（期間）
+    day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
+    d_start = st.selectbox(#開始日の選択
+         "開始日",
+         (day_num))
+    d_end = st.selectbox(#終了日の選択
+         "終了日",
+         (day_num))
+    dt = d_end-d_start#開始日と終了日の差の計算
+    dt= dt.days#int
+    #===============
     num_list = ["工程名称","担当者","図番",]
     num_1 = st.selectbox(
          "1つ目",
@@ -511,9 +523,16 @@ elif selector=="（E）作業時間統計量":
          "3つ目",
          (num_list))
     
+    
     answer = st.button('分析開始')
     if answer == True:
         
+        for d in range(dt+1):#日のデータの追加文
+            kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
+            d_num=d_num.append(kari_num)
+            d_start = d_start + datetime.timedelta(days=1)
+        
+        st.write(d_num)
         graph_num=pd.DataFrame()
         list_1=sorted(list(set(st.session_state.df[num_1])))
         for hazure_num1 in list_1:
@@ -548,8 +567,12 @@ elif selector=="（E）作業時間統計量":
  
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
-    num=st.session_state.df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
     
+    #================データの選択（期間）
+    
+    #===============
+    
+    num=st.session_state.df[["図番","製造番号","工程コード","担当コード","工程開始時間","工程開始日","工程完了日","工程完了時間"]]
     n_list = sorted(list(set(st.session_state.df["工程開始日"])))
     n = st.selectbox(
          "工程日",
