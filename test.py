@@ -372,6 +372,9 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         #全体のヒストグラムの作成
         zentai_scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)]#選択したデータ
         zentai_dd=zentai_scores["処理時間"]#選択したデータの処理時間
+        y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"] ==k)]
+        hyozyun1=y_scores["標準時間1"]
+        hyozyun2=y_scores["標準時間2"]
         # 描画領域を用意する
         fig = plt.figure()
         ax = fig.add_subplot()
