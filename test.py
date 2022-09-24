@@ -392,6 +392,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         plt.setp(labels, rotation=45, fontsize=10)
         ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
         left_column, right_column = st.columns(2)
+        st.write("社全体のグラフ")
         left_column.pyplot(fig)
         
         #ヒストグラムの作成
@@ -399,9 +400,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #データの整理
             x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
             scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
-            y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"] ==k)]
-            hyozyun1=y_scores["標準時間1"]
-            hyozyun2=y_scores["標準時間2"]
+            
             #はずれちの除外
 #             dd=scores[scores["処理時間"]<upper_num]
 #             dd=dd[dd["処理時間"]>lower_num]
