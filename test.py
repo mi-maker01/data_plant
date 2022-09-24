@@ -391,8 +391,8 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
         ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+        st.write("＝＝＝＝＝＝＝社全体のグラフ＝＝＝＝＝＝＝")
         left_column, right_column = st.columns(2)
-        st.write("社全体のグラフ")
         left_column.pyplot(fig)
         
         #ヒストグラムの作成
