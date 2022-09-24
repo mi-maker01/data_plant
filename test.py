@@ -603,11 +603,12 @@ elif selector=="（E）各人の工程量":
         left_column, right_column = st.columns(2)
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称",text="図番"))
         st.plotly_chart(fig, use_container_width=True)
-        st.dataframe(bar_num1)
+        
         
         num=pd.DataFrame(n_num.groupby(["担当者","工程名称","図番"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
         pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
         st.dataframe(pvit)
+        st.dataframe(bar_num1)
 #         fig = go.Figure(px.bar(bar_num1,x="担当者",y="%",text="%",color="工程名称"))
 #         st.plotly_chart(fig, use_container_width=True)
         
