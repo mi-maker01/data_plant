@@ -370,6 +370,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
 #         st.write('下限値は%.1fです'%lower_num2)
         
         #全体のヒストグラムの作成
+        zentai_x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]
         zentai_scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)]#選択したデータ
         zentai_dd=zentai_scores["処理時間"]#選択したデータの処理時間
         y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"] ==k)]
@@ -394,6 +395,12 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         st.write("＝＝＝＝＝＝＝社全体のグラフ＝＝＝＝＝＝＝")
         left_column, right_column = st.columns(2)
         left_column.pyplot(fig)
+        num=pd.DataFrame(zentai_scores.groupby(["図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+        pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+        pvit.insert(0, '総件数', len(zentai_x_num))
+        pvit["標準時間1"]=int(hyozyun1)
+        pvit["標準時間2"]=int(hyozyun2)
+        st.write(pvit)
         
         #ヒストグラムの作成
         for i in t:
