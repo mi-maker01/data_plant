@@ -150,7 +150,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
          "工程完了日",
          (day_num))
     
-    d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d)]
+    d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d)&(st.session_state.df["工程完了日"]==d_start)]
     
     d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
     d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
@@ -416,7 +416,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
         date_koutei_num=pd.DataFrame()#表データに入れる空データ
-        d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]#
+        d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
         s_list = sorted(list(set(d_num["製造番号"])))
         for s in s_list:
             s_num=d_num[(d_num["製造番号"]==s)]
@@ -424,7 +424,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             date_koutei_num=date_koutei_num.append(s_num.tail(1))
 
         for d in range(dt+1):#日のデータの追加文
-            kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
+            kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
@@ -533,11 +533,11 @@ elif selector=="（E）作業時間統計量":
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
-        st.write(d_num)
+        
         graph_num=pd.DataFrame()
-        list_1=sorted(list(set(st.session_state.df[num_1])))
+        list_1=sorted(list(set(d_num[num_1])))
         for hazure_num1 in list_1:
-            x_num=st.session_state.df[(st.session_state.df[num_1]==hazure_num1)]
+            x_num=d_num[(d_num[num_1]==hazure_num1)]
             list_2=sorted(list(set(x_num[num_2])))
             for hazure_num2 in list_2:
                 y_num=x_num[(x_num[num_2]==hazure_num2)]
