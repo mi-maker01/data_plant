@@ -106,6 +106,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             t_num=pd.concat([t_num, df3], axis=0)
                         
                             st.write(a)
+                        st.write("===")
                         st.write(aki_time)
                         t_num=t_num.sort_values("開始日時")
                         graph_num=graph_num.append(t_num)
