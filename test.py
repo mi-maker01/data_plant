@@ -608,7 +608,7 @@ elif selector=="（E）各人の工程量":
         num=pd.DataFrame(n_num.groupby(["担当者","工程名称","図番"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
         pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
         st.dataframe(pvit)
-        hyo_num=n_num["図番","担当者"]
+        hyo_num=n_num[["図番","担当者","工程名称","号機名称","処理時間","開始日時","完了日時"]]
         st.dataframe(hyo_num)
         st.dataframe(bar_num1)
 #         fig = go.Figure(px.bar(bar_num1,x="担当者",y="%",text="%",color="工程名称"))
