@@ -526,8 +526,9 @@ elif selector=="（E）作業時間統計量":
     
     answer = st.button('分析開始')
     if answer == True:
-        
-        for d in range(dt+1):#日のデータの追加文
+        #日のデータの追加文
+        d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]#
+        for d in range(dt+1):
             kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
