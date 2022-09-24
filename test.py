@@ -93,6 +93,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 
                         for i in range(len(t_num)-1):
                             a=sta_num[i+1]-end_num[i]
+                            st.write(a)
                             a=a.seconds
                             aki_time+=a
                             
@@ -105,7 +106,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             df3.loc[0,'完了日時'] = sta_num[i+1]+ datetime.timedelta(seconds=-1)
                             t_num=pd.concat([t_num, df3], axis=0)
                         
-                            st.write(a)
+                            
                         st.write("===")
                         st.write(aki_time)
                         st.write("===")
