@@ -394,6 +394,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
             plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
             plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
+            labels = ax.get_xticklabels()
             plt.setp(labels, rotation=45, fontsize=10);
             
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
