@@ -565,8 +565,6 @@ elif selector=="（E）作業時間統計量":
            
         
         st.dataframe(graph_num)
-        fig = go.Figure(px.bar(z_num,x="担当者",y="作成数",color="工程名称"))
-        st.plotly_chart(fig, use_container_width=True)
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
     
@@ -604,7 +602,7 @@ elif selector=="（E）各人の工程量":
         
         #描画領域を用意する
         left_column, right_column = st.columns(2)
-        fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称"))
+        fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称",text="図番"))
         st.plotly_chart(fig, use_container_width=True)
         st.dataframe(bar_num1)
         
