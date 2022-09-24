@@ -502,7 +502,7 @@ elif selector=="（E）図番別作業時間統計量":
 elif selector=="（E）作業時間統計量":
     
     #================データの選択（期間）
-    day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
+    day_num = sorted(list(set(st.session_state.df["工程開始日"])))#日付の抜出
     d_start = st.selectbox(#開始日の選択
          "開始日",
          (day_num))
@@ -527,9 +527,9 @@ elif selector=="（E）作業時間統計量":
     answer = st.button('分析開始')
     if answer == True:
         #日のデータの追加文
-        d_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]#
+        d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&&(st.session_state.df["工程完了日"]==d_start)]#
         for d in range(dt+1):
-            kari_num=st.session_state.df[(st.session_state.df["工程完了日"]==d_start)]
+            kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)]
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
