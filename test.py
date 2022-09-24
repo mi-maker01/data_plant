@@ -353,9 +353,9 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         hazure=data_num[data_num["処理時間"]<=upper_num]
         hazure=hazure[hazure["処理時間"]>=lower_num]
         
-        hazure_num=data_num[data_num["処理時間"]>upper_num]
-        hazure_num=hazure_num[hazure_num["処理時間"]<lower_num]
-        st.write(hazure)#外れ値（データベース）の表示
+        hazure_num=data_num[(data_num["処理時間"]>upper_num) | (data_num["処理時間"]<lower_num)]
+        hazure_num2=data_num[data_num["処理時間"]<lower_num]
+        st.write(hazure_num)#外れ値（データベース）の表示
         
 #         st.write('第一四分位数は%.1fです'%q1)
 #         st.write('第三四分位数は%.1fです'%q3)
