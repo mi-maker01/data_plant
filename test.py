@@ -459,25 +459,22 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
         
-        for i in range(dt+1):
-            date_koutei_num=pd.DataFrame()#表データに入れる空データ
-            sikakari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
-            s_list = sorted(list(set(sikakari_num["製造番号"])))
-            for s in s_list:
-                s_num=sikakari_num[(sikakari_num["製造番号"]==s)]
-                s_num=s_num.sort_values(["完了日時"])
-                date_koutei_num=date_koutei_num.append(s_num.tail(1))
-                num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
-                st.write(num)
-            d_start = d_start + datetime.timedelta(days=1)
-        
         #ガントチャート（総社内滞在時間）
         d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
+            date_koutei_num=pd.DataFrame()#表データに入れる空データ
+            s_list = sorted(list(set(kari_num["製造番号"])))
+            for s in s_list:
+                s_num=kari_num[(kari_num["製造番号"]==s)]
+                s_num=s_num.sort_values(["完了日時"])
+                date_koutei_num=date_koutei_num.append(s_num.tail(1))
+            num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
+            st.write(num)
+            
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
-        
+        st.write(d_num)
         st.write("-----------------------------------------------------------------------------------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
