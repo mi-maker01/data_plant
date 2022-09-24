@@ -158,18 +158,18 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
     
     answer = st.button('分析開始')
     if answer == True:
-        fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
+        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
         
         for k in kikai_num:
             k_num=d_num[d_num["号機名称"]==k]
-            k_num=k_num.sort_values(["工程開始時間"])
+            k_num=k_num.sort_values(["開始日時"])
             if len(k_num) >=1:
                 st.write("================================================================================")
                 st.write(k,":",len(k_num))
 
-                fig = go.Figure(px.timeline(k_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="担当者",color="担当者", color_continuous_scale='Jet',title="稼働状況の詳細"))
+                fig = go.Figure(px.timeline(k_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="担当者",color="担当者", color_continuous_scale='Jet',title="稼働状況の詳細"))
                 fig.update_traces(textposition='inside', orientation="h")
                 fig.update_yaxes(autorange='reversed')
                 st.plotly_chart(fig)
