@@ -463,12 +463,12 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             date_koutei_num=pd.DataFrame()#表データに入れる空データ
             sikakari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
             s_list = sorted(list(set(sikakari_num["製造番号"])))
-                for s in s_list:
-                    s_num=sikakari_num[(sikakari_num["製造番号"]==s)]
-                    s_num=s_num.sort_values(["完了日時"])
-                    date_koutei_num=date_koutei_num.append(s_num.tail(1))
-                    num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
-                    st.write(num)
+            for s in s_list:
+                s_num=sikakari_num[(sikakari_num["製造番号"]==s)]
+                s_num=s_num.sort_values(["完了日時"])
+                date_koutei_num=date_koutei_num.append(s_num.tail(1))
+                num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
+                st.write(num)
             d_start = d_start + datetime.timedelta(days=1)
         
         #ガントチャート（総社内滞在時間）
