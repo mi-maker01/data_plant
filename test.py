@@ -177,7 +177,6 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
 
 elif selector=="（B）同一人物の同一行程でのばらつきの把握_ヒストグラム":
     
-    st.write(df_time)
     #曜日の設定
     
     
