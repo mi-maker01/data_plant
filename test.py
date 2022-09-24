@@ -90,7 +90,9 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         for row in t_num.itertuples():
                             sta_num.append(row.開始日時)
                             end_num.append(row.完了日時)
-
+                        
+                        zentai_num=end_num[-1]-sta_num[0]
+#                         zentai_num=zentai_num.seconds
                         for i in range(len(t_num)-1):
                             a=sta_num[i+1]-end_num[i]
                             st.write(a)
@@ -109,6 +111,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             
                         st.write("===")
                         st.write(aki_time)
+                        st.write(zentai_num)
                         st.write("===")
                         t_num=t_num.sort_values("開始日時")
                         graph_num=graph_num.append(t_num)
