@@ -471,6 +471,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             st.write(d_start)
+            st.write(date_koutei_num)
             st.write(num)
             
             d_num=d_num.append(kari_num)
