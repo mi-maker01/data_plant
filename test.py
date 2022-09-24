@@ -108,6 +108,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             t_num=pd.concat([t_num, df3], axis=0)
                         
                         yoyuritu_num=(aki_time/zentai_num)*100
+                        st.write(t)
                         st.write("空き時間の合計（秒）")
                         st.write(aki_time)
                         st.write("総作業時間（秒）")
