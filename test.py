@@ -488,12 +488,12 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
                 
         st.write("-----------------------------------------------------------------------------------")
-        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
+        fig = go.Figure(px.timeline(d_num, x_start="工程開始日", x_end="工程完了日",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig)
         
-        fig = go.Figure(px.bar(d_num,x="製造番号",y="工程完了日",color="工程名称",text="担当者"))
+        fig = go.Figure(px.bar(d_num,x="製造番号",y="完了日時",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
 
 #=======================================================================================================================================
