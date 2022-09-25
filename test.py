@@ -485,9 +485,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             s_num2=d_num[(d_num["製造番号"]==s)]
             s_tail=s_num2.tail(1)
             st.write(s_tail)
-#             if s_tail["工程名称"]=="配送":
-#                 sta_num=[]
-#                 end_num=[]
+            if s_tail["工程名称"]=="配送":
+                sta_num=[]
+                end_num=[]
                         
 #                 for row in t_num.itertuples():
 #                     sta_num.append(row.開始日時)
