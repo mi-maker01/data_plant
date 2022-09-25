@@ -452,6 +452,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
          (day_num))
     dt = d_end-d_start#開始日と終了日の差の計算
     dt= dt.days#int
+    d_start1=d_start
     
     answer = st.button('分析開始')
     if answer == True:       
@@ -476,12 +477,22 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
-        
+#         s_list2 = sorted(list(set(st.session_state.df["製造番号"])))
+#         for s in s_list2:
+#             s_num2=st.session_state.df[(st.session_state.df["製造番号"]==s)]
+#             s_num2=s_num2.sort_values(["完了日時"])
+#             for d in range(dt+1):
+#                 kari_num2=s_num2[(s_num2["工程開始日"]==d_start)&(s_num2["工程完了日"]==d_start)]
+#                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
+                
         st.write("-----------------------------------------------------------------------------------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig)
+        
+        fig = go.Figure(px.bar(d_num,x="工程名称",y="製造番号",color="工程名称",text="担当者"))
+        st.plotly_chart(fig, use_container_width=True)
 
 #=======================================================================================================================================
 #担当者の画面
