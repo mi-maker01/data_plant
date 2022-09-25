@@ -494,6 +494,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(kou_num)
             st.write(sta_num)
             st.write(end_num)
+            st.write(s_num2)
 #             s_tail=s_num2.tail(1)
 #             st.write(s_t)
 #             if s_tail["工程名称"]=="配送":
