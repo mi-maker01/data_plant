@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
-pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握","（E）担当者別作業時間統計量","（E）作業時間統計量","（E）各人の工程量"]
+pagelist = ["(A-1)各人各日の実績ガントチャート","（A-2）各工程各日の実績ガントチャート","（B）同一人物の同一行程でのばらつきの把握_ヒストグラム","（C）同一行程内のばらつき把握_ヒストグラム","（D）一つの製品の総社内滞在時間の把握","（E）作業時間統計量","（E）各人の工程量"]
 st.title("生産データ分析")
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
@@ -613,12 +613,15 @@ elif selector=="（E）作業時間統計量":
         list_1=sorted(list(set(d_num[num_1])))
         for hazure_num1 in list_1:
             x_num=d_num[(d_num[num_1]==hazure_num1)]
+            x_num2=st.session_state.df_time[st.session_state.df_time([num_1]==hazure_num1)]
             list_2=sorted(list(set(x_num[num_2])))
             for hazure_num2 in list_2:
                 y_num=x_num[(x_num[num_2]==hazure_num2)]
+                y_num2=x_num2[(x_num2[num_2]==hazure_num2)]
                 list_3 = sorted(list(set(y_num[num_3])))
                 for hazure_num3 in list_3:
                     z_num=y_num[(y_num[num_3]==hazure_num3)]
+                    z_num2=y_num2[(y_num2[num_3]==hazure_num3)]
 
                     q1=z_num["処理時間"].describe().loc['25%']#第一四分位範囲
                     q3=z_num['処理時間'].describe().loc['75%']#第三四分位範囲
@@ -636,6 +639,12 @@ elif selector=="（E）作業時間統計量":
                     num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
                     pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
                     pvit.insert(0, '総件数', zentai_num)
+                    
+                   
+                    hyozyun1=z_num2["標準時間1"]
+                    hyozyun2=z_num2["標準時間2"]
+                    pvit["標準時間1"]=int(hyozyun1)
+                    pvit["標準時間2"]=int(hyozyun2)
                     graph_num=pd.concat([graph_num, pvit], axis=0)        
            
         
