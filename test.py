@@ -271,7 +271,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
-                left_column, right_column = st.columns(2)l
+                left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
                 
                 num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
