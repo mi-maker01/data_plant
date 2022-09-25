@@ -473,6 +473,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
             st.write(pvit)
+            fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
+            st.plotly_chart(fig, use_container_width=True)
             
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
@@ -491,7 +493,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig)
         
-        fig = go.Figure(px.bar(d_num,x="製造番号",y="開始日時",color="工程名称",text="担当者"))
+        fig = go.Figure(px.bar(d_num,x="製造番号",y="工程完了日",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
 
 #=======================================================================================================================================
