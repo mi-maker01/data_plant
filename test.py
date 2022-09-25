@@ -458,6 +458,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     if answer == True:       
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
+        time_num = pd.DataFrame(columns={"総滞在時間"})
         
         #ガントチャート（総社内滞在時間）
         d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
@@ -473,27 +474,37 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
             st.write(pvit)
-            fig = go.Figure(px.bar(kari_num,x="製造番号",y="完了日時",color="工程名称",text="担当者"))
+            fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
             st.plotly_chart(fig, use_container_width=True)
             
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
-#         s_list2 = sorted(list(set(st.session_state.df["製造番号"])))
-#         for s in s_list2:
-#             s_num2=st.session_state.df[(st.session_state.df["製造番号"]==s)]
-#             s_num2=s_num2.sort_values(["完了日時"])
-#             for d in range(dt+1):
-#                 kari_num2=s_num2[(s_num2["工程開始日"]==d_start)&(s_num2["工程完了日"]==d_start)]
-#                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
+        s_list2 = sorted(list(set(d_num["製造番号"])))
+        for s in s_list2:
+            s_num2=d_num[(d_num["製造番号"]==s)]
+            s_tail=s_num2.tail(1)
+            if s_tail["工程名称"]=="配送":
+                sta_num=[]
+                end_num=[]
+                        
+                for row in t_num.itertuples():
+                    sta_num.append(row.開始日時)
+                    end_num.append(row.完了日時)
+                zentai_num=end_num[-1]-sta_num[0]
+                st.write(s)
+                st.write(zentai_num)
+#                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
+#                 time_num.append({'A': 0, 'B': 1, 'C': 2}, ignore_index=True
                 
+               
         st.write("-----------------------------------------------------------------------------------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig)
         
-        fig = go.Figure(px.bar(d_num,x="製造番号",y="完了日時",color="工程名称",text="担当者"))
+        fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
 
 #=======================================================================================================================================
