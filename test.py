@@ -119,7 +119,6 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         st.write(zentai_num)
                         st.write("余裕率（％）")
                         st.write(yoyuritu_num)
-                        st.write(t_num)
                         
                         t_num=t_num.sort_values("開始日時")
                         fig = go.Figure(px.timeline(t_num, x_start="開始日時", x_end="完了日時",y="工程名称",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
