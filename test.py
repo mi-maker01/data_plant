@@ -118,7 +118,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         st.write(t_num)
                         
                         t_num=t_num.sort_values("開始日時")
-                        fig = go.Figure(px.timeline(t_num, x_start="開始日時", x_end="完了日時",y="工程名称",color="工程名称",title="一日の各人の稼働状況"))
+                        fig = go.Figure(px.timeline(t_num, x_start="開始日時", x_end="完了日時",y="工程名称",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
@@ -143,7 +143,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
 #                     st.plotly_chart(fig)
   
                     st.write("----------")
-                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",title="一日の各人の稼働状況"))
+                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
                     
@@ -483,7 +483,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         s_list2 = sorted(list(set(d_num["製造番号"])))
         for s in s_list2:
             s_num2=d_num[(d_num["製造番号"]==s)]
-            s_num2=s_num2.sort_values(["完了日時"])
+            s_num2=s_num2.sort_values(["開始日時"])
             date_koutei_num=date_koutei_num.append(s_num2.tail(1))
             
             sta_num=[]
@@ -502,7 +502,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #                 st.write(s)
 #                 st.write(zentai_num)
 #                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
-#                 time_num.append({'A': 0, 'B': 1, 'C': 2}, ignore_index=True
+#                 time_num.append({'A': 0, 'B': 1, 'C': 2}, ignore_index=True)
                 
                
         st.write("-----------------------------------------------------------------------------------")
