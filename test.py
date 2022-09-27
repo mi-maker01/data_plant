@@ -469,12 +469,6 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             date_koutei_num=pd.DataFrame()#表データに入れる空データ
             s_list = sorted(list(set(kari_num["製造番号"])))
-        
-        st.write("-----------------------------------------------------------------------------------")
-        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
-        fig.update_traces(textposition='inside', orientation="h")
-        fig.update_yaxes(autorange='reversed')
-        st.plotly_chart(fig)
             
             for s in s_list:
                 s_num=kari_num[(kari_num["製造番号"]==s)]
@@ -513,6 +507,12 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #                 st.write(zentai_num)
 #                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
 #                 time_num.append({'A': 0, 'B': 1, 'C': 2}, ignore_index=True)
+        
+        st.write("-----------------------------------------------------------------------------------")
+        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
+        fig.update_traces(textposition='inside', orientation="h")
+        fig.update_yaxes(autorange='reversed')
+        st.plotly_chart(fig)
         
         fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
