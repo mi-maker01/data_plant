@@ -494,7 +494,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 sta_num.append(row.開始日時)
                 end_num.append(row.完了日時)
          
-            zentai_num=zentai_num.append(end_num[-1]-sta_num[0])
+            zentai_num=end_num[-1]-sta_num[0]
             st.write(sta_num)
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
