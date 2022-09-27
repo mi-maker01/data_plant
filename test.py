@@ -242,7 +242,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 upper_num2=upper_num2+dif_num3
                 lower_num2=lower_num2-dif_num3
                 dif_num=upper_num2-lower_num2#差
-                if dif_num =< 10:
+                if dif_num <= 10:
                     dif_num=10
                 
                 hazure=data_num[data_num["処理時間"]<=upper_num]#外れ値の除外
