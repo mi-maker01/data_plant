@@ -108,7 +108,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             
                             df3_num=sta_num[i+1]-end_num[i]
                             d3= df3_num.seconds
-                            df3.loc[0,'処理時間'] = d3
+                            df3.loc[0,'処理時間'] = d3/60
                             t_num=pd.concat([t_num, df3], axis=0)
                         
                         yoyuritu_num=(aki_time/zentai_num)*100
