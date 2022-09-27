@@ -494,7 +494,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
             zentai_num=end_num[-1]-sta_num[0]
             st.write(s)
-            st.write(kou_num)
+            st.write(s_num2)
             st.write(kou_num[-1])
             st.write(zentai_num)
             
