@@ -105,6 +105,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                             df3.loc[0,'工程名称'] = "隙間時間"
                             df3.loc[0,'開始日時'] = end_num[i]+ datetime.timedelta(seconds=1)
                             df3.loc[0,'完了日時'] = sta_num[i+1]+ datetime.timedelta(seconds=-1)
+                            df3.loc[0,'処理時間'] = int(sta_num[i+1]-end_num[i])
                             t_num=pd.concat([t_num, df3], axis=0)
                         
                         yoyuritu_num=(aki_time/zentai_num)*100
