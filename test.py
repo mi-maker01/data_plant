@@ -480,28 +480,22 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
         
-#         s_list2 = sorted(list(set(d_num["製造番号"])))
-#         for s in s_list2:
-#             s_num2=d_num[(d_num["製造番号"]==s)]
-#             s_num2=s_num2.sort_values(["完了日時"])
-#             sta_num=[]
-#             end_num=[]
-#             kou_num=[]
-#             for row in s_num2.itertuples():
-#                 kou_num.append(row.工程名称)
-#                 sta_num.append(row.開始日時)
-#                 end_num.append(row.完了日時)
+        s_list2 = sorted(list(set(d_num["製造番号"])))
+        for s in s_list2:
+            s_num2=d_num[(d_num["製造番号"]==s)]
+            s_num2=s_num2.sort_values(["完了日時"])
+            sta_num=[]
+            end_num=[]
+            kou_num=[]
+            for row in s_num2.itertuples():
+                kou_num.append(row.工程名称)
+                sta_num.append(row.開始日時)
+                end_num.append(row.完了日時)
             
-#             s_tail=s_num2.tail(1)
-#             st.write(s_t)
-#             if s_tail["工程名称"]=="配送":
-#                 sta_num=[]
-#                 end_num=[]
-                        
-#                 for row in t_num.itertuples():
-#                     sta_num.append(row.開始日時)
-#                     end_num.append(row.完了日時)
-#                 zentai_num=end_num[-1]-sta_num[0]
+            zentai_num=end_num[-1]-sta_num[0]
+            st.write(zentai_num)
+            
+
 #                 st.write(s)
 #                 st.write(zentai_num)
 #                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
