@@ -356,7 +356,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         dif_num3=(dif_num2-dif_num)/2
         upper_num2=upper_num2+dif_num3
         lower_num2=lower_num2-dif_num3
-         if dif_num <= 10:
+        if dif_num <= 10:
             dif_num=10
             lower_num2=lower_num2-5
             upper_num2=upper_num2+5
