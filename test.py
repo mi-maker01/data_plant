@@ -264,7 +264,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 fig = plt.figure()
                 ax = fig.add_subplot()
 
-                plt.xlim([0,upper_num2])                        # X軸範囲
+                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
                 plt.ylim([0,dosu_num+10])                      # Y軸範囲
                 ax.set_title("chart")
                 ax.set_xlabel("time")                # x軸ラベル
