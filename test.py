@@ -276,7 +276,6 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 labels = ax.get_xticklabels()
                 plt.setp(labels, rotation=45, fontsize=10)
                 
-                st.write(dd)
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
