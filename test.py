@@ -350,6 +350,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         upper_num2=round(upper_num) #きりあげ
         lower_num2=math.floor(lower_num)#きりおとし
         dif_num=upper_num2-lower_num2#差
+        dif_num3=0
                 
         if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
             dif_num2=math.ceil((dif_num/10))*10
