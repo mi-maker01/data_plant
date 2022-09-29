@@ -353,7 +353,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                 
         if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
             dif_num2=math.ceil((dif_num/10))*10
-        dif_num3=(dif_num2-dif_num)/2
+            dif_num3=(dif_num2-dif_num)/2
         upper_num2=upper_num2+dif_num3
         lower_num2=lower_num2-dif_num3
         if dif_num <= 10:
