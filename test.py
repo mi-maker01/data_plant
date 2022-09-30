@@ -477,12 +477,12 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
-            if len(kari_num)==0:
-                break
             date_koutei_num=pd.DataFrame()#表データに入れる空データ
             s_list = sorted(list(set(kari_num["製造番号"])))
             
             for s in s_list:
+                if len(kari_num)==0:
+                    break
                 s_num=kari_num[(kari_num["製造番号"]==s)]
                 s_num=s_num.sort_values(["完了日時"])
                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
