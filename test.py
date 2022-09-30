@@ -481,17 +481,16 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             s_list = sorted(list(set(kari_num["製造番号"])))
             
             for s in s_list:
-                if len(kari_num)==0:
-                    break
                 s_num=kari_num[(kari_num["製造番号"]==s)]
                 s_num=s_num.sort_values(["完了日時"])
                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
-            num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
-            st.write(d_start)
-            pvit=num.set_axis([d_start], axis=1)
-            st.write(pvit)
-            fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
-            st.plotly_chart(fig, use_container_width=True)
+            if len(date_koutei_num)>=1:
+                num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
+                st.write(d_start)
+                pvit=num.set_axis([d_start], axis=1)
+                st.write(pvit)
+                fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
+                st.plotly_chart(fig, use_container_width=True)
             
             d_num=d_num.append(kari_num)
             d_start = d_start + datetime.timedelta(days=1)
