@@ -187,6 +187,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     
     #曜日の設定
     st.write(st.session_state.df)
+    st.session_state.df["曜日"]=0
     
     #担当の選択
     t_list = sorted(list(set(st.session_state.df["担当者"])))
