@@ -191,7 +191,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     st.session_state.df["月"]=st.session_state.df["工程開始日"].dt.month
     #年の設定
     st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
-    st.session_state.df["時間"]=st.session_state.df["開始日時"].dt.hour
+    
     st.write(st.session_state.df)
     
     #担当の選択
