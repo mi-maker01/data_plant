@@ -471,7 +471,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     if answer == True:       
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
-        time_num = pd.DataFrame(columns={"総滞在時間"})
+#         time_num = pd.DataFrame(columns={"総滞在時間"})
         
         #ガントチャート（総社内滞在時間）
         d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
