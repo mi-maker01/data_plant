@@ -212,7 +212,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     ne_list = sorted(list(set(x_num["年"])))
     
     #選択
-    y_list = ["なし","曜日","月","年"]
+    y_list = ["なし","曜日","月","年","時刻"]
     y = st.selectbox(
          "フィルター",
          (y_list))
@@ -713,6 +713,8 @@ elif selector=="（E）各人の工程量":
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称",text="図番"))
         st.plotly_chart(fig, use_container_width=True)
         
+        fig = go.Figure(px.bar(n_num,x="担当者",y="処理時間",color="工程名称",text="図番"))
+        st.plotly_chart(fig, use_container_width=True)
         
         num=pd.DataFrame(n_num.groupby(["担当者","工程名称","図番"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
         
