@@ -186,8 +186,11 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
 elif selector=="（B）同一人物の同一行程でのばらつきの把握_ヒストグラム":
     
     #曜日の設定
-    
     st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
+    #月の設定
+    st.session_state.df["月"]=st.session_state.df["工程開始日"].dt.month
+    #年の設定
+    st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
     st.write(st.session_state.df)
     #担当の選択
     t_list = sorted(list(set(st.session_state.df["担当者"])))
