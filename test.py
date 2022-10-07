@@ -191,7 +191,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     st.session_state.df["月"]=st.session_state.df["工程開始日"].dt.month
     #年の設定
     st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
-    st.session_state.df["時間"]=st.session_state.df["工程開始時間"].dt.hour
+    st.session_state.df["時間"]=st.session_state.df["開始日時"].dt.hour
     st.write(st.session_state.df)
     
     karino=st.session_state.df["開始日時"].between_time('8:00:00', '10:00:00')
