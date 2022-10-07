@@ -198,14 +198,18 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
          "担当者",
          (t_list))
     x_num=st.session_state.df[(st.session_state.df["担当者"]==t)]#dfからzで選んだ図番のデータ
+    
     k_list = sorted(list(set(x_num["工程名称"])))
     z_list = sorted(list(set(x_num["図番"])))
+    yo_list = sorted(list(set(x_num["曜日"])))
+    tu_list = sorted(list(set(x_num["月"])))
+    ne_list = sorted(list(set(x_num["年"])))
     
-#     #曜日の選択
-#     y_list = ["月","火","水","木","金","すべて"]
-#     y = st.selectbox(
-#          "曜日",
-#          (y_list))
+    #選択
+    y_list = ["なし","曜日","月","年"]
+    y = st.selectbox(
+         "フィルター",
+         (y_list))
     
     #データ分析開始
     answer = st.button('分析開始')
