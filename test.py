@@ -186,13 +186,13 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
 elif selector=="（B）同一人物の同一行程でのばらつきの把握_ヒストグラム":
     
     #曜日の設定
-    st.session_state.df["曜日"]=st.session_state.df["開始日時"].dt.weekday
+    st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
     #月の設定
-    st.session_state.df["月"]=st.session_state.df["開始日時"].dt.month
+    st.session_state.df["月"]=st.session_state.df["工程開始日"].dt.month
     #年の設定
-    st.session_state.df["年"]=st.session_state.df["開始日時"].dt.year
+    st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
     #時刻の設定
-    st.session_state.df["時刻"]=st.session_state.df["開始日時"].dt.time
+    st.session_state.df["時刻"]=st.session_state.df["工程開始時間"].dt.time
     
     st.write(st.session_state.df)
     
