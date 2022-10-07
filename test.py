@@ -192,6 +192,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #年の設定
     st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
     st.write(st.session_state.df)
+    
+    karino=st.session_state.df["工程開始時間"].between_time('8:00:00', '10:00:00')
+    st.write(karino)
     #担当の選択
     t_list = sorted(list(set(st.session_state.df["担当者"])))
     t = st.selectbox(
