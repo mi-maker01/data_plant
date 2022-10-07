@@ -69,7 +69,7 @@ if selector=="(A-1)各人各日の実績ガントチャート":
     d_num=d_num[(d_num["処理時間"] != 1)]
     st.dataframe(d_num)
     if len(d_num)!=0:
-            if len(d_num)!=1:
+            if len(d_num)!=1:#???分析開始ボタンの妨げになっている
                 d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
                 d_num["工程完了時間"] = pd.to_datetime(d_num["工程完了時間"], format="%H:%M:%S")
                 
@@ -186,7 +186,7 @@ elif selector=="（A-2）各工程各日の実績ガントチャート":
 elif selector=="（B）同一人物の同一行程でのばらつきの把握_ヒストグラム":
     
     #曜日の設定
-    
+    st.write(st.session_state.df)
     
     #担当の選択
     t_list = sorted(list(set(st.session_state.df["担当者"])))
