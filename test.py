@@ -302,9 +302,45 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                     pvit["標準時間1"]=int(hyozyun1)
                     pvit["標準時間2"]=int(hyozyun2)
                     st.write(pvit) 
+                
                 elif f_num=="曜日":
                     for you in range(6):
                         scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["曜日"]==you)]#選択したデータ（外れ値）
+                        dd=scores["処理時間"]#選択したデータの処理時間
+
+                        #描画領域を用意する
+                        fig = plt.figure()
+                        ax = fig.add_subplot()
+
+                        plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                        plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                        ax.set_title("chart")
+                        ax.set_xlabel("time")                # x軸ラベル
+                        plt.ylabel("count")               # y軸ラベル
+                        plt.grid(True)
+                        plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                        plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                        plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                        labels = ax.get_xticklabels()
+                        plt.setp(labels, rotation=45, fontsize=10)
+
+                        ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
+                        # Matplotlib の Figure を指定して可視化する
+                        st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"-------曜日:",you,"--------------")
+                        left_column, right_column = st.columns(2)
+                        left_column.pyplot(fig)
+
+                        num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                        pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                        pvit.insert(0, '総件数', len(y_num))
+                        pvit["標準時間1"]=int(hyozyun1)
+                        pvit["標準時間2"]=int(hyozyun2)
+                        st.write(pvit)
+                
+                elif f_num=="月":
+                    tuki_list = sorted(list(set(scores["月"])))
+                    for tuki in tuki_list
+                        scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["月"]==tuki)]#選択したデータ（外れ値）
                         dd=scores["処理時間"]#選択したデータの処理時間
 
                         #描画領域を用意する
