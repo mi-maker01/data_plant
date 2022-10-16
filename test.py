@@ -831,7 +831,7 @@ elif selector=="（E）各人の工程量":
     d_start1=d_start
     
     #日のデータの追加文
-    n_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
+    n_num=pd.DataFrame()
     for d in range(dt+1):
         kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
         n_num=n_num.append(kari_num)
