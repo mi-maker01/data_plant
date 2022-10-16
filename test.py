@@ -818,7 +818,7 @@ elif selector=="（E）作業時間統計量":
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
     
-   day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
+    day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
     d_start = st.selectbox(#開始日の選択
          "開始日",
          (day_num))
@@ -836,7 +836,7 @@ elif selector=="（E）各人の工程量":
         n_num=n_num.append(kari_num)
         d_start = d_start + datetime.timedelta(days=1)
         
-    st.write(n_num)
+    
     t_list = sorted(list(set(n_num["担当コード"])))
     
     hito_list = sorted(list(set(st.session_state.df["担当者"])))
@@ -857,7 +857,7 @@ elif selector=="（E）各人の工程量":
     n_num=n_num.sort_values('担当者')
     answer = st.button('分析開始')
     if answer == True:
-        
+        st.write(n_num)
         #描画領域を用意する
         left_column, right_column = st.columns(2)
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称",text="図番"))
