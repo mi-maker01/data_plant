@@ -220,7 +220,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        if y_list=="なし":
+        if y=="なし":
             for z in z_list:#図番でfor文回す
                 for k in k_list:#工程名称でfor文回す
                     data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]#図番と工程名称でデータを絞る
