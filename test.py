@@ -628,9 +628,10 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #         time_num = pd.DataFrame(columns={"総滞在時間"})
         
         #ガントチャート（総社内滞在時間）
-        d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
+        d_num=pd.DataFrame()
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
+            d_num=d_num.append(kari_num)
             date_koutei_num=pd.DataFrame()#表データに入れる空データ
             s_list = sorted(list(set(d_num["製造番号"])))
             
@@ -646,7 +647,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
                 st.plotly_chart(fig, use_container_width=True)
             
-            d_num=d_num.append(kari_num)
+           
             d_start = d_start + datetime.timedelta(days=1)
         
         s_list2 = sorted(list(set(d_num["製造番号"])))
