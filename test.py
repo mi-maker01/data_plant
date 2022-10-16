@@ -220,88 +220,88 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        
-        for z in z_list:#図番でfor文回す
-            for k in k_list:#工程名称でfor文回す
-                data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]#図番と工程名称でデータを絞る
-                dosu_num=0#度数の空の変数
-                
-                y_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == t)]#図番、工程名称、担当者でデータを絞る
-                y_num=y_num["処理時間"]#処理時間だけ抜出
-                if len(y_num)==0:#y_numの中にデータが一つも入ってなかった場合終了
-                    break
-                #y軸の上限値
-                x,y,_= plt.hist(y_num)#x軸、y軸、度数
-                if dosu_num<max(x):#度数の比較（最大値）
-                    dosu_num=max(x)#（最大値）
-                    
-                
-                s_num=data_num['処理時間']#図番と工程名称で絞ったデータの処理時間を抜き出し
-                    
-                q1=data_num['処理時間'].describe().loc['25%']#第一四分位範囲
-                q3=data_num['処理時間'].describe().loc['75%']#第三四分位範囲
-                
-                iqr=q3-q1#四分位範囲
-                upper_num=q3+(1.5*iqr)#上限
-                lower_num=q1-(1.5*iqr)#下限
-                
-                upper_num2=round(upper_num) #きりあげ（上限）見やすくする用
-                lower_num2=math.floor(lower_num)#きりおとし（下限）見やすくする用
-                dif_num=upper_num2-lower_num2#差
-                dif_num3=0
-                
-                if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
-                    dif_num2=math.ceil((dif_num/10))*10
-                    dif_num3=(dif_num2-dif_num)/2
-                upper_num2=upper_num2+dif_num3
-                lower_num2=lower_num2-dif_num3
-                dif_num=upper_num2-lower_num2#差
-                if dif_num <= 10:
-                    dif_num=10
-                    lower_num2=lower_num2-5
-                    upper_num2=upper_num2+5
-                
-                hazure=data_num[data_num["処理時間"]<=upper_num]#外れ値の除外
-                hazure=hazure[hazure["処理時間"]>=lower_num]
-        
-                #ヒストグラムの作成
-                #データの整理
-                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)]#選択したデータ（外れ値）
-                y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"]==k)]#標準時間のデータ
-                
-                hyozyun1=y_scores["標準時間1"]
-                hyozyun2=y_scores["標準時間2"]
-                
-                dd=scores["処理時間"]#選択したデータの処理時間
-       
-                #描画領域を用意する
-                fig = plt.figure()
-                ax = fig.add_subplot()
+        if y_list=="なし":
+            for z in z_list:#図番でfor文回す
+                for k in k_list:#工程名称でfor文回す
+                    data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]#図番と工程名称でデータを絞る
+                    dosu_num=0#度数の空の変数
 
-                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                ax.set_title("chart")
-                ax.set_xlabel("time")                # x軸ラベル
-                plt.ylabel("count")               # y軸ラベル
-                plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                labels = ax.get_xticklabels()
-                plt.setp(labels, rotation=45, fontsize=10)
-                
-                ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
-                # Matplotlib の Figure を指定して可視化する
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
-                left_column, right_column = st.columns(2)
-                left_column.pyplot(fig)
-                
-                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
-                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-                pvit.insert(0, '総件数', len(y_num))
-                pvit["標準時間1"]=int(hyozyun1)
-                pvit["標準時間2"]=int(hyozyun2)
-                st.write(pvit)
+                    y_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == t)]#図番、工程名称、担当者でデータを絞る
+                    y_num=y_num["処理時間"]#処理時間だけ抜出
+                    if len(y_num)==0:#y_numの中にデータが一つも入ってなかった場合終了
+                        break
+                    #y軸の上限値
+                    x,y,_= plt.hist(y_num)#x軸、y軸、度数
+                    if dosu_num<max(x):#度数の比較（最大値）
+                        dosu_num=max(x)#（最大値）
+
+
+                    s_num=data_num['処理時間']#図番と工程名称で絞ったデータの処理時間を抜き出し
+
+                    q1=data_num['処理時間'].describe().loc['25%']#第一四分位範囲
+                    q3=data_num['処理時間'].describe().loc['75%']#第三四分位範囲
+
+                    iqr=q3-q1#四分位範囲
+                    upper_num=q3+(1.5*iqr)#上限
+                    lower_num=q1-(1.5*iqr)#下限
+
+                    upper_num2=round(upper_num) #きりあげ（上限）見やすくする用
+                    lower_num2=math.floor(lower_num)#きりおとし（下限）見やすくする用
+                    dif_num=upper_num2-lower_num2#差
+                    dif_num3=0
+
+                    if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
+                        dif_num2=math.ceil((dif_num/10))*10
+                        dif_num3=(dif_num2-dif_num)/2
+                    upper_num2=upper_num2+dif_num3
+                    lower_num2=lower_num2-dif_num3
+                    dif_num=upper_num2-lower_num2#差
+                    if dif_num <= 10:
+                        dif_num=10
+                        lower_num2=lower_num2-5
+                        upper_num2=upper_num2+5
+
+                    hazure=data_num[data_num["処理時間"]<=upper_num]#外れ値の除外
+                    hazure=hazure[hazure["処理時間"]>=lower_num]
+
+                    #ヒストグラムの作成
+                    #データの整理
+                    scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)]#選択したデータ（外れ値）
+                    y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"]==k)]#標準時間のデータ
+
+                    hyozyun1=y_scores["標準時間1"]
+                    hyozyun2=y_scores["標準時間2"]
+
+                    dd=scores["処理時間"]#選択したデータの処理時間
+
+                    #描画領域を用意する
+                    fig = plt.figure()
+                    ax = fig.add_subplot()
+
+                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                    ax.set_title("chart")
+                    ax.set_xlabel("time")                # x軸ラベル
+                    plt.ylabel("count")               # y軸ラベル
+                    plt.grid(True)
+                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                    labels = ax.get_xticklabels()
+                    plt.setp(labels, rotation=45, fontsize=10)
+
+                    ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
+                    # Matplotlib の Figure を指定して可視化する
+                    st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"------------------")
+                    left_column, right_column = st.columns(2)
+                    left_column.pyplot(fig)
+
+                    num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                    pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                    pvit.insert(0, '総件数', len(y_num))
+                    pvit["標準時間1"]=int(hyozyun1)
+                    pvit["標準時間2"]=int(hyozyun2)
+                    st.write(pvit)
 #=======================================================================================================================================================
 elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     #図番の選択
