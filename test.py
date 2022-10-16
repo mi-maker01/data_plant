@@ -818,16 +818,25 @@ elif selector=="（E）作業時間統計量":
  #===============================================================================================================================================
 elif selector=="（E）各人の工程量":
     
-    #================データの選択（期間）
+   day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
+    d_start = st.selectbox(#開始日の選択
+         "開始日",
+         (day_num))
+    d_end = st.selectbox(#終了日の選択
+         "終了日",
+         (day_num))
+    dt = d_end-d_start#開始日と終了日の差の計算
+    dt= dt.days#int
+    d_start1=d_start
     
-    #===============
-    
-    n_list = sorted(list(set(st.session_state.df["工程開始日"])))
-    n = st.selectbox(
-         "工程日",
-         (n_list))
-    n_num=st.session_state.df[(st.session_state.df["工程開始日"]==n)]
-    
+    #日のデータの追加文
+    n_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
+    for d in range(dt+1):
+        kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
+        n_num=n_num.append(kari_num)
+        d_start = d_start + datetime.timedelta(days=1)
+        
+    st.write(n_num)
     t_list = sorted(list(set(n_num["担当コード"])))
     
     hito_list = sorted(list(set(st.session_state.df["担当者"])))
