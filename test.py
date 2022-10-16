@@ -769,7 +769,7 @@ elif selector=="（E）作業時間統計量":
     answer = st.button('分析開始')
     if answer == True:
         #日のデータの追加文
-        d_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]#
+        d_num=pd.DataFrame()
         for d in range(dt+1):
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
