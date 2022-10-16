@@ -669,6 +669,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
         st.write(num)
+        st.write(d_num)
 #                 st.write(s)
 #                 st.write(zentai_num)
 #                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
@@ -682,7 +683,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         
         fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
-
+        
 #=======================================================================================================================================
 #担当者の画面
 elif selector=="（E）担当者別作業時間統計量":
