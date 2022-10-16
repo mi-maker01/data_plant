@@ -407,7 +407,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                         pvit["標準時間2"]=int(hyozyun2)
                         st.write(pvit)
                         
-                elif f_num=="時刻":
+#                 elif f_num=="時刻":
 #                     jkoku_list = sorted(list(set(scores["時刻"])))
 #                     for i in range(6):
 #                         for jikoku in :
