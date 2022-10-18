@@ -629,6 +629,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         
         #ガントチャート（総社内滞在時間）
         d_num=pd.DataFrame()
+        pvit_data=pd.DataFrame()
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
@@ -643,6 +644,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
                 st.write(d_start)
                 pvit=num.set_axis([d_start], axis=1)
+                pvit_data=pvit_data.append(pvit)
+                
                 st.write(pvit)
                 fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
                 st.plotly_chart(fig, use_container_width=True)
@@ -669,11 +672,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
         st.write(num)
+        st.write(pvit_data)
         st.write(d_num)
-#                 st.write(s)
-#                 st.write(zentai_num)
-#                 tuika_df = pd.DataFrame('総滞在時間':zentai_num,index=s)
-#                 time_num.append({'A': 0, 'B': 1, 'C': 2}, ignore_index=True)
         
         st.write("-----------------------------------------------------------------------------------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
