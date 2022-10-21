@@ -624,7 +624,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     answer = st.button('分析開始')
     if answer == True:       
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
-        date_num = pd.DataFrame()#列名だけ入れた表データcolumns=k_list
+        date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
 #         time_num = pd.DataFrame(columns={"総滞在時間"})
         
         #ガントチャート（総社内滞在時間）
@@ -643,7 +643,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #             if len(date_koutei_num)>=1:
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             st.write(d_start)
-            pvit_data=pvit_data.append(pvit)
+            date_num=date_num.append(pvit)
             pvit=num.set_axis([d_start], axis=1)
             
 
@@ -672,7 +672,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
         st.write(num)
-        st.write(pvit_data)
+        st.write(date_num)
         st.write(d_num)
         
         st.write("-----------------------------------------------------------------------------------")
