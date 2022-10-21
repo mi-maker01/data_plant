@@ -625,11 +625,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     if answer == True:       
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
-#         time_num = pd.DataFrame(columns={"総滞在時間"})
-        
+        pvit_data=pd.DataFrame()
         #ガントチャート（総社内滞在時間）
         d_num=pd.DataFrame()
-        pvit_data=pd.DataFrame(index=k_list)
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
@@ -640,39 +638,24 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 s_num=d_num[(d_num["製造番号"]==s)]
                 s_num=s_num.sort_values(["完了日時"])
                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
-#             if len(date_koutei_num)>=1:
+
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             st.write(d_start)
-           
+            
             pvit=num.set_axis([d_start], axis=1)
-            date_num=date_num.append(pvit)
-
+            pvit_data=pvit_data.append(pvit)
+            
+            
             st.write(pvit)
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
             st.plotly_chart(fig, use_container_width=True)
             
             d_start = d_start + datetime.timedelta(days=1)
-        
-#         s_list2 = sorted(list(set(d_num["製造番号"])))
-#         for s in s_list2:
-#             s_num2=d_num[(d_num["製造番号"]==s)]
-#             s_num2=s_num2.sort_values(["開始日時"])
-#             date_koutei_num=date_koutei_num.append(s_num2.tail(1))
-            
-#             sta_num=[]
-#             end_num=[]
-#             kou_num=[]
-#             for row in s_num2.itertuples():
-#                 kou_num.append(row.工程名称)
-#                 sta_num.append(row.開始日時)
-#                 end_num.append(row.完了日時)
-         
-#             zentai_num=end_num[-1]-sta_num[0]
             
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
         st.write(num)
-        st.write(date_num)
+        st.write(pvit_data)
         st.write(d_num)
         
         st.write("-----------------------------------------------------------------------------------")
