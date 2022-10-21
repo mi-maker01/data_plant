@@ -629,7 +629,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         
         #ガントチャート（総社内滞在時間）
         d_num=pd.DataFrame()
-        pvit_data=pd.DataFrame()
+        pvit_data=pd.DataFrame(columns=k_list)
         for d in range(dt+1):#日のデータの追加文
             kari_num=st.session_state.df[(st.session_state.df["工程開始日"]==d_start)&(st.session_state.df["工程完了日"]==d_start)]
             d_num=d_num.append(kari_num)
@@ -644,7 +644,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
-            pvit_data=pvit_data.append(pvit)
+            pvit_data=pvit_data.assign(d_start=pvit)
 
             st.write(pvit)
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
