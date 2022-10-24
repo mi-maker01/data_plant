@@ -655,7 +655,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
         
         st.write("-----------------------------------------------------------------------------------")
-        fig = px.line(pvit_data)
+        fig = px.line(pvit_data,y=pvit_data.index)
         st.plotly_chart(fig)
         
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
