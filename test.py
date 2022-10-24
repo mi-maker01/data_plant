@@ -646,12 +646,6 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(pvit)
             st.write(pv)
             
-            ＃仕掛品の計算
-            karituke_num=0
-            yousetu_num=0
-            siage_num=0
-            kensa_num=0
-            
             
             
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
