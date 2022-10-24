@@ -640,15 +640,20 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 date_koutei_num=date_koutei_num.append(s_num.tail(1))
 
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
-            pvit1=date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"])
+            pv=date_koutei_num.groupby(["工程名称"])['作成数']
             st.write(d_start)
-            
             pvit=num.set_axis([d_start], axis=1)
-            pvit_data=pvit_data.append(pvit1)
-            
-            
             st.write(pvit)
-            st.write(pvit1)
+            st.write(pv)
+            
+            ＃仕掛品の計算
+            karituke_num=0
+            yousetu_num=0
+            siage_num=0
+            kensa_num=0
+            
+            
+            
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
             st.plotly_chart(fig, use_container_width=True)
             
