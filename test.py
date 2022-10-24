@@ -653,13 +653,11 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
             d_start = d_start + datetime.timedelta(days=1)
             
-            
-        num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
-        st.write(num)
-        st.write(pvit_data)
-        st.write(d_num)
         
         st.write("-----------------------------------------------------------------------------------")
+        fig = px.line(pvit_data)
+        st.plotly_chart(fig)
+        
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
