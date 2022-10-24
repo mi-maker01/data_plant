@@ -644,13 +644,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
             st.write(pvit)
-            pvit_data=pvit_data.append(pvit)
-            
-            d_kou_list = sorted(list(set(date_koutei_num["工程名称"])))
-            for d_kou in d_kou_list:
-                d_kari_num=date_koutei_num[(date_koutei_num["工程名称"]==d_kou)]
-                sika_num=len(d_kari_num)
-                st.write(sika_num)
+            pvit_data=pd.merge(pvit_data,pvit)
             
             
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
