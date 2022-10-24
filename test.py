@@ -644,6 +644,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
             st.write(pvit)
+            pvit_data=pvit_data.append(pvit)
             
             d_kou_list = sorted(list(set(date_koutei_num["工程名称"])))
             for d_kou in d_kou_list:
@@ -660,6 +661,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             
         num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))        
         st.write(num)
+        st.write(pvit_data)
         st.write(d_num)
         
         st.write("-----------------------------------------------------------------------------------")
