@@ -625,7 +625,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
     if answer == True:       
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
-        pvit_data=pd.DataFrame()
+        pvit_data=pd.DataFrame(index=k_list)
         #ガントチャート（総社内滞在時間）
         d_num=pd.DataFrame()
         for d in range(dt+1):#日のデータの追加文
@@ -644,7 +644,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
             st.write(pvit)
-            pvit_data1=pd.merge(pvit_data,pvit,left_index=True)
+            pvit_data1=pd.merge(pvit_data,pvit,left_index=True,right_index=True)
             
             
             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
