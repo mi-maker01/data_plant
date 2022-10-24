@@ -626,6 +626,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         k_list = sorted(list(set(st.session_state.df["工程名称"])))#全体データ（加工なし）から工程名称の抜出
         date_num = pd.DataFrame(columns=k_list)#列名だけ入れた表データ
         pvit_data=pd.DataFrame(index=k_list)
+        pvit_data1=pd.DataFrame()
         #ガントチャート（総社内滞在時間）
         d_num=pd.DataFrame()
         for d in range(dt+1):#日のデータの追加文
