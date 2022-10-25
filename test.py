@@ -656,6 +656,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         
         st.write("-----------------------------------------------------------------------------------")
         pvit_data=pvit_data.T
+        st.write(pvit_data)
         fig = px.line(pvit_data)
         st.plotly_chart(fig)
         
