@@ -193,8 +193,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #年の設定
     st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
     #時刻の設定
-    st.session_state.df["時刻"]=st.session_state.df["開始日時"].dt.hour
-    if st.session_state.df["時刻"]<="7":
+    st.session_state.df["時刻"]=int(st.session_state.df["開始日時"].dt.hour)
+    if st.session_state.df["時刻"]<=7:
         st.session_state.df["時刻"]=0
     elif st.session_state.df["時刻"]>=8 and st.session_state.df["時刻"]<=10:
         st.session_state.df["時刻"]=1
