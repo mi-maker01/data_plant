@@ -194,9 +194,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
     #時刻の設定
     st.session_state.df["時刻"]=st.session_state.df["開始日時"].dt.hour
-    for index, row in st.session_state.df.iterrows():
-        if index["時刻"]==7:
-            index["時刻"]=0
+    st.session_state.df.loc[st.session_state.df['時刻'] < 8, '時刻'] = -100
 #         elif st.session_state.df["時刻"]>=8 and st.session_state.df["時刻"]<=10:
 #             st.session_state.df["時刻"]=1
 #         elif st.session_state.df["時刻"]>=11 and st.session_state.df["時刻"]<=13:
