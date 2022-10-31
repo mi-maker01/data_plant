@@ -198,7 +198,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 10) & (st.session_state.df['時刻'] >= 8), '時刻'] = 1
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 13) & (st.session_state.df['時刻'] >= 11), '時刻'] = 2
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 14), '時刻'] = 3
-    st.session_state.df.loc[(st.session_state.df['時刻'] <= 17), '時刻'] = 4
+    st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 4
 #         elif st.session_state.df["時刻"]>=8 and st.session_state.df["時刻"]<=10:
 #             st.session_state.df["時刻"]=1
 #         elif st.session_state.df["時刻"]>=11 and st.session_state.df["時刻"]<=13:
