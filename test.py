@@ -126,24 +126,6 @@ if selector=="(A-1)各人各日の実績ガントチャート":
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
                         st.write("========================================================================================================================")
-                        
-                    #描画領域を用意する
-#                     fig = plt.subplots()
-#                     fig = px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="製造番号",title="設備の稼働状況見える化")
-#                     ax.update_traces(textposition='inside', orientation="h")
-#                     st.show(fig)
-                    
-#                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="担当者",color="工程名称",title="一日の各人の稼働状況"))
-#                     fig.update_traces(textposition='inside', orientation="h")
-#                     st.plotly_chart(fig)
-                    
-#                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="号機名称",color="担当者",title="一日の号機の稼働状況"))
-#                     fig.update_traces(textposition='inside', orientation="h")
-#                     st.plotly_chart(fig)
-                    
-#                     fig = go.Figure(px.timeline(d_num, x_start="工程開始時間", x_end="工程完了時間",text="処理時間",y="工程名称",color="担当者",title="一日の工程状況"))
-#                     fig.update_traces(textposition='inside', orientation="h")
-#                     st.plotly_chart(fig)
   
                     st.write("----------")
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
@@ -210,14 +192,24 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
          "担当者",
          (t_list))
     x_num=st.session_state.df[(st.session_state.df["担当者"]==t)]#dfからzで選んだ図番のデータ
-    
     k_list = sorted(list(set(x_num["工程名称"])))
-    z_list = sorted(list(set(x_num["図番"])))
+    
+    #工程の選択
+    k_num = st.selectbox(
+         "工程名称",
+         (k_list))  
+    z_list = sorted(list(set(k_num["図番"])))
+    
+    #図番の選択
+    z_num = st.selectbox(
+         "工程名称",
+         (z_list))
+    
     yo_list = sorted(list(set(x_num["曜日"])))
     tu_list = sorted(list(set(x_num["月"])))
     ne_list = sorted(list(set(x_num["年"])))
     
-    #選択
+    #フィルター選択
     y_list = ["なし","曜日","月","年","時刻"]
     f_num = st.selectbox(
          "フィルター",
@@ -226,8 +218,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-        for z in z_list:#図番でfor文回す
-            for k in k_list:#工程名称でfor文回す
+        for z in z_num:#図番でfor文回す
+            for k in k_num:#工程名称でfor文回す
                 data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]#図番と工程名称でデータを絞る
                 dosu_num=0#度数の空の変数
 
