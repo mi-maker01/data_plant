@@ -198,16 +198,13 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     k_num = st.selectbox(
          "工程名称",
          (k_list))  
-    z_list = sorted(list(set(k_num["図番"])))
+    x_k_num=x_num[(x_num["担当者"]==t) & (x_num["工程名称"]==k_num)]
+    z_list = sorted(list(set(x_k_num["図番"])))
     
     #図番の選択
     z_num = st.selectbox(
          "工程名称",
          (z_list))
-    
-    yo_list = sorted(list(set(x_num["曜日"])))
-    tu_list = sorted(list(set(x_num["月"])))
-    ne_list = sorted(list(set(x_num["年"])))
     
     #フィルター選択
     y_list = ["なし","曜日","月","年","時刻"]
@@ -302,7 +299,8 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                     st.write(pvit) 
                 
                 elif f_num=="曜日":
-                    for you in range(6):
+                    you_list = sorted(list(set(scores["曜日"])))
+                    for you in you_list:
                         scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["曜日"]==you)]#選択したデータ（外れ値）
                         dd=scores["処理時間"]#選択したデータの処理時間
 
