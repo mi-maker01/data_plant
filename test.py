@@ -468,7 +468,13 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     t = st.multiselect(
          "担当者",
          (t_list))
-
+    
+    #フィルター選択
+    y_list = ["なし","曜日","月","年","時刻"]
+    f_num = st.selectbox(
+         "フィルター",
+         (y_list))
+    
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
@@ -549,6 +555,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"] ==k)]
         hyozyun1=y_scores["標準時間1"]
         hyozyun2=y_scores["標準時間2"]
+        
         # 描画領域を用意する
         fig = plt.figure()
         ax = fig.add_subplot()
@@ -575,17 +582,15 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         pvit["標準時間2"]=int(hyozyun2)
         st.write(pvit)
         
+        #if f_num=="":
         #ヒストグラムの作成
         for i in t:
             #データの整理
             x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
             scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
             
-            #はずれちの除外
-#             dd=scores[scores["処理時間"]<upper_num]
-#             dd=dd[dd["処理時間"]>lower_num]
             dd=scores["処理時間"]#選択したデータの処理時間
-#             scores=scores.rename(columns={'processing_time':'処理時間' })#名前の変更 
+
             # 描画領域を用意する
             fig = plt.figure()
             ax = fig.add_subplot()
