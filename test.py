@@ -644,7 +644,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             d_start = d_start + datetime.timedelta(days=1)
         
         #滞在時間
-        zentai_list=pd.DataFrame()
+        zentai_list=pd.DataFrame(columns=["図番","総滞在時間"])
         end_num=d_num[(d_num["工程名称"]=="配送")]
         sei_list = sorted(list(set(end_num["製造番号"])))
         for s in sei_list:
@@ -656,7 +656,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 end_num.append(row.完了日時)
          
             zentai_num=end_num[-1]-sta_num[0]
-            zentai_list["総滞在時間"]=zentai_num
+#             zentai_list["総滞在時間"]=zentai_num
         st.write(zentai_list)
         #仕掛表
         pvit_data=pvit_data.T
