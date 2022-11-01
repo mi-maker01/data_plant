@@ -631,9 +631,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             
-            st.write(d_start)
+#             st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
-            st.write(pvit)
+#             st.write(pvit)
             pvit_data=pd.merge(pvit_data,pvit, right_index=True, left_index=True, how='outer')
             
             #日ごとのガントチャート
@@ -655,7 +655,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
-        st.plotly_chart(fig)
+        st.plotly_chart(fig,use_container_width=True)
         
         #製造番号ごとの棒グラフ
         fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者",title="期間内の仕事量"))
