@@ -632,7 +632,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             
-#             st.write(d_start)
+            st.write(d_start)
             pvit=num.set_axis([d_start], axis=1)
 #             st.write(pvit)
             pvit_data=pd.merge(pvit_data,pvit, right_index=True, left_index=True, how='outer')
