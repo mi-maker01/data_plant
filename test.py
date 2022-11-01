@@ -647,7 +647,15 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         sei_list = sorted(list(set(end_num["製造番号"])))
         for s in sei_list:
             sei_num=d_num[(d_num["製造番号"]==s)]
-            
+            sta_num=[]
+            end_num=[]
+            kou_num=[]
+            for row in s_num2.itertuples():
+                sta_num.append(row.開始日時)
+                end_num.append(row.完了日時)
+         
+            zentai_num=end_num[-1]-sta_num[0]
+            st.write(zentai_num)
         
         #仕掛表
         pvit_data=pvit_data.T
