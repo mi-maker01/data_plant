@@ -321,8 +321,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 plt.setp(labels, rotation=45, fontsize=10)
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
+                youbi=["月","火","水","木","金","土","日"]
                 # Matplotlib の Figure を指定して可視化する
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"-------曜日:",you,"--------------")
+                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"-------曜日:",youbi[you],"--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -426,8 +427,9 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
                 plt.setp(labels, rotation=45, fontsize=10)
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
+                jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
                 # Matplotlib の Figure を指定して可視化する
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"-------時刻（）:",i,"--------------")
+                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",len(scores),"-------時刻:",jikoku[i],"--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -448,10 +450,6 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 14) & (st.session_state.df['時刻'] >= 13), '時刻'] = 3
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 15), '時刻'] = 4
     st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 5
-
-    
-    st.write(st.session_state.df)
-    
     
     #図番の選択
     z_list = sorted(list(set(st.session_state.df["図番"])))
