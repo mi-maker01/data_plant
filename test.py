@@ -406,7 +406,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
 
         elif f_num=="時刻":
             jkoku_list = sorted(list(set(scores["時刻"])))
-            for i in range(5):
+            for i in jkoku_list:
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["時刻"]==i)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
 
