@@ -641,9 +641,15 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
 #             st.plotly_chart(fig, use_container_width=True)
             
             d_start = d_start + datetime.timedelta(days=1)
+        
+        #滞在時間
+        end_num=d_num[(d_num["工程名称"]=="配送")]
+        sei_list = sorted(list(set(end_num["製造番号"])))
+        for s in sei_list:
+            sei_num=d_num[(d_num["製造番号"]==s)]
             
         
-        st.write("-----------------------------------------------------------------------------------")
+        #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
         
@@ -657,9 +663,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig,use_container_width=True)
         
-        #製造番号ごとの棒グラフ
-        fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者",title="期間内の仕事量"))
-        st.plotly_chart(fig, use_container_width=True)
+        
         
 #=======================================================================================================================================
 #担当者の画面
