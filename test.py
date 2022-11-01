@@ -433,6 +433,26 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
 
 #=======================================================================================================================================================
 elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
+    st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
+    #曜日の設定
+    st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
+    #月の設定
+    st.session_state.df["月"]=st.session_state.df["工程開始日"].dt.month
+    #年の設定
+    st.session_state.df["年"]=st.session_state.df["工程開始日"].dt.year
+    #時刻の設定
+    st.session_state.df["時刻"]=st.session_state.df["開始日時"].dt.hour
+    st.session_state.df.loc[st.session_state.df['時刻'] <= 7, '時刻'] = 0
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 9) & (st.session_state.df['時刻'] >= 8), '時刻'] = 1
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 12) & (st.session_state.df['時刻'] >= 10), '時刻'] = 2
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 14) & (st.session_state.df['時刻'] >= 13), '時刻'] = 3
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 15), '時刻'] = 4
+    st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 5
+
+    
+    st.write(st.session_state.df)
+    
+    
     #図番の選択
     z_list = sorted(list(set(st.session_state.df["図番"])))
     z = st.selectbox(
@@ -656,9 +676,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 sta_num.append(row.開始日時)
                 end_num.append(row.完了日時)
          
-            zentai_num1=pd.DataFrame(end_num[-1]-sta_num[0])
+            zentai_num=end_num[-1]-sta_num[0]
             
-        st.write(zentai_num1)
+        st.write(zentai_num)
         #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
