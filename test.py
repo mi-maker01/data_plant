@@ -623,10 +623,11 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             date_koutei_num=pd.DataFrame()#表データに入れる空データ
             s_list = sorted(list(set(d_num["製造番号"])))
             
+            #製造番号で抜き出し
             for s in s_list:
                 s_num=d_num[(d_num["製造番号"]==s)]
                 s_num=s_num.sort_values(["完了日時"])
-                date_koutei_num=date_koutei_num.append(s_num.tail(1))
+                date_koutei_num=date_koutei_num.append(s_num.tail(1))#期間内の最終工程の抜粋
 
             num=pd.DataFrame(date_koutei_num.groupby(["工程名称"])['作成数'].agg(["count"]))
             
@@ -647,7 +648,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         pvit_data=pvit_data.fillna(0)
         
         #仕掛品の折れ線グラフ
-        fig = px.line(pvit_data)
+        fig = px.line(pvit_data,title="仕掛品の折れ線グラフ")
         st.plotly_chart(fig,use_container_width=True)
         
         #総社内滞在時間ガントチャート
@@ -657,7 +658,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         st.plotly_chart(fig)
         
         #製造番号ごとの棒グラフ
-        fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
+        fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者",title="期間内の仕事量"))
         st.plotly_chart(fig, use_container_width=True)
         
 #=======================================================================================================================================
