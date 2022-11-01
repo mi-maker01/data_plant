@@ -635,9 +635,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             st.write(pvit)
             pvit_data=pd.merge(pvit_data,pvit, right_index=True, left_index=True, how='outer')
             
-            
-            fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
-            st.plotly_chart(fig, use_container_width=True)
+            #日ごとのガントチャート
+#             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
+#             st.plotly_chart(fig, use_container_width=True)
             
             d_start = d_start + datetime.timedelta(days=1)
             
@@ -645,16 +645,18 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         st.write("-----------------------------------------------------------------------------------")
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
-        st.write(pvit_data)
+        
+        #仕掛品の折れ線グラフ
         fig = px.line(pvit_data)
-        st.plotly_chart(fig)
+        st.plotly_chart(fig,use_container_width=True)
         
-        
+        #総社内滞在時間ガントチャート
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称",title="総社内滞在時間"))
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig)
         
+        #製造番号ごとの棒グラフ
         fig = go.Figure(px.bar(d_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
         st.plotly_chart(fig, use_container_width=True)
         
