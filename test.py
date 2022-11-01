@@ -177,10 +177,11 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
     #時刻の設定
     st.session_state.df["時刻"]=st.session_state.df["開始日時"].dt.hour
     st.session_state.df.loc[st.session_state.df['時刻'] <= 7, '時刻'] = 0
-    st.session_state.df.loc[(st.session_state.df['時刻'] <= 10) & (st.session_state.df['時刻'] >= 8), '時刻'] = 1
-    st.session_state.df.loc[(st.session_state.df['時刻'] <= 13) & (st.session_state.df['時刻'] >= 11), '時刻'] = 2
-    st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 14), '時刻'] = 3
-    st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 4
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 9) & (st.session_state.df['時刻'] >= 8), '時刻'] = 1
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 12) & (st.session_state.df['時刻'] >= 10), '時刻'] = 2
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 14) & (st.session_state.df['時刻'] >= 13), '時刻'] = 3
+    st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 15), '時刻'] = 4
+    st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 5
 
     
     st.write(st.session_state.df)
@@ -404,7 +405,7 @@ elif selector=="（B）同一人物の同一行程でのばらつきの把握_�
 
         elif f_num=="時刻":
             jkoku_list = sorted(list(set(scores["時刻"])))
-            for i in range(4):
+            for i in range(5):
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["時刻"]==i)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
 
