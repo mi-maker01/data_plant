@@ -638,8 +638,8 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             pvit_data=pd.merge(pvit_data,pvit, right_index=True, left_index=True, how='outer')
             
             #日ごとのガントチャート
-#             fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
-#             st.plotly_chart(fig, use_container_width=True)
+            fig = go.Figure(px.bar(kari_num,x="製造番号",y="作成数",color="工程名称",text="担当者"))
+            st.plotly_chart(fig, use_container_width=True)
             
             d_start = d_start + datetime.timedelta(days=1)
         
@@ -671,6 +671,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
         fig.update_traces(textposition='inside', orientation="h")
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig,use_container_width=True)
+        
         
         
         
