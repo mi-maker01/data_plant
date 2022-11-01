@@ -649,8 +649,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             sei_num=d_num[(d_num["製造番号"]==s)]
             sta_num=[]
             end_num=[]
-            kou_num=[]
-            for row in s_num2.itertuples():
+            for row in sei_num.itertuples():
                 sta_num.append(row.開始日時)
                 end_num.append(row.完了日時)
          
