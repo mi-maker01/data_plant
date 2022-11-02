@@ -669,7 +669,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                     pvit["標準時間2"]=int(hyozyun2)
                     st.write(pvit)
             
-            elif f_num=="月":
+        elif f_num=="月":
             #ヒストグラムの作成
             for i in t:
                 #データの整理
@@ -708,7 +708,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                 pvit["標準時間2"]=int(hyozyun2)
                 st.write(pvit)
             
-            elif f_num=="年":
+        elif f_num=="年":
             #ヒストグラムの作成
             for i in t:
                 #データの整理
@@ -747,7 +747,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                 pvit["標準時間2"]=int(hyozyun2)
                 st.write(pvit)
             
-            elif f_num=="時刻":
+        elif f_num=="時刻":
             #ヒストグラムの作成
             for i in t:
                 #データの整理
