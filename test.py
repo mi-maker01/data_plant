@@ -856,8 +856,9 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
                 sta_num.append(row.開始日時)
                 end_num.append(row.完了日時)
          
-            zentai_num=end_num[-1]-sta_num[0]
-            zentai_list=zentai_list.append(zentai_num)
+            zentai_num=zentai_num.append(end_num[-1]-sta_num[0])
+            
+            
         st.write(zentai_num)
         #仕掛表
         pvit_data=pvit_data.T
