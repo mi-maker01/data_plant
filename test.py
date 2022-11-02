@@ -474,7 +474,11 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     f_num = st.selectbox(
          "フィルター",
          (y_list))
-    
+    if f_num=="曜日":
+        you_num = st.selectbox(
+         "フィルター",
+         (y_list))
+        
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
