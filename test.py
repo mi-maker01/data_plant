@@ -628,7 +628,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
                 #zen_list=pd.DataFrame()
                 #kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
                 #zen_list=zen_list.append(kari_num)
-                
+                st.write("====================================================================================================================")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["曜日"] == y)]
