@@ -478,7 +478,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     if f_num=="曜日":
         youbi_list = sorted(list(set(x_num["曜日"])))
         y = st.radio("曜日",(youbi_list))
-        
+        y = int(y)
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
