@@ -670,6 +670,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #ヒストグラムの作成
             tuki_list = sorted(list(set(hazure["月"])))
             for tu in tuki_list:
+                st.write("============================================================================================================================================")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["月"]==tu)]
@@ -712,6 +713,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #ヒストグラムの作成
             nen_list = sorted(list(set(hazure["年"])))
             for n in nen_list:
+                st.write("==============================================================================================================================================================")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["年"] == n)]
@@ -753,6 +755,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
             #ヒストグラムの作成
             jikoku_list = sorted(list(set(hazure["時刻"])))
             for j in jikoku_list:
+                st.write("============================================================================================================================================================")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["時刻"] == j)]
