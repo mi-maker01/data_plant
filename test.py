@@ -582,44 +582,211 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         pvit["標準時間2"]=int(hyozyun2)
         st.write(pvit)
         
-        #if f_num=="":
-        #ヒストグラムの作成
-        for i in t:
-            #データの整理
-            x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
-            scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
-            
-            dd=scores["処理時間"]#選択したデータの処理時間
+        if f_num=="なし":
+            #ヒストグラムの作成
+            for i in t:
+                #データの整理
+                x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
 
-            # 描画領域を用意する
-            fig = plt.figure()
-            ax = fig.add_subplot()
+                dd=scores["処理時間"]#選択したデータの処理時間
+
+                # 描画領域を用意する
+                fig = plt.figure()
+                ax = fig.add_subplot()
+
+                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                ax.set_title("chart")
+                ax.set_xlabel("time")                # x軸ラベル
+                plt.ylabel("count")               # y軸ラベル
+                plt.grid(True)
+                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                labels = ax.get_xticklabels()
+                plt.setp(labels, rotation=45, fontsize=10)
+
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+
+
+                # Matplotlib の Figure を指定して可視化する
+                st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
+                left_column, right_column = st.columns(2)
+                left_column.pyplot(fig)
+                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit.insert(0, '総件数', len(x_num))
+                pvit["標準時間1"]=int(hyozyun1)
+                pvit["標準時間2"]=int(hyozyun2)
+                st.write(pvit)
             
-            plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-            plt.ylim([0,dosu_num+10])                      # Y軸範囲
-            ax.set_title("chart")
-            ax.set_xlabel("time")                # x軸ラベル
-            plt.ylabel("count")               # y軸ラベル
-            plt.grid(True)
-            plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-            plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-            plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-            labels = ax.get_xticklabels()
-            plt.setp(labels, rotation=45, fontsize=10)
+        elif f_num=="曜日":
+            #ヒストグラムの作成
+            for i in t:
+                zen_list=pd.DataFrame()
+                kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+                zen_list=zen_list.append(kari_num)
+                you_list = sorted(list(set(zen_list["曜日"])))
+                you = st.selectbox(
+                    "曜日",
+                    (you_list))
+                
+                for y in you:
+                    #データの整理
+                    x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["曜日"] == y)]
+                    scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)&(hazure["曜日"]==y)]#選択したデータ
+
+                    dd=scores["処理時間"]#選択したデータの処理時間
+
+                    # 描画領域を用意する
+                    fig = plt.figure()
+                    ax = fig.add_subplot()
+
+                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                    ax.set_title("chart")
+                    ax.set_xlabel("time")                # x軸ラベル
+                    plt.ylabel("count")               # y軸ラベル
+                    plt.grid(True)
+                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                    labels = ax.get_xticklabels()
+                    plt.setp(labels, rotation=45, fontsize=10)
+
+                    ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+
+                    youbi=["月","火","水","木","金","土","日"]
+                    # Matplotlib の Figure を指定して可視化する
+                    st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"------------曜日：",youbi[y],"-----------")
+                    left_column, right_column = st.columns(2)
+                    left_column.pyplot(fig)
+                    num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                    pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                    pvit.insert(0, '総件数', len(x_num))
+                    pvit["標準時間1"]=int(hyozyun1)
+                    pvit["標準時間2"]=int(hyozyun2)
+                    st.write(pvit)
             
-            ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+            elif f_num=="月":
+            #ヒストグラムの作成
+            for i in t:
+                #データの整理
+                x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+
+                dd=scores["処理時間"]#選択したデータの処理時間
+
+                # 描画領域を用意する
+                fig = plt.figure()
+                ax = fig.add_subplot()
+
+                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                ax.set_title("chart")
+                ax.set_xlabel("time")                # x軸ラベル
+                plt.ylabel("count")               # y軸ラベル
+                plt.grid(True)
+                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                labels = ax.get_xticklabels()
+                plt.setp(labels, rotation=45, fontsize=10)
+
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+
+                
+                # Matplotlib の Figure を指定して可視化する
+                st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
+                left_column, right_column = st.columns(2)
+                left_column.pyplot(fig)
+                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit.insert(0, '総件数', len(x_num))
+                pvit["標準時間1"]=int(hyozyun1)
+                pvit["標準時間2"]=int(hyozyun2)
+                st.write(pvit)
+            
+            elif f_num=="年":
+            #ヒストグラムの作成
+            for i in t:
+                #データの整理
+                x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+
+                dd=scores["処理時間"]#選択したデータの処理時間
+
+                # 描画領域を用意する
+                fig = plt.figure()
+                ax = fig.add_subplot()
+
+                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                ax.set_title("chart")
+                ax.set_xlabel("time")                # x軸ラベル
+                plt.ylabel("count")               # y軸ラベル
+                plt.grid(True)
+                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                labels = ax.get_xticklabels()
+                plt.setp(labels, rotation=45, fontsize=10)
+
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+
+
+                # Matplotlib の Figure を指定して可視化する
+                st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
+                left_column, right_column = st.columns(2)
+                left_column.pyplot(fig)
+                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit.insert(0, '総件数', len(x_num))
+                pvit["標準時間1"]=int(hyozyun1)
+                pvit["標準時間2"]=int(hyozyun2)
+                st.write(pvit)
+            
+            elif f_num=="時刻":
+            #ヒストグラムの作成
+            for i in t:
+                #データの整理
+                x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)]
+                scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+
+                dd=scores["処理時間"]#選択したデータの処理時間
+
+                # 描画領域を用意する
+                fig = plt.figure()
+                ax = fig.add_subplot()
+
+                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+                plt.ylim([0,dosu_num+10])                      # Y軸範囲
+                ax.set_title("chart")
+                ax.set_xlabel("time")                # x軸ラベル
+                plt.ylabel("count")               # y軸ラベル
+                plt.grid(True)
+                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+                labels = ax.get_xticklabels()
+                plt.setp(labels, rotation=45, fontsize=10)
+
+                ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+
+
+                # Matplotlib の Figure を指定して可視化する
+                st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
+                left_column, right_column = st.columns(2)
+                left_column.pyplot(fig)
+                num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
+                pvit.insert(0, '総件数', len(x_num))
+                pvit["標準時間1"]=int(hyozyun1)
+                pvit["標準時間2"]=int(hyozyun2)
+                st.write(pvit)
             
             
-            # Matplotlib の Figure を指定して可視化する
-            st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
-            left_column, right_column = st.columns(2)
-            left_column.pyplot(fig)
-            num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
-            pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-            pvit.insert(0, '総件数', len(x_num))
-            pvit["標準時間1"]=int(hyozyun1)
-            pvit["標準時間2"]=int(hyozyun2)
-            st.write(pvit)
 #================================================================================================================================
 elif selector=="（D）一つの製品の総社内滞在時間の把握":
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
