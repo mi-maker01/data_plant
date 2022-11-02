@@ -478,7 +478,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
     if f_num=="曜日":
         youbi_list = sorted(list(set(x_num["曜日"])))
         you_num = st.radio("曜日",(youbi_list))
-        st.write(you_num)
+        
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
@@ -628,7 +628,7 @@ elif selector=="（C）同一行程内のばらつき把握_ヒストグラム":
         elif f_num=="曜日":
             #ヒストグラムの作成
             you_list = sorted(list(set(hazure["曜日"])))
-            for y in you_list:
+            for y in you_num:
                 #zen_list=pd.DataFrame()
                 #kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
                 #zen_list=zen_list.append(kari_num)
