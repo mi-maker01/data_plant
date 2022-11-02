@@ -859,7 +859,7 @@ elif selector=="（D）一つの製品の総社内滞在時間の把握":
             zentai_num=end_num[-1]-sta_num[0]
             
             
-        st.write(zentai_num.dtypes)
+        st.write(type(zentai_num))
         #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
