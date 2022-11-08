@@ -59,7 +59,7 @@ st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_tim
 st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
     
 #================================================================================================================================
-if selector=="➁(ガントチャート)各人各日の実績":
+if selector=="　1.(ガントチャート)人の空き":
     
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
@@ -138,7 +138,7 @@ if selector=="➁(ガントチャート)各人各日の実績":
                     
                     
                     #================================================================================================================================
-elif selector=="➁(ガントチャート)各工程各日の実績":
+elif selector=="　2.(ガントチャート)設備の空き":
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
@@ -169,7 +169,7 @@ elif selector=="➁(ガントチャート)各工程各日の実績":
                 st.plotly_chart(fig)
                  #================================================================================================================================
 
-elif selector=="➀(ヒストグラム)作業時間[個人]":
+elif selector=="　1.(ヒストグラム)作業時間[個人]":
     
     st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
     #曜日の設定
@@ -438,7 +438,7 @@ elif selector=="➀(ヒストグラム)作業時間[個人]":
                 left_column.pyplot(fig)
 
 #=======================================================================================================================================================
-elif selector=="➀(ヒストグラム)作業時間[複数]":
+elif selector=="　2.(ヒストグラム)作業時間[複数]":
     st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
     #曜日の設定
     st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
@@ -812,7 +812,7 @@ elif selector=="➀(ヒストグラム)作業時間[複数]":
             
             
 #================================================================================================================================
-elif selector=="➂(折れ線)仕掛品の推移":
+elif selector=="　1.(折れ線)仕掛品の推移":
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
     d_start = st.selectbox(#開始日の選択
          "開始日",
@@ -889,67 +889,9 @@ elif selector=="➂(折れ線)仕掛品の推移":
         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig,use_container_width=True)
         
-        
-        
-        
-#=======================================================================================================================================
-#担当者の画面
-elif selector=="（E）担当者別作業時間統計量":
-    answer = st.button('分析開始')
-    if answer == True:
-        t_list = sorted(list(set(st.session_state.df["担当者"])))
-
-        for t in t_list:
-            t_num=st.session_state.df[(st.session_state.df["担当者"]==t)]
-            k_list=sorted(list(set(t_num["工程名称"])))
-            graph_num=pd.DataFrame()
-           
-            
-            for k in k_list:
-                k_num=t_num[(t_num["工程名称"]==k)]
-
-                q1=k_num["処理時間"].describe().loc['25%']#第一四分位範囲
-                q3=k_num['処理時間'].describe().loc['75%']#第三四分位範囲
-                iqr=q3-q1#四分位範囲
-                upper_num=q3+(1.5*iqr)#上限
-                lower_num=q1-(1.5*iqr)#下限
-
-                hazure=k_num[k_num["処理時間"]<=upper_num]#外れ値の除外
-                hazure=hazure[hazure["処理時間"]>=lower_num]
-
-                Nohazure_num=len(hazure)
-                zentai_num=len(k_num)
-                Yeshazure_num=(zentai_num-Nohazure_num)
-
-                num=pd.DataFrame(hazure.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
-                pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-                pvit["標準時間"]=0
-                pvit.insert(0, '総件数', zentai_num)
-                
-                graph_num=pd.concat([graph_num, pvit], axis=0)
-            
-            st.dataframe(graph_num)
-            st.write("----------------------")
-            
- #================================================================================================================================        
-#図番の画面
-elif selector=="（E）図番別作業時間統計量":
-    z_list = sorted(list(set(st.session_state.df["図番"])))
-    z = st.selectbox(
-         "図番",
-         (z_list))
-    z_num=st.session_state.df[(st.session_state.df["図番"]==z)]
-    num=pd.DataFrame(z_num.groupby(["図番","工程コード",'担当コード'])['処理時間'].agg(["count","mean", "std", "min", "max"]))
-    pvit=num.set_axis(['件数', '平均', '標準偏差', '最小', '最大'], axis=1)
-    pvit=pvit.round(1)   # 小数第1位まで．2位を切り捨て
-    answer = st.button('分析開始')
-    if answer == True:
-        
-        st.dataframe(pvit)
-        st.table(pvit)
  #================================================================================================================================      
 #工程の画面
-elif selector=="➀(集計表)作業時間統計量":
+elif selector=="　1.(集計表)作業時間統計量":
     
     #================データの選択（期間）
     day_num = sorted(list(set(st.session_state.df["工程開始日"])))#日付の抜出
@@ -1025,7 +967,7 @@ elif selector=="➀(集計表)作業時間統計量":
         
         st.dataframe(graph_num)
  #===============================================================================================================================================
-elif selector=="➀(棒グラフ)期間内の各人作業量":
+elif selector=="　3.(棒グラフ)期間内の各人作業量":
     
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
     d_start = st.selectbox(#開始日の選択
