@@ -871,8 +871,7 @@ elif selector=="　1.(折れ線)仕掛品の推移":
                 end_num.append(row.完了日時)
          
             zentai_num=end_num[-1]-sta_num[0]
-            list = ["A-LH",zentai_num]
-            zentai_list.loc[len(zentai_list)] = list
+            zentai_list=zentai_list.append(zentai_num)
             
         st.write(zentai_list)
         #仕掛表
