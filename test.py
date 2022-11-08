@@ -626,14 +626,12 @@ elif selector=="➀(ヒストグラム)作業時間[複数]":
             
         elif f_num=="曜日":
             #ヒストグラムの作成
-            
-            you_list = sorted(list(set(hazure["曜日"])))
-           
-            
+            zen_list=pd.DataFrame()
+            for i in t:
+                kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+                zen_list=zen_list.append(kari_num)
+            you_list = sorted(list(set(zen_list["曜日"])))
             for y in you_list:
-                #zen_list=pd.DataFrame()
-                #kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
-                #zen_list=zen_list.append(kari_num)
                 st.write("============================================================================================================================================")
                 for i in t:
                     #データの整理
