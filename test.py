@@ -28,7 +28,7 @@ if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
 
 st.session_state.df["開始日時"]=0
-st.session_state.df["完了日時"]=➀
+st.session_state.df["完了日時"]=0
 st.session_state.df=st.session_state.df[st.session_state.df["処理時間"]!=0]
 
 for index,row in st.session_state.df.iterrows():
