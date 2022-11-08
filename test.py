@@ -870,9 +870,9 @@ elif selector=="➂(折れ線)仕掛品の推移":
                 end_num.append(row.完了日時)
          
             zentai_num=end_num[-1]-sta_num[0]
+            zentai_list["総滞在時間"]= zentai_num
             
-            
-        st.write(type(zentai_num))
+        st.write(zentai_list)
         #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
