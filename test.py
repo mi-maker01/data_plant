@@ -15,7 +15,7 @@ import plotly.graph_objects as go
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["（人の能力）同一人物の同一行程でのばらつきの把握_ヒストグラム","（人の能力）同一行程内のばらつき把握_ヒストグラム","（人の能力）作業時間統計量","（人の能力）各人の工程量",#人の能力
-            "(ガントチャート)各人各日の実績","（ガントチャート）各工程各日の実績",#場所・時間・人の有効活用
+            "（ガントチャート）各人各日の実績","（ガントチャート）各工程各日の実績",#場所・時間・人の有効活用
             "（仕掛品）総社内滞在時間の把握"]#無駄なものを作りたくない
 
 st.title("生産データ分析")
@@ -58,7 +58,7 @@ st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_tim
 st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
     
 #================================================================================================================================
-if selector=="(ガントチャート)各人各日の実績":
+if selector=="（ガントチャート）各人各日の実績":
     
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
