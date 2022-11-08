@@ -672,7 +672,11 @@ elif selector=="➀(ヒストグラム)作業時間[複数]":
             
         elif f_num=="月":
             #ヒストグラムの作成
-            tuki_list = sorted(list(set(hazure["月"])))
+            zen_list=pd.DataFrame()
+            for i in t:
+                kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+                zen_list=zen_list.append(kari_num)
+            tuki_list = sorted(list(set(zen_list["月"])))
             for tu in tuki_list:
                 st.write("============================================================================================================================================")
                 for i in t:
@@ -715,7 +719,11 @@ elif selector=="➀(ヒストグラム)作業時間[複数]":
         elif f_num=="年":
             
             #ヒストグラムの作成
-            nen_list = sorted(list(set(hazure["年"])))
+            zen_list=pd.DataFrame()
+            for i in t:
+                kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+                zen_list=zen_list.append(kari_num)
+            nen_list = sorted(list(set(zen_list["年"])))
             for n in nen_list:
                 st.write("==============================================================================================================================================================")
                 for i in t:
@@ -757,7 +765,11 @@ elif selector=="➀(ヒストグラム)作業時間[複数]":
             
         elif f_num=="時刻":
             #ヒストグラムの作成
-            jikoku_list = sorted(list(set(hazure["時刻"])))
+            zen_list=pd.DataFrame()
+            for i in t:
+                kari_num=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)]#選択したデータ
+                zen_list=zen_list.append(kari_num)
+            jikoku_list = sorted(list(set(zen_list["時刻"])))
             for j in jikoku_list:
                 st.write("============================================================================================================================================================")
                 for i in t:
