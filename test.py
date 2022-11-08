@@ -537,7 +537,7 @@ elif selector=="➀(ヒストグラム)作業時間のばらつき":
         
         hazure_num=data_num[(data_num["処理時間"]>upper_num) | (data_num["処理時間"]<lower_num)]
         hazure_num2=data_num[data_num["処理時間"]<lower_num]
-        st.write("＝＝＝＝外れ値のデータ＝＝＝＝")
+        st.write("＝＝＝＝＝＝＝＝＝＝＝＝＝外れ値のデータ＝＝＝＝＝＝＝＝＝＝＝＝＝")
         st.write(hazure_num)#外れ値（データベース）の表示
         
 #         st.write('第一四分位数は%.1fです'%q1)
@@ -575,7 +575,7 @@ elif selector=="➀(ヒストグラム)作業時間のばらつき":
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
         ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
-        st.write("＝＝＝＝＝＝＝社全体のグラフ＝＝＝＝＝＝＝")
+        st.write("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝社全体のグラフ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝")
         left_column, right_column = st.columns(2)
         left_column.pyplot(fig)
         num=pd.DataFrame(zentai_scores.groupby(["図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
