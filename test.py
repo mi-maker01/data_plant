@@ -870,11 +870,11 @@ elif selector=="　1.(折れ線)仕掛品の推移":
                 sta_num.append(row.開始日時)
                 end_num.append(row.完了日時)
          
-            zentai_num=end_num[-1]-sta_num[0]
-            zen_num=pd.DataFrame(data={"図番":1,"総滞在時間":zentai_num}])
-            zentai_list=zentai_list.append(zen_num)
+#             zentai_num=end_num[-1]-sta_num[0]
+#             zen_num=pd.DataFrame(data={"図番":1,"総滞在時間":zentai_num}])
+#             zentai_list=zentai_list.append(zen_num)
             
-        st.write(zentai_list)
+#         st.write(zentai_list)
         #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
