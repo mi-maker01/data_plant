@@ -23,7 +23,7 @@ st.title("生産データ分析")
 #サイドバーのセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #製造データの取り込み
-st.title("製造データファイル")
+
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
@@ -49,7 +49,7 @@ if uploaded_file is not None:
         st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
 
     #標準時間の取り込み
-    st.title("標準時間ファイル")
+    
     uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file1 is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file1)
@@ -61,7 +61,8 @@ if uploaded_file is not None:
 
 #================================================================================================================================
 if selector=="　1.(ガントチャート)人の空き":
-    
+    st.write("===========================================================================")
+    st.write("　ガントチャート　人の空き　")
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
