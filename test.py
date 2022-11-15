@@ -37,7 +37,7 @@ for index,row in st.session_state.df.iterrows():
     
     time1=row["工程開始時間"]
     day1=row["工程開始日"]
-    st.write(time1))
+    st.write(time1)
     dateti1= datetime.datetime.combine(day1,time1)
     
     time2=row["工程完了時間"]
