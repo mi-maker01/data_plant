@@ -673,7 +673,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                     youbi=["月","火","水","木","金","土","日"]
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("--------")
+                   
                     st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"------------曜日：",youbi[y],"-----------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
