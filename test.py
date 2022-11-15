@@ -61,8 +61,8 @@ if uploaded_file is not None:
 
 #================================================================================================================================
 if selector=="　1.(ガントチャート)人の空き":
-    st.write("-------------------")
-    st.write("　ガントチャート　人の空き　")
+    st.write("--------")
+    st.title("1.(ガントチャート)人の空き")
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
@@ -117,6 +117,7 @@ if selector=="　1.(ガントチャート)人の空き":
                             df3.loc[0,'処理時間'] = round(d3/60)
                             t_num=pd.concat([t_num, df3], axis=0)
                         
+                        st.write("----------")
                         yoyuritu_num=(aki_time/zentai_num)*100
                         st.write(t)
                         st.write("空き時間の合計（秒）")
@@ -131,9 +132,9 @@ if selector=="　1.(ガントチャート)人の空き":
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
-                        st.write("========================================================================================================================")
+                        st.write("--------")
   
-                    st.write("----------")
+                    
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
