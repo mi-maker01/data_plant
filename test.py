@@ -1,58 +1,57 @@
+#import欄
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import math as math
 import numpy as np
-
 import plotly.express as px
 import plotly.io as pio
 import datetime
-
 import plotly.graph_objects as go
 
-
+#目次の作成
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
 pagelist = ["➀人のことを知りたい","　1.(ヒストグラム)作業時間[個人]","　2.(ヒストグラム)作業時間[複数]","　3.(棒グラフ)期間内の各人作業量",#人の能力
             "➁設備や人の空きを知りたい","　1.(ガントチャート)人の空き","　2.(ガントチャート)設備の空き",#場所・時間・人の有効活用
             "➂製品を知りたい","　1.(折れ線)仕掛品の推移",
             "➃集計表","　1.(集計表)作業時間統計量"]#無駄なものを作りたくない
-
-st.title("生産データ分析")
-#サイドバーのセレクトボックスを配置
+#サイドバーにセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
-#製造データの取り込み
+#ページのタイトル
+st.title("生産データ分析")
 
+#製造データの取り込み
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
+    
+    #空の列作成
     st.session_state.df["開始日時"]=0
     st.session_state.df["完了日時"]=0
+    #処理時間が０のものを除外
     st.session_state.df=st.session_state.df[st.session_state.df["処理時間"]!=0]
 
-
+    #開始日時、完了日時の作成（時間と日付の結合）
     for index,row in st.session_state.df.iterrows():
-
+    #作成（開始日時）
         time1=row["工程開始時間"]
         day1=row["工程開始日"]
-
         dateti1= datetime.datetime.combine(day1,time1)
-
+    #作成（完了日時）
         time2=row["工程完了時間"]
         day2=row["工程完了日"]
-
         dateti2= datetime.datetime.combine(day2,time2)
-
-
+    #追加
         st.session_state.df.at[index,'開始日時'] = pd.to_datetime(dateti1)
         st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
 
     #標準時間の取り込み
-    
     uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file1 is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file1)
+        #標準時間の設定
         base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
         st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
         st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
@@ -144,6 +143,7 @@ if selector=="　1.(ガントチャート)人の空き":
                     #================================================================================================================================
 elif selector=="　2.(ガントチャート)設備の空き":
     st.write("--------")
+    st.title("2.(ガントチャート)設備の空き")
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
     d = st.selectbox(
          "工程完了日",
@@ -176,7 +176,8 @@ elif selector=="　2.(ガントチャート)設備の空き":
     #================================================================================================================================
 
 elif selector=="　1.(ヒストグラム)作業時間[個人]":
-    
+    st.write("--------")
+    st.title("1.(ヒストグラム)作業時間[個人]")
     st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
     #曜日の設定
     st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
