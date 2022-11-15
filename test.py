@@ -223,8 +223,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
-#         for z in z_num:#図番でfor文回す
-#             for k in k_num:#工程名称でfor文回す
+        
         data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]#図番と工程名称でデータを絞る
         dosu_num=0#度数の空の変数
 
@@ -333,22 +332,6 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["月"]==tuki)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
 
-                #描画領域を用意する
-                fig = plt.figure()
-                ax = fig.add_subplot()
-
-                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                ax.set_title("chart")
-                ax.set_xlabel("time")                # x軸ラベル
-                plt.ylabel("count")               # y軸ラベル
-                plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                labels = ax.get_xticklabels()
-                plt.setp(labels, rotation=45, fontsize=10)
-
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
@@ -369,22 +352,6 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["年"]==nen)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
 
-                #描画領域を用意する
-                fig = plt.figure()
-                ax = fig.add_subplot()
-
-                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                ax.set_title("chart")
-                ax.set_xlabel("time")                # x軸ラベル
-                plt.ylabel("count")               # y軸ラベル
-                plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                labels = ax.get_xticklabels()
-                plt.setp(labels, rotation=45, fontsize=10)
-
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
@@ -404,22 +371,6 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
             for i in jkoku_list:
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["時刻"]==i)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
-
-                #描画領域を用意する
-                fig = plt.figure()
-                ax = fig.add_subplot()
-
-                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                ax.set_title("chart")
-                ax.set_xlabel("time")                # x軸ラベル
-                plt.ylabel("count")               # y軸ラベル
-                plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                labels = ax.get_xticklabels()
-                plt.setp(labels, rotation=45, fontsize=10)
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
