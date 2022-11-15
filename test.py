@@ -132,9 +132,9 @@ if selector=="　1.(ガントチャート)人の空き":
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
-                        st.write("--------")
+                        
   
-                    
+                    st.write("--------")
                     fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
