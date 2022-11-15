@@ -29,7 +29,7 @@ if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
 
 # st.session_state.df["工程開始時間"]=pd.to_datetime(st.session_state.df["工程開始時間"])
-st.write(st.session_state.df["工程開始時間"])
+
 st.session_state.df["開始日時"]=0
 st.session_state.df["完了日時"]=0
 st.session_state.df=st.session_state.df[st.session_state.df["処理時間"]!=0]
@@ -39,7 +39,6 @@ for index,row in st.session_state.df.iterrows():
     
     time1=row["工程開始時間"]
     day1=row["工程開始日"]
-    st.write(time1)
     
     dateti1= datetime.datetime.combine(day1,time1)
     
