@@ -513,6 +513,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 #         ax.boxplot(s_num)#箱髭図作成
 #         # Matplotlib の Figure を指定して可視化する
 #         st.pyplot(fig)
+        st.write("箱ひげ図")
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
