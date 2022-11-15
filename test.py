@@ -51,7 +51,7 @@ if uploaded_file is not None:
     #標準時間の取り込み
     st.title("標準時間ファイル")
     uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
-    if uploaded_file is not None:
+    if uploaded_file1 is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file1)
         base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
         st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
