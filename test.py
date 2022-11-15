@@ -446,6 +446,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
 
 #=======================================================================================================================================================
 elif selector=="　2.(ヒストグラム)作業時間[複数]":
+    st.write("--------")
     st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
     #曜日の設定
     st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
@@ -489,6 +490,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
     #データ分析開始
     answer = st.button('分析開始')
     if answer == True:
+        st.write("--------")
         #上限値、下限値のdata
         data_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)]
         dosu_num=0
@@ -545,7 +547,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         
         hazure_num=data_num[(data_num["処理時間"]>upper_num) | (data_num["処理時間"]<lower_num)]
         hazure_num2=data_num[data_num["処理時間"]<lower_num]
-        st.write("＝＝＝＝＝＝＝＝＝＝＝＝＝外れ値のデータ＝＝＝＝＝＝＝＝＝＝＝＝＝")
+        st.write("--------")
+        st.write("＝＝＝外れ値のデータ＝＝＝")
         st.write(hazure_num)#外れ値（データベース）の表示
         
 #         st.write('第一四分位数は%.1fです'%q1)
@@ -583,7 +586,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
         ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
-        st.write("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝社全体のグラフ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝")
+        st.write("--------")
+        st.write("＝＝＝社全体のグラフ＝＝＝")
         left_column, right_column = st.columns(2)
         left_column.pyplot(fig)
         num=pd.DataFrame(zentai_scores.groupby(["図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -622,6 +626,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
 
                 # Matplotlib の Figure を指定して可視化する
+                st.write("--------")
                 st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
@@ -640,7 +645,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                 zen_list=zen_list.append(kari_num)
             you_list = sorted(list(set(zen_list["曜日"])))
             for y in you_list:
-                st.write("============================================================================================================================================")
+                st.write("--------")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["曜日"] == y)]
@@ -668,6 +673,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                     youbi=["月","火","水","木","金","土","日"]
                     # Matplotlib の Figure を指定して可視化する
+                    st.write("--------")
                     st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"------------曜日：",youbi[y],"-----------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
