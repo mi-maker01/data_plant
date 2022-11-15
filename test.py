@@ -157,6 +157,7 @@ elif selector=="　2.(ガントチャート)設備の空き":
     
     answer = st.button('分析開始')
     if answer == True:
+        st.write("--------")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称",title="一日の稼働状況見える化"))
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
