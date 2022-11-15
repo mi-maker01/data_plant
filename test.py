@@ -32,32 +32,32 @@ if uploaded_file is not None:
     st.session_state.df=st.session_state.df[st.session_state.df["処理時間"]!=0]
 
 
-for index,row in st.session_state.df.iterrows():
+    for index,row in st.session_state.df.iterrows():
 
-    time1=row["工程開始時間"]
-    day1=row["工程開始日"]
+        time1=row["工程開始時間"]
+        day1=row["工程開始日"]
 
-    dateti1= datetime.datetime.combine(day1,time1)
+        dateti1= datetime.datetime.combine(day1,time1)
 
-    time2=row["工程完了時間"]
-    day2=row["工程完了日"]
+        time2=row["工程完了時間"]
+        day2=row["工程完了日"]
 
-    dateti2= datetime.datetime.combine(day2,time2)
+        dateti2= datetime.datetime.combine(day2,time2)
 
 
-    st.session_state.df.at[index,'開始日時'] = pd.to_datetime(dateti1)
-    st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
+        st.session_state.df.at[index,'開始日時'] = pd.to_datetime(dateti1)
+        st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
 
-#標準時間の取り込み
-st.title("標準時間ファイル")
-uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
-if uploaded_file is not None:
-    st.session_state.df_time=pd.read_excel(uploaded_file1)
-base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
-st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
-st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
-st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_time['標準時間2'], format='%M:%S:%f') - base_time
-st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
+    #標準時間の取り込み
+    st.title("標準時間ファイル")
+    uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
+    if uploaded_file is not None:
+        st.session_state.df_time=pd.read_excel(uploaded_file1)
+        base_time = pd.to_datetime('00:00:0', format='%M:%S:%f')
+        st.session_state.df_time['標準時間1']=pd.to_datetime(st.session_state.df_time['標準時間1'], format='%M:%S:%f') - base_time
+        st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
+        st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_time['標準時間2'], format='%M:%S:%f') - base_time
+        st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
 
 #================================================================================================================================
 if selector=="　1.(ガントチャート)人の空き":
