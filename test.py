@@ -272,25 +272,25 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
 
         hyozyun1=y_scores["標準時間1"]
         hyozyun2=y_scores["標準時間2"]
+        
+        #描画領域を用意する
+        fig = plt.figure()
+        ax = fig.add_subplot()
 
+        plt.xlim([lower_num2,upper_num2])                        # X軸範囲
+        plt.ylim([0,dosu_num+10])                      # Y軸範囲
+        ax.set_title("chart")
+        ax.set_xlabel("time")                # x軸ラベル
+        plt.ylabel("count")               # y軸ラベル
+        plt.grid(True)
+        plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+        plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+        plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+        labels = ax.get_xticklabels()
+        plt.setp(labels, rotation=45, fontsize=10)
+            
         if f_num=="なし":
             dd=scores["処理時間"]#選択したデータの処理時間
-
-            #描画領域を用意する
-            fig = plt.figure()
-            ax = fig.add_subplot()
-
-            plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-            plt.ylim([0,dosu_num+10])                      # Y軸範囲
-            ax.set_title("chart")
-            ax.set_xlabel("time")                # x軸ラベル
-            plt.ylabel("count")               # y軸ラベル
-            plt.grid(True)
-            plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-            plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-            plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-            labels = ax.get_xticklabels()
-            plt.setp(labels, rotation=45, fontsize=10)
 
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
             # Matplotlib の Figure を指定して可視化する
@@ -311,22 +311,6 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
             for you in you_list:
                 scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)&(hazure["曜日"]==you)]#選択したデータ（外れ値）
                 dd=scores["処理時間"]#選択したデータの処理時間
-
-                #描画領域を用意する
-                fig = plt.figure()
-                ax = fig.add_subplot()
-
-                plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                ax.set_title("chart")
-                ax.set_xlabel("time")                # x軸ラベル
-                plt.ylabel("count")               # y軸ラベル
-                plt.grid(True)
-                plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                labels = ax.get_xticklabels()
-                plt.setp(labels, rotation=45, fontsize=10)
 
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 youbi=["月","火","水","木","金","土","日"]
