@@ -28,7 +28,8 @@ uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
 
-st.session_state.df["工程開始時間"]=pd.to_datetime(st.session_state.df["工程開始時間"])
+# st.session_state.df["工程開始時間"]=pd.to_datetime(st.session_state.df["工程開始時間"])
+st.write(st.session_state.df["工程開始時間"])
 st.session_state.df["開始日時"]=0
 st.session_state.df["完了日時"]=0
 st.session_state.df=st.session_state.df[st.session_state.df["処理時間"]!=0]
