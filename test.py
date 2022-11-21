@@ -1047,7 +1047,7 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
         num=pd.DataFrame(n_num.groupby(["担当者","工程名称","図番"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
         
         pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
-        st.write("""### 作業件数""")
+        st.write("""### 集計表""")
         st.dataframe(pvit)
 #         hyo_num=n_num[["図番","担当者","工程名称","号機名称","処理時間","開始日時","完了日時"]]
 #         st.write("上記のグラフのデータベース")
