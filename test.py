@@ -220,7 +220,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
     
     #フィルター選択
     y_list = ["なし","曜日","月","年","時刻"]
-    f_num = st.selectbox(
+    f_num = left_column.selectbox(
          "フィルター",
          (y_list))
     
