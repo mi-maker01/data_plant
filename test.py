@@ -591,7 +591,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         plt.setp(labels, rotation=45, fontsize=10)
         ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
         st.write("--------")
-        st.write("＝＝＝社全体のグラフ＝＝＝")
+        st.write("""### ＝＝＝社全体のグラフ＝＝＝""")
         left_column, right_column = st.columns(2)
         left_column.pyplot(fig)
         num=pd.DataFrame(zentai_scores.groupby(["図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -632,7 +632,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------データ件数：[",str(len(scores)),"]-------------担当者名：[",i,"]-----------------------")
+                st.write("""#### ---------------データ件数：[""",str(len(scores)),"""]-------------担当者名：[""",i,"""]-----------------------""")
+                
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
                 num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
