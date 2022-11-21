@@ -296,7 +296,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
             ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
             # Matplotlib の Figure を指定して可視化する
             st.write("--------")
-            st.write("---------------工程コード:",k,"-------------図番:",z,"------------データの数:",str(len(scores)),"------------------")
+            st.write("---------------工程名称:",k,"-------------図番:",z,"------------データ件数:",str(len(scores)),"------------------")
             left_column, right_column = st.columns(2)
             left_column.pyplot(fig)
 
@@ -401,27 +401,29 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 15), '時刻'] = 4
     st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 5
     
+    left_column, center_column ,right_column = st.columns(3)
+   
     #図番の選択
     z_list = sorted(list(set(st.session_state.df["図番"])))
-    z = st.selectbox(
+    z = left_column.selectbox(
          "図番",
          (z_list))
     x_num=st.session_state.df[(st.session_state.df["図番"]==z)]#dfからzで選んだ図番のデータ
     #工程の選択
     k_list = sorted(list(set(x_num["工程名称"])))
-    k = st.selectbox(
+    k = center_column.selectbox(
          "工程名称",
          (k_list))
     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"] == k)]#dfからz,kで選んだ図番,工程のデータ
     #担当の選択
     t_list = sorted(list(set(x_num["担当者"])))
-    t = st.multiselect(
+    t = right_column.multiselect(
          "担当者",
          (t_list))
     
     #フィルター選択
     y_list = ["なし","曜日","月","年","時刻"]
-    f_num = st.selectbox(
+    f_num = left_column.selectbox(
          "フィルター",
          (y_list))
     
