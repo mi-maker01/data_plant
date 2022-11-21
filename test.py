@@ -911,7 +911,7 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
         st.write("""##作業件数""")
         st.write("""
     # My Web Application
-    ## This app was created by me!
+    ## 作業時間
     This app is a sample of the user interface.
 """)
  
