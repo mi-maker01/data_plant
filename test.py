@@ -319,7 +319,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 youbi=["月","火","水","木","金","土","日"]
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データ件数:",str(len(scores)),"-------曜日:",youbi[you],"--------------")
+                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------曜日:[",youbi[you],"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -339,7 +339,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データ件数:",str(len(scores)),"-------月:",str(tuki),"--------------")
+                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------月:[",str(tuki),"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -359,7 +359,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データ件数:",str(len(scores)),"-------年:",str(nen),"--------------")
+                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------年:[",str(nen),"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -380,7 +380,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:",k,"-------------図番:",z,"------------データ件数:",str(len(scores)),"-------時刻:",jikoku[i],"--------------")
+                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------時刻:[",jikoku[i],"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -571,7 +571,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------このグラフのデータ件数：",str(len(scores)),"-------------担当者名：",i,"-----------------------")
+                st.write("---------------このグラフのデータ件数：[",str(len(scores)),"]-------------担当者名：[",i,"]-----------------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
                 num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -596,29 +596,12 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)&(hazure["曜日"]==y)]#選択したデータ
 
                     dd=scores["処理時間"]#選択したデータの処理時間
-
-                    # 描画領域を用意する
-                    fig = plt.figure()
-                    ax = fig.add_subplot()
-
-                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                    ax.set_title("chart")
-                    ax.set_xlabel("time")                # x軸ラベル
-                    plt.ylabel("count")               # y軸ラベル
-                    plt.grid(True)
-                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                    labels = ax.get_xticklabels()
-                    plt.setp(labels, rotation=45, fontsize=10)
-
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
                     youbi=["月","火","水","木","金","土","日"]
                     # Matplotlib の Figure を指定して可視化する
                    
-                    st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"------------曜日：",youbi[y],"-----------")
+                    st.write("---------------このグラフのデータ個数：[",str(len(dd)),"]-------------担当者名：[",i,"]------------曜日：[",youbi[y],"]-----------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -643,28 +626,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)&(hazure["月"]==tu)]#選択したデータ
 
                     dd=scores["処理時間"]#選択したデータの処理時間
-
-                    # 描画領域を用意する
-                    fig = plt.figure()
-                    ax = fig.add_subplot()
-
-                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                    ax.set_title("chart")
-                    ax.set_xlabel("time")                # x軸ラベル
-                    plt.ylabel("count")               # y軸ラベル
-                    plt.grid(True)
-                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                    labels = ax.get_xticklabels()
-                    plt.setp(labels, rotation=45, fontsize=10)
-
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
-
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-------------------月：",tu,"-------------")
+                    st.write("---------------このグラフのデータ個数：[",len(dd),"]-------------担当者名：[",i,"]-------------------月：[",str(tu),"]-------------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -690,28 +655,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)&(hazure["年"]==n)]#選択したデータ
 
                     dd=scores["処理時間"]#選択したデータの処理時間
-
-                    # 描画領域を用意する
-                    fig = plt.figure()
-                    ax = fig.add_subplot()
-
-                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                    ax.set_title("chart")
-                    ax.set_xlabel("time")                # x軸ラベル
-                    plt.ylabel("count")               # y軸ラベル
-                    plt.grid(True)
-                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                    labels = ax.get_xticklabels()
-                    plt.setp(labels, rotation=45, fontsize=10)
-
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
-
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"---------------年：",n,"----------------")
+                    st.write("---------------このグラフのデータ個数：[",len(dd),"]-------------担当者名：[",i,"]---------------年：[",str(n),"]----------------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -736,28 +683,11 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==i)&(hazure["時刻"]==j)]#選択したデータ
 
                     dd=scores["処理時間"]#選択したデータの処理時間
-
-                    # 描画領域を用意する
-                    fig = plt.figure()
-                    ax = fig.add_subplot()
-
-                    plt.xlim([lower_num2,upper_num2])                        # X軸範囲
-                    plt.ylim([0,dosu_num+10])                      # Y軸範囲
-                    ax.set_title("chart")
-                    ax.set_xlabel("time")                # x軸ラベル
-                    plt.ylabel("count")               # y軸ラベル
-                    plt.grid(True)
-                    plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-                    plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-                    plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
-                    labels = ax.get_xticklabels()
-                    plt.setp(labels, rotation=45, fontsize=10)
-
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
                     jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------このグラフのデータ個数：",len(dd),"-------------担当コード：",i,"-----------------",jikoku[j],"-----------------")
+                    st.write("---------------このグラフのデータ個数：[",str(len(dd)),"]-------------担当者名：[",i,"]-----------------時間帯：[",jikoku[j],"]-----------------")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
