@@ -84,6 +84,7 @@ if selector=="　1.(ガントチャート)人の空き":
                 
                 answer = st.button('分析開始')
                 if answer == True:
+                    
                     graph_num=pd.DataFrame()
                     t_list = sorted(list(set(d_num["担当者"])))
                     for t in t_list:
@@ -122,24 +123,24 @@ if selector=="　1.(ガントチャート)人の空き":
                         
                         st.write("----------")
                         yoyuritu_num=(aki_time/zentai_num)*100
-                        st.write(t)
-                        st.write("空き時間の合計（秒）")
-                        st.write(aki_time)
-                        st.write("総作業時間（秒）")
-                        st.write(zentai_num)
-                        st.write("余裕率（％）")
-                        st.write(yoyuritu_num)
+                        st.write(""" #### 担当者：""",t)
+#                         st.write("空き時間の合計（秒）")
+#                         st.write(aki_time)
+#                         st.write("総作業時間（秒）")
+#                         st.write(zentai_num)
+                        
                         
                         t_num=t_num.sort_values("開始日時")
-                        fig = go.Figure(px.timeline(t_num, x_start="開始日時", x_end="完了日時",y="工程名称",color="工程名称",text="処理時間",title="一日の各人の稼働状況"))
+                        st.write(""" #### """,t,"""の稼働状況""",)
+                        fig = go.Figure(px.timeline(t_num, x_start="開始日時", x_end="完了日時",y="工程名称",color="工程名称",text="処理時間"))
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
-                        
+                        st.write(""" #### 余裕率：""",yoyuritu_num)
   
                     st.write("--------")
-                    st.write("--------")
-                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間",title="一日の全体の稼働状況"))
+                    st.write(""" #### 一日の全体の稼働状況""")
+                    fig = go.Figure(px.timeline(graph_num, x_start="開始日時", x_end="完了日時",y="担当者",color="工程名称",text="処理時間"))
                     fig.update_traces(textposition='inside', orientation="h")
                     st.plotly_chart(fig)
                     
