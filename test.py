@@ -516,7 +516,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 #         ax.boxplot(s_num)#箱髭図作成
 #         # Matplotlib の Figure を指定して可視化する
 #         st.pyplot(fig)
-        st.write("箱ひげ図")
+        st.write("""### 箱ひげ図""")
         fig = go.Figure(px.box(s_num))
         st.plotly_chart(fig, use_container_width=True)
         
@@ -552,7 +552,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         hazure_num=data_num[(data_num["処理時間"]>upper_num) | (data_num["処理時間"]<lower_num)]
         hazure_num2=data_num[data_num["処理時間"]<lower_num]
         
-        st.write("＝＝＝外れ値のデータ＝＝＝")
+        st.write("""### ＝＝＝外れ値のデータ＝＝＝""")
         st.write(hazure_num)#外れ値（データベース）の表示
         
 #         st.write('第一四分位数は%.1fです'%q1)
