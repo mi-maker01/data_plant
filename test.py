@@ -10,6 +10,8 @@ import plotly.io as pio
 import datetime
 import plotly.graph_objects as go
 
+#ページのタイトル
+st.sidebar.title("生産データ分析")
 #目次の作成
 st.set_page_config(layout="wide")
 #セレクトボックスのリストを作成
@@ -19,8 +21,7 @@ pagelist = ["➀人のことを知りたい","　1.(ヒストグラム)作業時
             "➃集計表","　1.(集計表)作業時間統計量"]#無駄なものを作りたくない
 #サイドバーにセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
-#ページのタイトル
-st.title("生産データ分析")
+
 
 #製造データの取り込み
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
