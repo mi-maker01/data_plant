@@ -21,7 +21,7 @@ pagelist = ["➀人のことを知りたい","　1.(ヒストグラム)作業時
 #サイドバーにセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 #ページのタイトル
-st.sidebar.title("生産データ分析")
+st.sidebar.write("生産データ分析")
 
 #製造データの取り込み
 uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
