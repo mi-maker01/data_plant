@@ -632,7 +632,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("""#### ---------------データ件数：[""",str(len(scores)),"""]-------------担当者名：[""",i,"""]-----------------------""")
+                st.write("""#### ---------------データ件数：[""",str(len(dd)),"""]-------------担当者名：[""",i,"""]-----------------------""")
                 
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
@@ -679,8 +679,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                     youbi=["月","火","水","木","金","土","日"]
                     # Matplotlib の Figure を指定して可視化する
-                   
-                    st.write("---------------データ個数：[",str(len(dd)),"]-------------担当者名：[",i,"]------------曜日：[",youbi[y],"]-----------")
+                    st.write("""#### ---------------データ個数：[""",str(len(dd)),"""]-------------担当者名：[""",i,"""]------------曜日：[""",youbi[y],"""]-----------""")
+                    
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -725,7 +725,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------データ件数：[",len(dd),"]-------------担当者名：[",i,"]-------------------月：[",str(tu),"]-------------")
+                    st.write("""#### ---------------データ個数：[""",str(len(dd)),"""]-------------担当者名：[""",i,"""]------------月：[""",str(tu),"""]-----------""")
+                   
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -770,7 +771,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                     ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
 
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------データ件数：[",len(dd),"]-------------担当者名：[",i,"]---------------年：[",str(n),"]----------------")
+                    
+                    st.write("""#### ---------------データ個数：[""",str(len(dd)),"""]-------------担当者名：[""",i,"""]------------年：[""",str(n),"""]-----------""")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
@@ -815,7 +817,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
 
                     jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
                     # Matplotlib の Figure を指定して可視化する
-                    st.write("---------------データ件数：[",str(len(dd)),"]-------------担当者名：[",i,"]-----------------時間帯：[",jikoku[j],"]-----------------")
+                    
+                    st.write("""#### ---------------データ個数：[""",str(len(dd)),"""]-------------担当者名：[""",i,"""]------------時間帯：[""",jikoku[j],"""]-----------""")
                     left_column, right_column = st.columns(2)
                     left_column.pyplot(fig)
                     num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
