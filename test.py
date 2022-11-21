@@ -908,7 +908,7 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
         
         #描画領域を用意する
         left_column, right_column = st.columns(2)
-        st.write("##作業件数")
+        st.write("""##作業件数""")
         fig = go.Figure(px.bar(n_num,x="担当者",y="作成数",color="工程名称",text="図番"))
         st.plotly_chart(fig, use_container_width=True)
         st.write("##作業時間")
