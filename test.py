@@ -812,6 +812,7 @@ elif selector=="　1.(集計表)作業時間統計量":
     
     answer = st.button('分析開始')
     if answer == True:
+        st.write("-------")
         #日のデータの追加文
         d_num=pd.DataFrame()
         for d in range(dt+1):
@@ -858,7 +859,7 @@ elif selector=="　1.(集計表)作業時間統計量":
 #                     pvit["標準時間2"]=int(hyozyun2)
                     graph_num=pd.concat([graph_num, pvit], axis=0)        
            
-        
+        st.write("""### 集計表""")
         st.dataframe(graph_num)
  #===============================================================================================================================================
 elif selector=="　3.(棒グラフ)期間内の各人作業量":
@@ -903,9 +904,9 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
     bar_num1=bar_num1.sort_values('担当者')
     n_num=n_num.sort_values('担当者')
     answer = st.button('分析開始')
-    st.write("-------")
+    
     if answer == True:
-        
+        st.write("-------")
         #描画領域を用意する
         left_column, right_column = st.columns(2)
         st.write("""## 作業件数""")
