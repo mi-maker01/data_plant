@@ -339,7 +339,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------月:[",str(tuki),"]--------------")
+                st.write("---------------工程名称:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------月:[",str(tuki),"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -359,7 +359,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 ax.hist(dd,bins=10,range=(lower_num2,upper_num2))
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------年:[",str(nen),"]--------------")
+                st.write("---------------工程名称:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------年:[",str(nen),"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -380,7 +380,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
                 jikoku=["～７時","８時～１０時","１０時～１２時","１３時～１５時","１５時～１７時","１７時～"]
                 # Matplotlib の Figure を指定して可視化する
                 st.write("--------")
-                st.write("---------------工程コード:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------時刻:[",jikoku[i],"]--------------")
+                st.write("---------------工程名称:[",k,"]-------------図番:[",z,"]------------データ件数:[",str(len(scores)),"]-------時刻:[",jikoku[i],"]--------------")
                 left_column, right_column = st.columns(2)
                 left_column.pyplot(fig)
 
@@ -427,7 +427,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
     #フィルター選択
     y_list = ["なし","曜日","月","年","時刻"]
     f_num = left_column.selectbox(
-         "フィルター",
+         "期間グループ分け",
          (y_list))
     
     #データ分析開始
