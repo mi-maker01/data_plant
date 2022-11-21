@@ -387,6 +387,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
 #=======================================================================================================================================================
 elif selector=="　2.(ヒストグラム)作業時間[複数]":
     st.write("--------")
+    st.title("2.(ヒストグラム)作業時間[複数]")
     st.session_state.df['開始日時']=pd.to_datetime(st.session_state.df['開始日時'])
     #曜日の設定
     st.session_state.df["曜日"]=st.session_state.df["工程開始日"].dt.weekday
@@ -769,6 +770,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
             
 #================================================================================================================================
 elif selector=="　1.(折れ線)仕掛品の推移":
+    st.write("-------")
+    st.title("1.(折れ線)仕掛品の推移")
     left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
     d_start = left_column.selectbox(#開始日の選択
@@ -849,6 +852,8 @@ elif selector=="　1.(折れ線)仕掛品の推移":
  #================================================================================================================================      
 #工程の画面
 elif selector=="　1.(集計表)作業時間統計量":
+    st.write("-------")
+    st.title("1.(集計表)作業時間統計量")
     left_column, center_column ,right_column = st.columns(3)
     
     #================データの選択（期間）
@@ -869,7 +874,7 @@ elif selector=="　1.(集計表)作業時間統計量":
     num_2 = center_column.selectbox(
          "2つ目",
          (num_list))
-    num_3= right_column.selectbox(
+    num_3= left_column.selectbox(
          "3つ目",
          (num_list))
     
@@ -926,6 +931,8 @@ elif selector=="　1.(集計表)作業時間統計量":
         st.dataframe(graph_num)
  #===============================================================================================================================================
 elif selector=="　3.(棒グラフ)期間内の各人作業量":
+    st.write("-------")
+    st.title("3.(棒グラフ)期間内の各人作業量")
     left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
     d_start = left_column.selectbox(#開始日の選択
