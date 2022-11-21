@@ -903,6 +903,7 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
     bar_num1=bar_num1.sort_values('担当者')
     n_num=n_num.sort_values('担当者')
     answer = st.button('分析開始')
+    st.write("-------")
     if answer == True:
         st.write(n_num)
         #描画領域を用意する
