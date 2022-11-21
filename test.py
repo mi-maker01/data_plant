@@ -872,7 +872,8 @@ elif selector=="　1.(折れ線)仕掛品の推移":
             
             m=str(d_start.month)
             d=str(d_start.day)
-            st.write("""#### --""",m,"""月""",n,"""日--""")
+            
+            st.write("""#### --""",str(d_start.month),"""月""",str(d_start.day),"""日--""")
             pvit=num.set_axis([d_start], axis=1)
 #             st.write(pvit)
             pvit_data=pd.merge(pvit_data,pvit, right_index=True, left_index=True, how='outer')
