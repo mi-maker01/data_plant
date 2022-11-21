@@ -65,8 +65,9 @@ if uploaded_file is not None:
 if selector=="　1.(ガントチャート)人の空き":
     st.write("--------")
     st.title("1.(ガントチャート)人の空き")
+    left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
-    d = st.selectbox(
+    d = left_column.selectbox(
          "工程完了日",
          (day_num))
     
@@ -75,7 +76,7 @@ if selector=="　1.(ガントチャート)人の空き":
     d_num=d_num.reset_index()
     
     d_num=d_num[(d_num["処理時間"] != 1)]
-    st.dataframe(d_num)
+    
     if len(d_num)!=0:
             if len(d_num)!=1:#???分析開始ボタンの妨げになっている
                 d_num["工程開始時間"] = pd.to_datetime(d_num["工程開始時間"], format="%H:%M:%S")
@@ -147,8 +148,9 @@ if selector=="　1.(ガントチャート)人の空き":
 elif selector=="　2.(ガントチャート)設備の空き":
     st.write("--------")
     st.title("2.(ガントチャート)設備の空き")
+    left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))
-    d = st.selectbox(
+    d = left_column.selectbox(
          "工程完了日",
          (day_num))
     
@@ -767,11 +769,12 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
             
 #================================================================================================================================
 elif selector=="　1.(折れ線)仕掛品の推移":
+    left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
-    d_start = st.selectbox(#開始日の選択
+    d_start = left_column.selectbox(#開始日の選択
          "開始日",
          (day_num))
-    d_end = st.selectbox(#終了日の選択
+    d_end = center_column.selectbox(#終了日の選択
          "終了日",
          (day_num))
     dt = d_end-d_start#開始日と終了日の差の計算
@@ -846,26 +849,27 @@ elif selector=="　1.(折れ線)仕掛品の推移":
  #================================================================================================================================      
 #工程の画面
 elif selector=="　1.(集計表)作業時間統計量":
+    left_column, center_column ,right_column = st.columns(3)
     
     #================データの選択（期間）
     day_num = sorted(list(set(st.session_state.df["工程開始日"])))#日付の抜出
-    d_start = st.selectbox(#開始日の選択
+    d_start = left_column.selectbox(#開始日の選択
          "開始日",
          (day_num))
-    d_end = st.selectbox(#終了日の選択
+    d_end = center_column.selectbox(#終了日の選択
          "終了日",
          (day_num))
     dt = d_end-d_start#開始日と終了日の差の計算
     dt= dt.days#int
     #===============
     num_list = ["工程名称","担当者","図番",]
-    num_1 = st.selectbox(
+    num_1 = left_column.selectbox(
          "1つ目",
          (num_list))
-    num_2 = st.selectbox(
+    num_2 = center_column.selectbox(
          "2つ目",
          (num_list))
-    num_3= st.selectbox(
+    num_3= right_column.selectbox(
          "3つ目",
          (num_list))
     
@@ -922,12 +926,12 @@ elif selector=="　1.(集計表)作業時間統計量":
         st.dataframe(graph_num)
  #===============================================================================================================================================
 elif selector=="　3.(棒グラフ)期間内の各人作業量":
-    
+    left_column, center_column ,right_column = st.columns(3)
     day_num = sorted(list(set(st.session_state.df["工程完了日"])))#日付の抜出
-    d_start = st.selectbox(#開始日の選択
+    d_start = left_column.selectbox(#開始日の選択
          "開始日",
          (day_num))
-    d_end = st.selectbox(#終了日の選択
+    d_end = center_column.selectbox(#終了日の選択
          "終了日",
          (day_num))
     dt = d_end-d_start#開始日と終了日の差の計算
