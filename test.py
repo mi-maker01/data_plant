@@ -197,24 +197,25 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
     st.session_state.df.loc[(st.session_state.df['時刻'] <= 16) & (st.session_state.df['時刻'] >= 15), '時刻'] = 4
     st.session_state.df.loc[(st.session_state.df['時刻'] >= 17), '時刻'] = 5
     
+    left_column, center_column ,right_column = st.columns(3)
     #担当の選択
     t_list = sorted(list(set(st.session_state.df["担当者"])))
-    t = st.selectbox(
+    t = left_column.selectbox(
          "担当者",
          (t_list))
     x_num=st.session_state.df[(st.session_state.df["担当者"]==t)]#dfからzで選んだ図番のデータ
     k_list = sorted(list(set(x_num["工程名称"])))
     
     #工程の選択
-    k = st.selectbox(
+    k = center_column.selectbox(
          "工程名称",
          (k_list))  
     x_k_num=x_num[(x_num["担当者"]==t) & (x_num["工程名称"]==k)]
     z_list = sorted(list(set(x_k_num["図番"])))
     
     #図番の選択
-    z = st.selectbox(
-         "工程名称",
+    z = right_column.selectbox(
+         "図番",
          (z_list))
     
     #フィルター選択
