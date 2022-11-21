@@ -136,7 +136,7 @@ if selector=="　1.(ガントチャート)人の空き":
                         fig.update_traces(textposition='inside', orientation="h")
                         st.plotly_chart(fig)
                         graph_num=graph_num.append(t_num)
-                        st.write(""" #### 余裕率：""",yoyuritu_num)
+                        st.write(""" #### 余裕率：""",str(yoyuritu_num),""" % """)
   
                     st.write("--------")
                     st.write(""" #### 一日の全体の稼働状況""")
