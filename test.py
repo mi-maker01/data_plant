@@ -607,7 +607,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         pvit["標準時間1"]=int(hyozyun1)
         pvit["標準時間2"]=int(hyozyun2)
         st.write(pvit)
-        st.write("--------")
+        
             
         if f_num=="なし":
             #ヒストグラムの作成
