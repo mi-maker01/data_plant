@@ -123,6 +123,7 @@ if selector=="　1.(ガントチャート)人の空き":
                         
                         st.write("----------")
                         yoyuritu_num=(aki_time/zentai_num)*100
+                        yoyuritu_num=round(yoyuritu_num, 2)
                         st.write(""" #### 担当者：""",t)
 #                         st.write("空き時間の合計（秒）")
 #                         st.write(aki_time)
