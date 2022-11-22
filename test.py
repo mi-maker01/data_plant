@@ -51,7 +51,7 @@ if uploaded_file is not None:
         st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
 
     #標準時間の取り込み
-    uploaded_file1=left_column.file_uploader("標準時間の取り込み",type="xlsx")
+    uploaded_file1=st.sidebar.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file1 is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file1)
         #標準時間の設定
