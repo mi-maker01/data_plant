@@ -289,8 +289,8 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         ax.set_xlabel("time")                # x軸ラベル
         plt.ylabel("count")               # y軸ラベル
         plt.grid(True)
-#         plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
-#         plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
+        plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
+        plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
         plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
@@ -309,8 +309,8 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
             num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
             pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
             pvit.insert(0, '総件数', len(y_num))
-#             pvit["標準時間1"]=int(hyozyun1)
-#             pvit["標準時間2"]=int(hyozyun2)
+            pvit["標準時間1"]=int(hyozyun1)
+            pvit["標準時間2"]=int(hyozyun2)
             st.write(pvit) 
 
         elif f_num=="曜日":
