@@ -60,7 +60,7 @@ if uploaded_file is not None:
         st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
         st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_time['標準時間2'], format='%M:%S:%f') - base_time
         st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
-
+    st.write(st.session_state.df_time)
 #================================================================================================================================
 if selector=="　1.(ガントチャート)人の空き":
     st.write("--------")
