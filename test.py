@@ -24,9 +24,9 @@ pagelist = ["➀人のことを知りたい","　1.(ヒストグラム)作業時
 #サイドバーにセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
 
-
+left_column, center_column ,right_column = st.columns(3)
 #製造データの取り込み
-uploaded_file=st.file_uploader("製造データの取り込み",type="xlsx")
+uploaded_file=left_column.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
     
@@ -51,7 +51,7 @@ if uploaded_file is not None:
         st.session_state.df.at[index,'完了日時'] = pd.to_datetime(dateti2)
 
     #標準時間の取り込み
-    uploaded_file1=st.file_uploader("標準時間の取り込み",type="xlsx")
+    uploaded_file1=left_column.file_uploader("標準時間の取り込み",type="xlsx")
     if uploaded_file1 is not None:
         st.session_state.df_time=pd.read_excel(uploaded_file1)
         #標準時間の設定
