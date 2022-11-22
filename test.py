@@ -60,7 +60,7 @@ if uploaded_file is not None:
         st.session_state.df_time['標準時間1']=st.session_state.df_time["標準時間1"].dt.total_seconds()
         st.session_state.df_time['標準時間2']=pd.to_datetime(st.session_state.df_time['標準時間2'], format='%M:%S:%f') - base_time
         st.session_state.df_time['標準時間2']=st.session_state.df_time["標準時間2"].dt.total_seconds()
-    st.write(st.session_state.df_time)
+    
 #================================================================================================================================
 if selector=="　1.(ガントチャート)人の空き":
     st.write("--------")
@@ -164,7 +164,8 @@ elif selector=="　2.(ガントチャート)設備の空き":
     answer = st.button('分析開始')
     if answer == True:
         st.write("--------")
-        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称",title="全体の稼働状況"))
+        st.write(""" #### 全体の稼働状況""")
+        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称"))
         fig.update_traces(textposition='inside', orientation="h")
         st.plotly_chart(fig)
         
@@ -173,7 +174,7 @@ elif selector=="　2.(ガントチャート)設備の空き":
             k_num=k_num.sort_values(["開始日時"])
             if len(k_num) >=1:
                 st.write("--------")
-                st.write(k,"の稼働状況")
+                st.write(""" #### """,k,"""の稼働状況""")
 
                 fig = go.Figure(px.timeline(k_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="担当者",color="担当者", color_continuous_scale='Jet'))
                 fig.update_traces(textposition='inside', orientation="h")
@@ -272,12 +273,9 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         #ヒストグラムの作成
         #データの整理
         scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)]#選択したデータ（外れ値）
-        y_scores=st.session_state.df_time[(st.session_state.df_time["工程名称"]==k)]#標準時間のデータ
-        st.write(scores)
-        st.write(st.session_state.df_time)
-        st.write(y_scores)
-        st.write(z)
-        st.write(k)
+        
+        y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"]==k)]#標準時間のデータ
+        
         hyozyun1=y_scores["標準時間1"]
         hyozyun2=y_scores["標準時間2"]
         
