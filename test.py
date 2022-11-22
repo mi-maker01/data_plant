@@ -26,7 +26,7 @@ selector=st.sidebar.selectbox( "ページ選択",pagelist)
 
 left_column, center_column ,right_column = st.columns(3)
 #製造データの取り込み
-uploaded_file=left_column.file_uploader("製造データの取り込み",type="xlsx")
+uploaded_file=st.sidebar.file_uploader("製造データの取り込み",type="xlsx")
 if uploaded_file is not None:
     st.session_state.df=pd.read_excel(uploaded_file)
     
