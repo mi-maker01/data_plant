@@ -273,7 +273,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         #データの整理
         scores=hazure[(hazure["図番"]==z)&(hazure["工程名称"]==k)&(hazure["担当者"]==t)]#選択したデータ（外れ値）
         y_scores=st.session_state.df_time[(st.session_state.df_time["図番"]==z)&(st.session_state.df_time["工程名称"]==k)]#標準時間のデータ
-
+        st.write(y_scores)
         hyozyun1=y_scores["標準時間1"]
         hyozyun2=y_scores["標準時間2"]
         
