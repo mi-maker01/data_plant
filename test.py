@@ -307,8 +307,8 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
             num=pd.DataFrame(scores.groupby(['担当者',"図番","工程名称"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
             pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
             pvit.insert(0, '総件数', len(y_num))
-            pvit["標準時間1"]=int(hyozyun1)
-            pvit["標準時間2"]=int(hyozyun2)
+#             pvit["標準時間1"]=int(hyozyun1)
+#             pvit["標準時間2"]=int(hyozyun2)
             st.write(pvit) 
 
         elif f_num=="曜日":
