@@ -23,6 +23,7 @@ pagelist = ["➀人のことを知りたい","　1.(ヒストグラム)作業時
             "➃集計表","　1.(集計表)作業時間統計量"]#無駄なものを作りたくない
 #サイドバーにセレクトボックスを配置
 selector=st.sidebar.selectbox( "ページ選択",pagelist)
+st.sidebar.write("-----")
 
 left_column, center_column ,right_column = st.columns(3)
 #製造データの取り込み
