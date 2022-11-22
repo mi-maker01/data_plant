@@ -705,7 +705,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                 zen_list=zen_list.append(kari_num)
             tuki_list = sorted(list(set(zen_list["月"])))
             for tu in tuki_list:
-                st.write("============================================================================================================================================")
+                st.write("-----")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["月"]==tu)]
@@ -752,7 +752,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                 zen_list=zen_list.append(kari_num)
             nen_list = sorted(list(set(zen_list["年"])))
             for n in nen_list:
-                st.write("==============================================================================================================================================================")
+                st.write("-----")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["年"] == n)]
@@ -797,7 +797,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
                 zen_list=zen_list.append(kari_num)
             jikoku_list = sorted(list(set(zen_list["時刻"])))
             for j in jikoku_list:
-                st.write("============================================================================================================================================================")
+                st.write("-----")
                 for i in t:
                     #データの整理
                     x_num=st.session_state.df[(st.session_state.df["図番"]==z)&(st.session_state.df["工程名称"]==k)&(st.session_state.df["担当者"] == i)&(st.session_state.df["時刻"] == j)]
