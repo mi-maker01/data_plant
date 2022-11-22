@@ -277,6 +277,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         st.write(st.session_state.df_time)
         st.write(y_scores)
         st.write(z)
+        st.write(k)
         hyozyun1=y_scores["標準時間1"]
         hyozyun2=y_scores["標準時間2"]
         
