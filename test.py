@@ -942,6 +942,7 @@ elif selector=="　1.(集計表)作業時間統計量":
     dt = d_end-d_start#開始日と終了日の差の計算
     dt= dt.days#int
     #===============
+    left_column, center_column ,right_column = st.columns(3)
     num_list = ["工程名称","担当者","図番",]
     num_1 = left_column.selectbox(
          "1つ目",
@@ -949,7 +950,7 @@ elif selector=="　1.(集計表)作業時間統計量":
     num_2 = center_column.selectbox(
          "2つ目",
          (num_list))
-    num_3= left_column.selectbox(
+    num_3= right_column.selectbox(
          "3つ目",
          (num_list))
     
