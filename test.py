@@ -292,7 +292,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         plt.grid(True)
         plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
         plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-        plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+        plt.xticks(np.arange(lower_num2, upper_num2,2))
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
             
