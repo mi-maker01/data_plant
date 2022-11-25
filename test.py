@@ -543,6 +543,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         lower_num2=math.floor(lower_num)#きりおとし
         dif_num=upper_num2-lower_num2#差
         dif_num3=0
+        st.write(upper_num)
+        st.write(lower_num)
+        st.write(upper_num2)
+        st.write(lower_num2)
                 
         if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
             dif_num2=math.ceil((dif_num/10))*10
