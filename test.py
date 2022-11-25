@@ -299,7 +299,7 @@ elif selector=="　1.(ヒストグラム)作業時間[個人]":
         if f_num=="なし":
             dd=scores["処理時間"]#選択したデータの処理時間
             
-            ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/15)
+            ax.hist(dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/15)
             # Matplotlib の Figure を指定して可視化する
             st.write("--------")
             st.write("""#### -----担当者:[""",t,"""]-------工程名称:[""",k,"""]-------図番:[""",z,"""]-------データ件数:[""",str(len(scores)),"""]-----""")
