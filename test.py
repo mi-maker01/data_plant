@@ -547,7 +547,8 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         st.write(lower_num)
         st.write(upper_num2)
         st.write(lower_num2)
-                
+        st.write(dif_num)
+        
         if dif_num%10!=0:#もし切り上げ切り落としした差が10で割れなかった
             dif_num2=math.ceil((dif_num/10))*10
             dif_num3=(dif_num2-dif_num)/2
