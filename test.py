@@ -590,7 +590,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         # 描画領域を用意する
         fig = plt.figure()
         ax = fig.add_subplot()
-
+        
         plt.xlim([lower_num2,upper_num2])                        # X軸範囲
         plt.ylim([0,dosu_num+10])                      # Y軸範囲
         ax.set_title("chart")
@@ -613,7 +613,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         pvit["標準時間1"]=int(hyozyun1)
         pvit["標準時間2"]=int(hyozyun2)
         st.write(pvit)
-        
+        st.write(upper_num)
+        st.write(lower_num)
+        st.write(upper_num2)
+        st.write(lower_num2)
             
         if f_num=="なし":
             #ヒストグラムの作成
