@@ -559,7 +559,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
             lower_num2=lower_num2-5
             upper_num2=upper_num2+5
         st.write(dif_num2)
-        st.write(dif_num)
+        st.write(dif_num3)
         hazure=data_num[data_num["処理時間"]<=upper_num]
         hazure=hazure[hazure["処理時間"]>=lower_num]
         
