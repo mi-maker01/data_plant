@@ -600,10 +600,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         plt.grid(True)
         plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
         plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-        plt.xticks(np.arange(lower_num2, upper_num2,3))
+        plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
-        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=3)
+        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
         st.write("--------")
         st.write("""### ＝＝＝""",k,"""の社全体のグラフ＝＝＝""")
         left_column, right_column = st.columns(2)
