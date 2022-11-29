@@ -554,7 +554,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
             dif_num=10
             lower_num2=lower_num2-5
             upper_num2=upper_num2+5
-        
+        dif_num2=upper_num2-lower_num2#差
         hazure=data_num[data_num["処理時間"]<=upper_num]
         hazure=hazure[hazure["処理時間"]>=lower_num]
         
@@ -595,10 +595,10 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         plt.grid(True)
         plt.axvline(x=int(hyozyun1),color = "crimson")#標準時間の表記（赤軸）
         plt.axvline(x=int(hyozyun2),color = "Blue")#標準時間の表記（軸）
-        plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
+        plt.xticks(np.arange(lower_num2, upper_num2,dif_num2/10))
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
-        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
+        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
         st.write("--------")
         st.write("""### ＝＝＝""",k,"""の社全体のグラフ＝＝＝""")
         left_column, right_column = st.columns(2)
@@ -608,11 +608,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         pvit.insert(0, '総件数', len(zentai_x_num))
         pvit["標準時間1"]=int(hyozyun1)
         pvit["標準時間2"]=int(hyozyun2)
-        st.write(pvit)
-        st.write(upper_num)
-        st.write(lower_num)
-        st.write(upper_num2)
-        st.write(lower_num2)
+       
             
         if f_num=="なし":
             #ヒストグラムの作成
