@@ -598,7 +598,7 @@ elif selector=="　2.(ヒストグラム)作業時間[複数]":
         plt.xticks(np.arange(lower_num2, upper_num2,dif_num/10))
         labels = ax.get_xticklabels()
         plt.setp(labels, rotation=45, fontsize=10)
-        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num2/10)
+        ax.hist(zentai_dd,bins=10,range=(lower_num2,upper_num2),rwidth=dif_num/10)
         st.write("--------")
         st.write("""### ＝＝＝""",k,"""の社全体のグラフ＝＝＝""")
         left_column, right_column = st.columns(2)
