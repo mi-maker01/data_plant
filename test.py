@@ -1060,7 +1060,7 @@ elif selector=="　3.(棒グラフ)期間内の各人作業量":
         
         st.write("""## 作業時間""")
         fig = px.bar(n_num,x="担当者",y="処理時間",color="工程名称",text="図番")
-        st.plotly_chart(fig,use_container_width=False)
+        st.plotly_chart(fig,use_container_width=True)
         
         num=pd.DataFrame(n_num.groupby(["担当者","工程名称","図番"])['処理時間'].agg(["count","mean", "median", "min", "max"]))
         pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
