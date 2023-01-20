@@ -165,8 +165,7 @@ elif selector=="　2.(ガントチャート)設備の空き":
     if answer == True:
         st.write("--------")
         st.write(""" #### 全体の稼働状況""")
-        fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称"))
-        fig.update_traces(textposition='inside', orientation="h")
+        fig = px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="号機名称",color="号機名称")
         st.plotly_chart(fig)
         
         for k in kikai_num:
@@ -921,7 +920,7 @@ elif selector=="　1.(折れ線)仕掛品の推移":
         st.write("""#### 総社内滞在時間""")
         fig = go.Figure(px.timeline(d_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="製造番号",color="工程名称"))
         fig.update_traces(textposition='inside', orientation="h")
-        fig.update_yaxes(autorange='reversed')
+#         fig.update_yaxes(autorange='reversed')
         st.plotly_chart(fig,use_container_width=True)
         
  #================================================================================================================================      
@@ -993,15 +992,10 @@ elif selector=="　1.(集計表)作業時間統計量":
                     zentai_num=len(z_num)
                     Yeshazure_num=(zentai_num-Nohazure_num)
 
-                    num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])['処理時間'].agg(["count","mean", "median", "min", "max"]))
+                    num=pd.DataFrame(hazure.groupby([num_1,num_2,num_3])
+                                     ['処理時間'].agg(["count","mean", "median", "min", "max"]))
                     pvit=num.set_axis(['件数', '平均', '中央値', '最小', '最大'], axis=1)
                     pvit.insert(0, '総件数', zentai_num)
-                    
-                   
-#                     hyozyun1=z_num2["標準時間1"]
-#                     hyozyun2=z_num2["標準時間2"]
-#                     pvit["標準時間1"]=int(hyozyun1)
-#                     pvit["標準時間2"]=int(hyozyun2)
                     graph_num=pd.concat([graph_num, pvit], axis=0)        
            
         st.write("""### 集計表""")
