@@ -910,7 +910,7 @@ elif selector=="　1.(折れ線)仕掛品の推移":
         #仕掛表
         pvit_data=pvit_data.T
         pvit_data=pvit_data.fillna(0)
-        
+        st.write(pvit_data)
         #仕掛品の折れ線グラフ
         st.write("""#### 仕掛品の折れ線グラフ""")
         fig = px.line(pvit_data)
