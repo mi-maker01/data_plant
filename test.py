@@ -176,7 +176,7 @@ elif selector=="　2.(ガントチャート)設備の空き":
                 st.write("--------")
                 st.write(""" #### ・""",k,"""の稼働状況""")
 
-                fig = go.Figure(px.timeline(k_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="担当者",color="担当者", color_continuous_scale='Jet'))
+                fig = px.timeline(k_num, x_start="開始日時", x_end="完了日時",text="処理時間",y="担当者",color="担当者")
                 fig.update_traces(textposition='inside', orientation="h")
                 fig.update_yaxes(autorange='reversed')
                 st.plotly_chart(fig)
